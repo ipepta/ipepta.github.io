@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>vr_wxs_api</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<div style="
+    position: fixed;
+    right: 50px;
+    bottom: 30px;
+    cursor: pointer;
+"><a href="#table">返回顶部</a></div>
+<h1>wxs服务接口</h1>
+<h2 id="table">目录</h2>
+<ol>
+<li>
+<a href="#1">点播单管理</a>
+<ul>
+<li><a href="#1_1">1.1向购物车中添加影片</a></li>
+<li><a href="#1_2">1.2修改购物车</a></li>
+<li><a href="#1_3">1.3提交购物车</a></li>
+<li><a href="#1_4">1.4查询购物车</a></li>
+<li><a href="#1_5">1.5查询点播单</a>  
+</li>
+<li><a href="#1_6">1.6撤销点播单</a></li>
+<li><a href="#1_7">1.7获取支付参数(微信客户端支付时，需要向服务器获取加密参数)</a></li>
+<li><a href="#1_8">1.8向点播单报告问题</a></li>
+</ul>
+</li>
+<li>
+<a href="#2">微信管理</a>
+<ul>
+<li><a href="#2_1">2.1查询微信用户</a></li>
+<li><a href="#2_2">2.2查询用户当前sceneid</a></li>
+<li><a href="#2_3">2.3获取AccessToken</a></li>
+<li><a href="#2_4">2.4微信回调接口</a></li>
+</ul>
+</li>
+</ol>
+<h2 id="1">1.点播单管理</h2>
+<h3 id="1_1">1.1向购物车中添加影片</h3>
+<h3>request</h3>
+<p><code>POST /wxs/cart</code></p>
+<pre><code>{
+  &quot;movieID&quot;: &quot;fqofnaieujfoiq3jfoaew&quot;,
+  &quot;openID&quot;: &quot;qjo3fjaefjap3jq83f9p8er9fpq4&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>movieID</td>
+	<td>string</td>
+	<td>所添加的影片id</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>openID</td>
+	<td>string</td>
+	<td>微信给用户对本公众号分配的唯一标识，获取方法<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1421140842">参考</a></td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="1_2">1.2修改购物车</h3>
+<h3>request</h3>
+<p><code>PUT /wxs/cart</code></p>
+<pre><code>{
+  &quot;movieID&quot;: &quot;fqofnaieujfoiq3jfoaew&quot;,
+  &quot;openID&quot;: &quot;qjo3fjaefjap3jq83f9p8er9fpq4&quot;,
+  &quot;action&quot;: &quot;MOVEUP&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>movieID</td>
+	<td>string</td>
+	<td>目标影片id</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>openID</td>
+	<td>string</td>
+	<td>微信给用户对本公众号分配的唯一标识，获取方法<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1421140842">参考</a></td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>action</td>
+	<td>string</td>
+	<td>MOVEUP, MOVEDOWN, REMOVE 分别对应上移, 下移和删除影片</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="1_3">1.3提交购物车</h3>
+<h3>request</h3>
+<p><code>POST /wxs/cart/submit</code></p>
+<pre><code>{
+  &quot;openID&quot;: &quot;qjo3fjaefjap3jq83f9p8er9fpq4&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>openID</td>
+	<td>string</td>
+	<td>微信给用户对本公众号分配的唯一标识，获取方法<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1421140842">参考</a></td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;ticketID&quot;: &quot;fweiqb3285nxqojoew&quot;
+}
+</code></pre>
+
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="1_4">1.4查询购物车</h3>
+<h3>request</h3>
+<p><code>GET /wxs/cart?open_id={openID}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>openID</td>
+	<td>string</td>
+	<td>微信给用户对本公众号分配的唯一标识</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;openID&quot;: &quot;fweiqb3285nxqojoew&quot;,
+  &quot;movieList&quot;: [&quot;fqp9j384jf83498uf9e&quot;, &quot;9j3gfdja9ngf9ejf83&quot;, &quot;1ht984nfvq84q39uf9e&quot;]
+}
+</code></pre>
+
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="1_5">1.5查询点播单</h3>
+<h3>request</h3>
+<p><code>GET /wxs/tickets?open_id={openID}&amp;status={status}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>ticketID</td>
+	<td>string</td>
+	<td>点播单ID</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>openID</td>
+	<td>string</td>
+	<td>微信用户openid</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>status</td>
+	<td>string</td>
+	<td>点播单状态</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>start</td>
+	<td>int</td>
+	<td>分页开始，默认为0</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>limit</td>
+	<td>int</td>
+	<td>页面大小，默认为20</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;totalCount&quot;: 30,
+  &quot;itemList&quot;: [
+    {
+        &quot;ticketID&quot;: &quot;fqp9j384jf83498uf9e&quot;,          
+        &quot;status&quot;: &quot;PENDING_PAYMENT&quot;,                
+        &quot;progressPhase&quot;: &quot;TO_DISTRIBUTE&quot;,           
+        &quot;price&quot;: 6000,
+        &quot;actualPrice&quot;: 5000,
+        &quot;payMode&quot;: &quot;WEIXIN&quot;,
+        &quot;payTime&quot;: 1510994684570,
+        &quot;viewerOpenID&quot;: &quot;23ofj9q08ef93q849fq83f&quot;,
+        &quot;viewerNickName&quot;: &quot;张三&quot;,
+        &quot;vrClientID&quot;: &quot;fdj3efjs98er9f83fj9e8f9&quot;,
+        &quot;seatNumber&quot;: &quot;001&quot;,
+        &quot;cinemaName&quot;: &quot;西单vr影院&quot;,
+        &quot;hallName&quot;: &quot;001厅&quot;,     
+        &quot;movieIDList&quot;: [&quot;aw0e9f9839fj93q8f&quot;,&quot;jf9fej9pq3ep9fq39f&quot;,&quot;jf9qjf983f9&quot;],
+        &quot;startTime&quot;: 1510995105068,
+        &quot;expireTime&quot;: 3000
+    },{
+      ...
+    }
+  ]
+}
+</code></pre>
+
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>ticketID</td>
+	<td>string</td>
+	<td>点播单id</td>
+</tr>
+<tr>
+	<td>status</td>
+	<td>string</td>
+	<td>点播单状态</td>
+</tr>
+<tr>
+	<td>progressPhase</td>
+	<td>string</td>
+	<td>点播单进度</td>
+</tr>
+<tr>
+	<td>price</td>
+	<td>int</td>
+	<td>价格，单位为分</td>
+</tr>
+<tr>
+	<td>actualPrice</td>
+	<td>int</td>
+	<td>实际价格</td>
+</tr>
+<tr>
+	<td>payMode</td>
+	<td>string</td>
+	<td>支付方式，WEIXIN / ALIPAY</td>
+</tr>
+<tr>
+	<td>payTime</td>
+	<td>long</td>
+	<td>支付时间</td>
+</tr>
+<tr>
+	<td>viewerOpenID</td>
+	<td>string</td>
+	<td>观众微信id</td>
+</tr>
+<tr>
+	<td>viewerNickName</td>
+	<td>string</td>
+	<td>观众微信昵称</td>
+</tr>
+<tr>
+	<td>vrClientID</td>
+	<td>string</td>
+	<td>订单所在座椅id</td>
+</tr>
+<tr>
+	<td>seatNumber</td>
+	<td>string</td>
+	<td>订单所在座椅编号</td>
+</tr>
+<tr>
+	<td>cinemaName</td>
+	<td>string</td>
+	<td>订单所在影院名称</td>
+</tr>
+<tr>
+	<td>hallName</td>
+	<td>string</td>
+	<td>订单所在影厅名称</td>
+</tr>
+<tr>
+	<td>movieIDList</td>
+	<td>list</td>
+	<td>订单包含影片id</td>
+</tr>
+<tr>
+	<td>startTime</td>
+	<td>long</td>
+	<td>订单生效时间</td>
+</tr>
+<tr>
+	<td>expireTime</td>
+	<td>int</td>
+	<td>订单失效时间间隔</td>
+</tr>
+</tbody>
+</table>
+<p><code>点播单状态(status)枚举：PENDING_PAYMENT(待付款) / ALREADY_PAID(已付款) / OVER_TIME(超出观看时间)/CANCELLED(完成付款前被用户撤销)</code></p>
+<p><code>点播单进度(progressPhase)枚举:PENDING_PAYMENT(待付款) / TO_DISTRIBUTE(待派发) / DISTRIBUTED(已派发) / PLAYING(已执行，播放中) / COMPLETED(播放完成) / TO_TERMINATE(待终止，即观众中途离开，并未点击观看完成) / TERMINATED(已终止，即管理员强行将播放终止)</code></p>
+<h3 id="1_6">1.6撤销点播单</h3>
+<p><code>撤销后, 点播单内的电影会回到购物车内, 可修改后再次提交. 而点播单本身不允许修改.</code></p>
+<h3>request</h3>
+<p><code>DELETE /wxs/tickets?ticket_id={ticketID}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>ticketID</td>
+	<td>string</td>
+	<td>点播单ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="1_7">1.7获取支付参数(微信客户端支付时，需要向服务器获取加密参数)</h3>
+<h3>request</h3>
+<p><code>GET /wxs/payment/wx/params?open_id={openID}&amp;ticket_id={ticketID}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>openID</td>
+	<td>string</td>
+	<td>微信用户openid</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>ticketID</td>
+	<td>string</td>
+	<td>提交支付的点播单ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;timestamp&quot;: 1510995105068,
+  &quot;nonceStr&quot;: &quot;qoidsj9ifjq434aodsgjoa&quot;,
+  &quot;package&quot;: &quot;prepay_id=90dskvaiejfjoieg3r&quot;,
+  &quot;signType&quot;: &quot;MD5&quot;,
+  &quot;paySign&quot;: &quot;fq3jefj9afrjao3jfr98ear&quot;
+}
+</code></pre>
+
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<p>参数说明见<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1421141115">微信公众平台</a>
+支付流程见<a href="https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_4">微信支付开发文档</a></p>
+<h3 id="1_8">1.8向点播单报告问题</h3>
+<h3>request</h3>
+<p><code>POST /wxs/tickets/complaint</code></p>
+<pre><code>{
+  &quot;ticketID&quot;: &quot;fweiqb3285nxqojoew&quot;,
+  &quot;openID&quot;: &quot;qjo3fjaefjap3jq83f9p8er9fpq4&quot;,
+  &quot;content&quot;: &quot;影片没有播放完就终止了&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>openID</td>
+	<td>string</td>
+	<td>微信用户openid</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>ticketID</td>
+	<td>string</td>
+	<td>投诉目标</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>content</td>
+	<td>string</td>
+	<td>投诉内容</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="2">2.微信管理</h2>
+<h3 id="2_1">2.1查询微信用户</h3>
+<h3>request</h3>
+<p><code>GET /wxs/users/wx?open_id={openID}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>openID</td>
+	<td>string</td>
+	<td>用户id</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>start</td>
+	<td>int</td>
+	<td>分页开始，默认为0</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>limit</td>
+	<td>int</td>
+	<td>页面大小，默认为20</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>reponse</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;totalCount&quot;: 30,
+  &quot;itemList&quot;: [
+    {
+        &quot;openID&quot;: &quot;fq23jfjp9a8e9q34&quot;,
+        &quot;nickName&quot;: &quot;张三&quot;,
+        &quot;iconURL&quot;: &quot;https://weixin.com.cn/ajfw90fa9.jpg&quot;,
+        &quot;attentionTime&quot;: 1510995105068,
+        &quot;sceneID&quot;: 2000,
+        &quot;subscribed&quot;: 1
+    },{
+      ...
+    }
+  ]
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>openID</td>
+	<td>string</td>
+	<td>用户id</td>
+</tr>
+<tr>
+	<td>nickName</td>
+	<td>string</td>
+	<td>用户昵称</td>
+</tr>
+<tr>
+	<td>iconURL</td>
+	<td>string</td>
+	<td>用户头像</td>
+</tr>
+<tr>
+	<td>attentionTime</td>
+	<td>string</td>
+	<td>用户关注本公众号的时间</td>
+</tr>
+<tr>
+	<td>sceneID</td>
+	<td>int</td>
+	<td>用户最新扫面的二维码场景值</td>
+</tr>
+<tr>
+	<td>subscribed</td>
+	<td>bool</td>
+	<td>用户当前是否仍在关注</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="2_2">2.2查询用户当前sceneid</h3>
+<h3>request</h3>
+<p><code>GET /wxs/users/sceneid?open_id={openID}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>openID</td>
+	<td>string</td>
+	<td>用户id</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>reponse</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;sceneID&quot;: 10025,
+  &quot;scanTime&quot;: &quot;1511457450&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>sceneID</td>
+	<td>int</td>
+	<td>场景ID</td>
+</tr>
+<tr>
+	<td>scanTime</td>
+	<td>string</td>
+	<td>扫描事件微信时间戳(10位)</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="2_3">2.3获取AccessToken</h3>
+<h3>request</h3>
+<p><code>GET /wxs/wx/accesstoken</code></p>
+<h3>reponse</h3>
+<p>成功 200</p>
+<pre><code>&quot;gzwzM7sD2y0sos7EhoibXawJ1VbUcqesUaUmc8SPJaR6rHvyfIR95GVQxSXtprAD0lFpg7OdhfVhh1&quot;
+</code></pre>
+
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="2_4">2.4微信回调接口</h3>
+<h3>request</h3>
+<p><code>GET&amp;POST /wxs/wx/callback</code></p>
+<p>用于和微信服务器通信, 接收服务器验证握手, 事件推送等.</p>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
