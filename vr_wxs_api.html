@@ -307,11 +307,12 @@ img {
 <li><a href="#1_2">1.2修改购物车</a></li>
 <li><a href="#1_3">1.3提交购物车</a></li>
 <li><a href="#1_4">1.4查询购物车</a></li>
-<li><a href="#1_5">1.5查询点播单</a>  
+<li><a href="#1_5">1.5清空购物车</a></li>
+<li><a href="#1_6">1.6查询点播单</a>  
 </li>
-<li><a href="#1_6">1.6撤销点播单</a></li>
-<li><a href="#1_7">1.7获取支付参数(微信客户端支付时，需要向服务器获取加密参数)</a></li>
-<li><a href="#1_8">1.8向点播单报告问题</a></li>
+<li><a href="#1_7">1.7撤销点播单</a></li>
+<li><a href="#1_8">1.8获取支付参数(微信客户端支付时，需要向服务器获取加密参数)</a></li>
+<li><a href="#1_9">1.9向点播单报告问题</a></li>
 </ul>
 </li>
 <li>
@@ -488,7 +489,36 @@ img {
 }
 </code></pre>
 
-<h3 id="1_5">1.5查询点播单</h3>
+<h3 id="1_5">1.5清空购物车</h3>
+<h3>request</h3>
+<p><code>DELETE /wxs/cart?open_id={openID}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>openID</td>
+	<td>string</td>
+	<td>微信给用户对本公众号分配的唯一标识</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="1_6">1.6查询点播单</h3>
 <h3>request</h3>
 <p><code>GET /wxs/tickets?open_id={openID}&amp;status={status}</code></p>
 <table>
@@ -661,7 +691,7 @@ img {
 </table>
 <p><code>点播单状态(status)枚举：PENDING_PAYMENT(待付款) / ALREADY_PAID(已付款) / OVER_TIME(超出观看时间)/CANCELLED(完成付款前被用户撤销)</code></p>
 <p><code>点播单进度(progressPhase)枚举:PENDING_PAYMENT(待付款) / TO_DISTRIBUTE(待派发) / DISTRIBUTED(已派发) / PLAYING(已执行，播放中) / COMPLETED(播放完成) / TO_TERMINATE(待终止，即观众中途离开，并未点击观看完成) / TERMINATED(已终止，即管理员强行将播放终止)</code></p>
-<h3 id="1_6">1.6撤销点播单</h3>
+<h3 id="1_7">1.7撤销点播单</h3>
 <p><code>撤销后, 点播单内的电影会回到购物车内, 可修改后再次提交. 而点播单本身不允许修改.</code></p>
 <h3>request</h3>
 <p><code>DELETE /wxs/tickets?ticket_id={ticketID}</code></p>
@@ -691,7 +721,7 @@ img {
 }
 </code></pre>
 
-<h3 id="1_7">1.7获取支付参数(微信客户端支付时，需要向服务器获取加密参数)</h3>
+<h3 id="1_8">1.8获取支付参数(微信客户端支付时，需要向服务器获取加密参数)</h3>
 <h3>request</h3>
 <p><code>GET /wxs/payment/wx/params?open_id={openID}&amp;ticket_id={ticketID}</code></p>
 <table>
@@ -737,7 +767,7 @@ img {
 
 <p>参数说明见<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1421141115">微信公众平台</a>
 支付流程见<a href="https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_4">微信支付开发文档</a></p>
-<h3 id="1_8">1.8向点播单报告问题</h3>
+<h3 id="1_9">1.9向点播单报告问题</h3>
 <h3>request</h3>
 <p><code>POST /wxs/tickets/complaint</code></p>
 <pre><code>{
