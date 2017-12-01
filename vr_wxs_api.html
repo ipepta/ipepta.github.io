@@ -324,6 +324,13 @@ img {
 <li><a href="#2_4">2.4微信回调接口</a></li>
 </ul>
 </li>
+<li>
+<a href="#3">点赞管理</a>
+<ul>
+<li><a href="#3_1">3.1提交点赞</a></li>
+<li><a href="#3_2">3.2查询点赞</a></li>
+</ul>
+</li>
 </ol>
 <h2 id="1">1.点播单管理</h2>
 <h3 id="1_1">1.1向购物车中添加影片</h3>
@@ -989,6 +996,111 @@ img {
 <h3>request</h3>
 <p><code>GET&amp;POST /wxs/wx/callback</code></p>
 <p>用于和微信服务器通信, 接收服务器验证握手, 事件推送等.</p>
+<h2 id="3">3.点赞管理</h2>
+<h3 id="3_1">3.1提交点赞</h3>
+<h3>request</h3>
+<p><code>POST /wxs/tickets/praise</code></p>
+<pre><code>{
+  &quot;ticketID&quot;: &quot;fweiqb3285nxqojoew&quot;,
+  &quot;movieID&quot;: &quot;fq3jefj9afrjao3jfr98ear&quot;,
+  &quot;openID&quot;: &quot;fq23jfjp9a8e9q34&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>openID</td>
+	<td>string</td>
+	<td>用户id</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>ticketID</td>
+	<td>string</td>
+	<td>点赞影片所在订单id</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>movieID</td>
+	<td>string</td>
+	<td>点赞目标影片id</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>reponse</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="3_2">3.2查询点赞</h3>
+<h3>request</h3>
+<p><code>GET /wxs/tickets/praise?ticket_id={ticketID}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>ticketID</td>
+	<td>string</td>
+	<td>查询目标订单id</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>reponse</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;ticketID&quot;: &quot;fweiqb3285nxqojoew&quot;,
+  &quot;praisedMovieIDList&quot;: [&quot;fq3jefj9afrjao3jfr98ear&quot;, &quot;ffeaf3223ffrjajgowjear&quot;, &quot;fjfdan3nfq8j904q8ear&quot;]
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>ticketID</td>
+	<td>string</td>
+	<td>查询目标订单id</td>
+</tr>
+<tr>
+	<td>praisedMovieIdList</td>
+	<td>List string</td>
+	<td>目标点播单中被点赞影片ID列表</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
 
 </body>
 </html>
