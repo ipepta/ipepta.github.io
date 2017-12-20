@@ -1,0 +1,2007 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>vr_cms_api</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<div style="
+    position: fixed;
+    right: 50px;
+    bottom: 30px;
+    cursor: pointer;
+"><a href="#table">返回顶部</a></div>
+<h1>cms服务接口</h1>
+<h2 id="table">目录</h2>
+<ol>
+<li>
+<a href="#1">影院管理</a>
+<ul>
+<li><a href="#1_1">1.1创建影院</a></li>
+<li><a href="#1_2">1.2查询影院</a></li>
+<li><a href="#1_3">1.3修改影院</a></li>
+<li><a href="#1_4">1.4删除影院</a></li>
+<li><a href="#1_5">1.5导出影院</a></li>
+</ul>
+</li>
+<li>
+<a href="#2">放映厅管理</a>
+<ul>
+<li><a href="#2_1">2.1创建放映厅</a></li>
+<li><a href="#2_2">2.2查询放映厅</a></li>
+<li><a href="#2_3">2.3修改放映厅</a></li>
+<li><a href="#2_4">2.4删除放映厅</a></li>
+</ul>
+</li>
+<li>
+<a href="#3">播放终端管理</a>
+<ul>
+<li><a href="#3_1">3.1创建终端</a></li>
+<li><a href="#3_2">3.2查询终端</a></li>
+<li><a href="#3_3">3.3修改终端</a></li>
+<li><a href="#3_4">3.4删除终端</a></li>
+<li><a href="#3_5">3.5生成终端二维码</a></li>
+</ul>
+</li>
+<li>
+<a href="#4">影片管理</a>
+<ul>
+<li><a href="#4_1">4.1创建影片</a></li>
+<li><a href="#4_2">4.2查询影片</a></li>
+<li><a href="#4_3">4.3修改影片</a></li>
+<li><a href="#4_4">4.4为影片点赞</a></li>
+<li><a href="#4_5">4.5删除影片</a></li>
+<li><a href="#4_6">4.6分发到影院</a></li>
+<li><a href="#4_7">4.7影片添加广告</a></li>
+</ul>
+</li>
+<li>
+<a href="#5">点播任务管理</a>
+<ul>
+<li><a href="#5_1">5.1创建点播任务</a></li>
+<li><a href="#5_1">5.2查询点播任务</a>  
+</li>
+</ul>
+</li>
+<li>
+<a href="#6">双端通信websocket(用于coms与cms通信)</a>
+<ul>
+<li><a href="#6_1">6.1有新影片生成</a></li>
+<li><a href="#6_2">6.2有新点播任务生成</a></li>
+</ul>
+</li>
+<li>
+<a href="#7">cms用户管理</a>
+<ul>
+<li><a href="#7_1">7.1新增用户</a></li>
+<li><a href="#7_2">7.2上传用户头像</a></li>
+<li><a href="#7_3">7.3查询用户</a></li>
+<li><a href="#7_4">7.4修改用户</a></li>
+<li><a href="#7_5">7.5删除用户</a></li>
+</ul>
+</li>
+<li><a href="#8">获取系统枚举参数</a></li>
+<li><a href="#9">头盔型号管理</a></li>
+<li><a href="#10">座椅型号管理</a></li>
+<li>
+<a href="#11">文件上传</a>
+<ul>
+<li><a href="#11_1">11.1获取上传policy</a></li>
+<li><a href="#11_2">11.2文件上传callback</a></li>
+</ul>
+</li>
+</ol>
+<h2 id="1">1.影院管理</h2>
+<h3 id="1_1">1.1创建影院</h3>
+<h3>request</h3>
+<p><code>POST /cms/cinemas</code></p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+  &quot;cinemaCode&quot;: &quot;huabeiqu_cinema_0001&quot;,
+  &quot;name&quot;: &quot;X立方长宁缤谷&quot;,
+  &quot;numberOfHalls&quot;: 4,
+  &quot;regionID&quot;: &quot;fqj943f89ad8f9q3hf489ewa&quot;,
+  &quot;comsMACAddr&quot;: &quot;ef:23:7e:cc:8a&quot;,  
+  &quot;comsIPAddr&quot;: &quot;192.168.8.21&quot;,
+  &quot;description&quot;: &quot;第二家店&quot;,
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>cinemaCode</td>
+	<td>string</td>
+	<td>影院的唯一的识别码，可读</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>name</td>
+	<td>string</td>
+	<td>影院名称，限制在256字符内</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>numberOfHalls</td>
+	<td>int</td>
+	<td>放映厅数量</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>regionID</td>
+	<td>string</td>
+	<td>区域id</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>comsMACAddr</td>
+	<td>string</td>
+	<td>COMS系统主机的mac地址</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>comsIPAddr</td>
+	<td>string</td>
+	<td>COMS主机的本地局域网IP地址</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>description</td>
+	<td>string</td>
+	<td>描述比如地址联系方式等，限制在256字符内</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>address</td>
+	<td>string</td>
+	<td>影院地址，限制在256字符内</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>phone</td>
+	<td>string</td>
+	<td>影院联系方式，限制在256字符内</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<h4>接口成功与否，通过http状态码来标识，200代表成功，400代表请求参数错误，500代表服务器错误，以下悉同。</h4>
+<p>成功 200</p>
+<pre><code>{
+  &quot;cinemaID&quot;: &quot;fqj39fha8ef9q83fp983q9er&quot;
+}
+</code></pre>
+
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="1_2">1.2查询影院</h3>
+<h3>request</h3>
+<p><code>GET /cms/cinemas?region_id={region_id}&amp;cinema_id={cinema_id}&amp;cinema_code={cinema_code}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>region_id</td>
+	<td>string</td>
+	<td>区域id</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>cinema_id</td>
+	<td>string</td>
+	<td>影院id，可多传，<code>cinema_id={cinema_id1}&amp;cinema_id={cinema_id2}</code></td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>cinema_code</td>
+	<td>string</td>
+	<td>影院编码</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>start</td>
+	<td>int</td>
+	<td>分页开始，默认为0</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>limit</td>
+	<td>int</td>
+	<td>页面大小，默认为20</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;totalCount&quot;: 100,
+  &quot;itemList&quot;: [
+    {
+      &quot;cinemaID&quot;: &quot;fqj39fha8ef9q83fp983q9er&quot;,
+      &quot;cinemaCode&quot;: &quot;huabeiqu_cinema_0001&quot;,
+      &quot;name&quot;: &quot;X立方长宁缤谷&quot;,
+      &quot;numberOfHalls&quot;: 4,
+      &quot;regionID&quot;: &quot;fqj943f89ad8f9q3hf489ewa&quot;,
+      &quot;comsMACAddr&quot;: &quot;ef:23:7e:cc:8a&quot;,
+      &quot;comsIPAddr&quot;: &quot;192.168.8.21&quot;,
+      &quot;description&quot;: &quot;第二家店&quot;,
+      &quot;address&quot;: &quot;五道口宇宙中心&quot;,
+      &quot;phone&quot;: &quot;010-66666&quot;
+    },{
+      ...
+    }
+  ]
+}
+</code></pre>
+
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="1_3">1.3修改影院</h3>
+<h3>request</h3>
+<p><code>PUT /cms/cinemas/{cinemasId}</code></p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{  
+  &quot;name&quot;: &quot;X立方长宁缤谷&quot;,
+  &quot;numberOfHalls&quot;: 4,
+  &quot;regionID&quot;: &quot;fqj943f89ad8f9q3hf489ewa&quot;,
+  &quot;comsMACAddr&quot;: &quot;ef:23:7e:cc:8a&quot;,  
+  &quot;comsIPAddr&quot;: &quot;192.168.8.21&quot;,
+  &quot;description&quot;: &quot;第二家店&quot;,
+}
+</code></pre>
+
+<h4>字段描述见<a href="#1_1">1.1创建影院</a></h4>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="1_4">1.4删除影院</h3>
+<h3>request</h3>
+<p><code>DELETE /cms/cinemas?cinema_id={cinema_id1}&amp;cinema_id={cinema_id2}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>cinema_id</td>
+	<td>string</td>
+	<td>影院id，可多传，<code>cinema_id={cinema_id1}&amp;cinema_id={cinema_id2}</code></td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="1_5">1.5导出影院</h3>
+<h3>request</h3>
+<p><code>GET /cms/cinemas/export?cinema_id={cinema_id}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>cinema_id</td>
+	<td>string</td>
+	<td>影院id，<code>cinema_id={cinema_id}</code></td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="2">2.放映厅管理</h2>
+<h3 id="2_1">2.1创建放映厅</h3>
+<h3>request</h3>
+<p><code>POST /cms/halls</code></p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+  &quot;hallCode&quot;: &quot;guanghualu_cinema_0001_hall_01&quot;,
+  &quot;name&quot;: &quot;放映厅01&quot;,
+  &quot;cinemaID&quot;: &quot;qiejgq3984jf9384jf9ef93q8&quot;,
+  &quot;numberOfSeats&quot;: 10,
+  &quot;vrClientIDList&quot;:[&quot;vrid1&quot;,&quot;vrid2&quot;,&quot;vrid3&quot;]
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>hallCode</td>
+	<td>string</td>
+	<td>放映厅的唯一识别码，可读</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>name</td>
+	<td>string</td>
+	<td>放映厅的名称</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>cinemaID</td>
+	<td>string</td>
+	<td>放映厅所属影院id</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>numberOfSeats</td>
+	<td>int</td>
+	<td>座椅数</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>vrClientIDList</td>
+	<td>String[]</td>
+	<td>一次性挂载的终端id集合</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;hallID&quot;: &quot;fqj3fjp9ejfp9w8f983qf9q9p8&quot;
+}
+</code></pre>
+
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="2_2">2.2查询放映厅</h3>
+<h3>request</h3>
+<p><code>GET /cms/halls?cinema_id={cinema_id}&amp;hall_id={hall_id1}&amp;hall_id={hall_id2}&amp;hall_code={hall_code}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>cinema_id</td>
+	<td>string</td>
+	<td>所属影院id</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>hall_id</td>
+	<td>string</td>
+	<td>放映厅id，可多传</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>hall_code</td>
+	<td>string</td>
+	<td>放映厅编码</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>start</td>
+	<td>int</td>
+	<td>分页开始，默认为0</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>limit</td>
+	<td>int</td>
+	<td>页面大小，默认为20</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;totalCount&quot;: 100,
+  &quot;itemList&quot;: [
+    {
+      &quot;hallID&quot;: &quot;fqj3fjp9ejfp9w8f983qf9q9p8&quot;
+      &quot;hallCode&quot;: &quot;guanghualu_cinema_0001_hall_01&quot;,
+      &quot;name&quot;: &quot;放映厅01&quot;,
+      &quot;cinemaID&quot;: &quot;qiejgq3984jf9384jf9ef93q8&quot;,
+      &quot;numberOfSeats&quot;: 10
+    },{
+      ...
+    }
+  ]
+}
+</code></pre>
+
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="2_3">2.3修改放映厅</h3>
+<h3>request</h3>
+<p><code>PUT /cms/halls/{hall_id}</code></p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+  &quot;hallCode&quot;: &quot;guanghualu_cinema_0001_hall_01&quot;,
+  &quot;name&quot;: &quot;放映厅01&quot;,
+  &quot;cinemaID&quot;: &quot;qiejgq3984jf9384jf9ef93q8&quot;,
+  &quot;numberOfSeats&quot;: 10
+}
+</code></pre>
+
+<p>参数描述见<a href="#2_1">2.1创建放映厅</a></p>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="2_4">2.4删除放映厅</h3>
+<h3>request</h3>
+<p><code>DELETE /cms/halls?hall_id={hall_id1}&amp;hall_id={hall_id2}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>hall_id</td>
+	<td>string</td>
+	<td>放映厅id，可多传</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="3">3.播放终端管理</h2>
+<h3 id="3_1">3.1创建终端</h3>
+<h3>request</h3>
+<p><code>POST /cms/vr_clients</code></p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+  &quot;hallID&quot;: &quot;fqofjp98jf9p8q3948fq3&quot;,
+  &quot;seatNumber&quot;: &quot;02&quot;,
+  &quot;hostModel&quot;: &quot;windows07&quot;,  
+  &quot;seatModel&quot;: &quot;vr0109&quot;,
+  &quot;HMDModel&quot;: &quot;hmd109&quot;,
+  &quot;MACAddr&quot;: &quot;99:ed:9d:3b:e8:36&quot;,
+  &quot;IPAddr&quot;: &quot;192.168.8.28&quot;,
+  &quot;description&quot;: &quot;描述&quot;,
+  &quot;clientCode&quot;:&quot;vrdevice&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>hallID</td>
+	<td>string</td>
+	<td>放映厅id</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>seatNumber</td>
+	<td>string</td>
+	<td>座位号</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>hostModel</td>
+	<td>string</td>
+	<td>播放终端使用的主机型号</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>seatModel</td>
+	<td>string</td>
+	<td>座椅型号</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>HMDModel</td>
+	<td>string</td>
+	<td>头盔型号</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>MACAddr</td>
+	<td>string</td>
+	<td>座椅主机的mac地址</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>IPAddr</td>
+	<td>string</td>
+	<td>座椅主机的ip地址</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>description</td>
+	<td>string</td>
+	<td>描述(最长265个字)</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;clientID&quot;: &quot;fqj3fjp9ejfp9w8f983qf9q9p8&quot;
+}
+</code></pre>
+
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="3_2">3.2查询终端</h3>
+<h3>request</h3>
+<p><code>GET /cms/vr_clients?client_id={client_id}&amp;cinema_id={cinema_id}&amp;hall_id={hall_id}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>client_id</td>
+	<td>string</td>
+	<td>客户端id，可多传</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>cinema_id</td>
+	<td>string</td>
+	<td>影院id</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>hall_id</td>
+	<td>string</td>
+	<td>播放厅id</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>start</td>
+	<td>int</td>
+	<td>分页开始，默认为0</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>limit</td>
+	<td>int</td>
+	<td>页面大小，默认为20</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<pre><code>{
+  &quot;totalCount&quot;: 100,
+  &quot;itemList&quot;: [
+    {
+      &quot;clientCode&quot;:&quot;vrdevice&quot;,
+      &quot;clientID&quot;: &quot;fjefijsieuf93q849f8ejf&quot;,             //终端id
+      &quot;cinemaID&quot;: &quot;qoifjp938f983q4udgihue&quot;,
+      &quot;hallID&quot;: &quot;fqofjp98jf9p8q3948fq3&quot;,
+      &quot;sceneNumber&quot;: &quot;10001&quot;,                       //对应的公众号场景值
+      &quot;status&quot;: &quot;IDLE&quot;,   
+      &quot;seatNumber&quot;: &quot;02&quot;,
+      &quot;hostModel&quot;: &quot;windows07&quot;,
+      &quot;seatModel&quot;: &quot;vr0109&quot;,
+      &quot;HMDModel&quot;: &quot;hmd109&quot;,
+      &quot;MACAddr&quot;: &quot;99:ed:9d:3b:e8:36&quot;,
+      &quot;IPAddr&quot;: &quot;192.168.8.28&quot;,
+      &quot;description&quot;: &quot;描述&quot;
+    },{
+      ...
+    }
+  ]
+}
+</code></pre>
+
+<p><code>座椅状态(status)枚举：SHUT_DOWN(关机) / IDLE(空闲) / IN_VOD(点播) / PLAYING(播放) / ERROR(错误)</code></p>
+<h3 id="3_3">3.3修改终端</h3>
+<h3>request</h3>
+<p><code>PUT /cms/vr_clients/{client_id}</code></p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{  
+  &quot;clientCode&quot;:&quot;vrdevice&quot;,
+  &quot;seatNumber&quot;: &quot;02&quot;,
+  &quot;hostModel&quot;: &quot;windows07&quot;,  
+  &quot;status&quot;: &quot;SHUT_DOWN&quot;,
+  &quot;seatModel&quot;: &quot;vr0109&quot;,
+  &quot;HMDModel&quot;: &quot;hmd109&quot;,
+  &quot;MACAddr&quot;: &quot;99:ed:9d:3b:e8:36&quot;,
+  &quot;IPAddr&quot;: &quot;192.168.8.28&quot;,
+  &quot;description&quot;: &quot;描述&quot;
+}
+</code></pre>
+
+<p>字段描述见<a href="#3_1">3.1创建终端</a></p>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="3_4">3.4删除终端</h3>
+<h3>request</h3>
+<p><code>DELETE /cms/vr_clients?client_id={client_id1}&amp;client_id={client_id2}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>client_id</td>
+	<td>string</td>
+	<td>客户端id，可多传</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="3_5">3.5生成终端二维码</h3>
+<h3>request</h3>
+<p><code>GET /cms/vr_clients/{client_id}/qr_code</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>二维码图片
+</code></pre>
+
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="4">4.影片管理</h2>
+<h3 id="4_1">4.1创建影片</h3>
+<h3>request</h3>
+<p><code>POST /cms/movies</code></p>
+<pre><code>{
+  &quot;name&quot;: &quot;NAME&quot;,
+  &quot;movieCode&quot;: &quot;movieCode&quot;,
+  &quot;duration&quot;: 30,
+  &quot;description&quot;: &quot;简介&quot;,
+  &quot;type&quot;: &quot;MOVIE&quot;,
+  &quot;category&quot;: &quot;ACTION&quot;,
+  &quot;country&quot;: &quot;USA&quot;,
+  &quot;fileID&quot;: &quot;q3eifj3f98h3w94hf83wffq324s&quot;,
+  &quot;iconID&quot;: &quot;asdfhf09q38fdhuf98q938f98pq&quot;,
+  &quot;posterID&quot;: &quot;g928gj98es9gw45jg98rsgfp9s8u&quot;,
+  &quot;scheduleStart&quot;: &quot;1510208988793&quot;,
+  &quot;scheduleEnd&quot;: &quot;1510208989793&quot;,  
+  &quot;online&quot;: true,
+  &quot;weixinURL&quot;: &quot;https://mp.weixin.qq.com/s?__biz=MzI5NjQ3OTg1Mw==&amp;mid=2247483989&amp;idx=1&amp;sn=df852bf7447d293b6d6f34d5791a9d80&amp;chksm=ec42ff57db3576413dbacf1288bc6be4d271a7db7aefc093e485c01026b3a645130e3e7b41a2&amp;scene=0#rd&quot;,
+  &quot;price&quot;: 2990,
+  &quot;isHot&quot;: true
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>name</td>
+	<td>string</td>
+	<td>电影名称</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>movieCode</td>
+	<td>string</td>
+	<td>电影编号</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>duration</td>
+	<td>int</td>
+	<td>电影时长，单位是分钟</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>description</td>
+	<td>string</td>
+	<td>电影简介</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>string</td>
+	<td>类型枚举，有MOVIE(电影)，GUIDE(前导片)，AD(广告)</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>category</td>
+	<td>string</td>
+	<td>电影分类枚举，有ACTION(动作)，SCIENCE(科幻)，等，可多传，用逗号(,)隔开</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>country</td>
+	<td>string</td>
+	<td>电影发行国家枚举，有USA(美国)，CHN(中国)等</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>fileID</td>
+	<td>string</td>
+	<td>上传影片文件时，oss返回的fileID，请参见<a href="#11">文件上传</a></td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>iconID</td>
+	<td>string</td>
+	<td>上传肖像时，oss返回的fileID，请参见<a href="#11">文件上传</a></td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>posterID</td>
+	<td>string</td>
+	<td>上传海报时，oss返回的fileID，请参见<a href="#11">文件上传</a></td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>scheduleStart</td>
+	<td>long</td>
+	<td>档期开始日期</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>scheduleEnd</td>
+	<td>long</td>
+	<td>档期结束日期</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>online</td>
+	<td>boolean</td>
+	<td>影片是否上线，默认false</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>weixinURL</td>
+	<td>string</td>
+	<td>影片在微信上的简介</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>price</td>
+	<td>int</td>
+	<td>价格(分)</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>isHot</td>
+	<td>boolean</td>
+	<td>是否热映</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;movieID&quot;: &quot;q03jfp9q38jfp9q38fp9ew&quot;
+}
+</code></pre>
+
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="4_2">4.2查询影片</h3>
+<h3>request</h3>
+<p><code>GET /cms/movies</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>movie_id</td>
+	<td>string</td>
+	<td>电影id，可多传<code>movie_id={movie_id1}&amp;movie_id={movie_id2}</code></td>
+	<td>&nbsp;</td>
+</tr>
+<tr>
+	<td>open_id</td>
+	<td>string</td>
+	<td>微信用户id</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>cinema_id</td>
+	<td>string</td>
+	<td>影院id</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>name</td>
+	<td>string</td>
+	<td>电影名称，支持模糊查询</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>movie_code</td>
+	<td>string</td>
+	<td>电影编号</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>string</td>
+	<td>电影类型</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>category</td>
+	<td>string</td>
+	<td>电影种类</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>country</td>
+	<td>string</td>
+	<td>电影发行国家</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>start</td>
+	<td>int</td>
+	<td>分页开始，默认为0</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>limit</td>
+	<td>int</td>
+	<td>页面大小，默认为20</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>order_param</td>
+	<td>string</td>
+	<td>排序字段，默认根据档期开始日期降序排序</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>order_seq</td>
+	<td>string</td>
+	<td>排序顺序，默认为降序</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>time</td>
+	<td>long</td>
+	<td>档期日期</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;totalCount&quot;: 100,
+  &quot;itemList&quot;: [
+    {
+      &quot;name&quot;: &quot;NAME&quot;,
+      &quot;movieCode&quot;: &quot;movieCode&quot;,
+      &quot;duration&quot;: 30,
+      &quot;description&quot;: &quot;简介&quot;,
+      &quot;type&quot;: &quot;MOVIE&quot;,
+      &quot;category&quot;: &quot;ACTION&quot;,
+      &quot;country&quot;: &quot;USA&quot;,      
+      &quot;iconURL&quot;: &quot;&quot;,                    //肖像地址
+      &quot;posterURL&quot;: &quot;&quot;,                      //海报地址
+      &quot;scheduleStart&quot;: &quot;1510208988793&quot;,
+      &quot;scheduleEnd&quot;: &quot;1510208989793&quot;,
+      &quot;numOfPraise&quot;: 1000,              //点赞数
+      &quot;numOfView&quot;: 200,                 //被点播数
+      &quot;online&quot;: true,
+      &quot;weixinURL&quot;: &quot;https://mp.weixin.qq.com/s?__biz=MzI5NjQ3OTg1Mw==&amp;mid=2247483989&amp;idx=1&amp;sn=df852bf7447d293b6d6f34d5791a9d80&amp;chksm=ec42ff57db3576413dbacf1288bc6be4d271a7db7aefc093e485c01026b3a645130e3e7b41a2&amp;scene=0#rd&quot;,
+      &quot;price&quot;: 2990,
+      &quot;isHot&quot;: true
+    },{
+      ...
+    }
+  ]
+}
+</code></pre>
+
+<p>参数介绍见<a href="#4_1">4.1创建影片</a></p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="4_3">4.3修改影片</h3>
+<h3>request</h3>
+<p><code>PUT /cms/movies/{movieID}</code></p>
+<pre><code>{
+  &quot;name&quot;: &quot;NAME&quot;,
+  &quot;movieCode&quot;: &quot;movieCode&quot;,
+  &quot;duration&quot;: 30,
+  &quot;description&quot;: &quot;简介&quot;,
+  &quot;type&quot;: &quot;MOVIE&quot;,
+  &quot;category&quot;: &quot;ACTION&quot;,
+  &quot;country&quot;: &quot;USA&quot;,
+  &quot;fileID&quot;: &quot;q3eifj3f98h3w94hf83wffq324s&quot;,
+  &quot;iconID&quot;: &quot;asdfhf09q38fdhuf98q938f98pq&quot;,
+  &quot;posterID&quot;: &quot;g928gj98es9gw45jg98rsgfp9s8u&quot;,
+  &quot;scheduleStart&quot;: &quot;1510208988793&quot;,
+  &quot;scheduleEnd&quot;: &quot;1510208989793&quot;,  
+  &quot;online&quot;: true,
+  &quot;weixinURL&quot;: &quot;https://mp.weixin.qq.com/s?__biz=MzI5NjQ3OTg1Mw==&amp;mid=2247483989&amp;idx=1&amp;sn=df852bf7447d293b6d6f34d5791a9d80&amp;chksm=ec42ff57db3576413dbacf1288bc6be4d271a7db7aefc093e485c01026b3a645130e3e7b41a2&amp;scene=0#rd&quot;,
+  &quot;price&quot;: 3000,
+  &quot;isHot&quot;: true
+}
+</code></pre>
+
+<p>参数介绍见<a href="#4_1">4.1创建影片</a></p>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="4_4">4.4为影片点赞</h3>
+<h3>request</h3>
+<p><code>POST /cms/movies/{movieID}/_praise</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="4_5">4.5删除影片</h3>
+<h3>request</h3>
+<p><code>DELETE /cms/movies</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>movie_id</td>
+	<td>string</td>
+	<td>电影id，可多传<code>movie_id={movie_id1}&amp;movie_id={movie_id2}</code></td>
+	<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="4_6">4.6分发到影院</h3>
+<h3>request</h3>
+<p><code>POST /cms/movies/{movie_id}/_distribute</code></p>
+<pre><code>{
+  &quot;cinemaIDList&quot;:[&quot;fqjfj9p384u9f83jfq3948f983&quot;, &quot;weori9348g9s8eh4p958jf98&quot;]
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>movie_id</td>
+	<td>string</td>
+	<td>电影id</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>cinemaIDList</td>
+	<td>list</td>
+	<td>影院id列表，是分发到所有影院的id列表</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="4_7">4.7影片添加广告</h3>
+<h3>request</h3>
+<p><code>POST /cms/movies/{movieId}/attachAD</code></p>
+<pre><code>{
+  &quot;ADIdList&quot;:[&quot;fqjfj9p384u9f83jfq3948f983&quot;, &quot;weori9348g9s8eh4p958jf98&quot;]
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>movieId</td>
+	<td>string</td>
+	<td>电影id</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>ADIdList</td>
+	<td>list</td>
+	<td>为影片添加的广告id列表</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;info&quot;: &quot;success&quot;
+}
+</code></pre>
+
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;failure&quot;
+}
+</code></pre>
+
+<h2 id="5">5.点播任务管理</h2>
+<h3 id="5_1">5.1创建点播任务</h3>
+<h3>request</h3>
+<p><code>POST /cms/vod_tasks</code></p>
+<pre><code>{
+  &quot;movieList&quot;: [
+     &quot;123445&quot;, &quot;fajwpoiefieauhgrh8g&quot;
+  ],
+  &quot;cinemaName&quot;:&quot;XX影院&quot;,
+  &quot;hallName&quot;:&quot;XX影厅&quot;,
+  &quot;seatNumber&quot;:&quot;1&quot;,
+  &quot;nickName&quot;:&quot;9s&quot;,
+  &quot;sceneID&quot;:&quot;1254255&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>movieList[].id</td>
+	<td>string</td>
+	<td>影片id</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>cinemaName</td>
+	<td>String</td>
+	<td>影院名称</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>hallName</td>
+	<td>String</td>
+	<td>影厅名称</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>ticketId</td>
+	<td>String</td>
+	<td>单号</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>seatNumber</td>
+	<td>String</td>
+	<td>座位号</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>nickName</td>
+	<td>String</td>
+	<td>用户昵称</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;taskID&quot;: &quot;ef9843wjfp9ae8grp98q&quot;  
+}
+</code></pre>
+
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="5_1">5.2查询点播任务</h3>
+<h3>request</h3>
+<p><code>GET /cms/vod_tasks?time={time}&amp;cinemaId={cinemaId}&amp;hallId={hallId}&amp;ticketId={ticketId}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>time</td>
+	<td>long</td>
+	<td>日期</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>cinemaId</td>
+	<td>String</td>
+	<td>影院id</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>hallId</td>
+	<td>String</td>
+	<td>影厅id</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>ticketId</td>
+	<td>String</td>
+	<td>单号</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+    &quot;totalCount&quot;:&quot;1&quot;,
+    &quot;itemList&quot;:[
+        {
+            &quot;id&quot;:&quot;id&quot;,
+            &quot;sceneId&quot;:&quot;sceneid&quot;,
+            &quot;cinemaName&quot;:&quot;大话影院&quot;,
+            &quot;hallName&quot;:&quot;1号厅&quot;,
+            &quot;seat&quot;:&quot;一号座位&quot;,
+            &quot;start_time&quot;: &quot;1510208988793&quot;,
+            &quot;movie&quot;:{
+                &quot;name&quot;:&quot;NAME&quot;,
+                &quot;movieCode&quot;:&quot;movieCode&quot;,
+                &quot;duration&quot;:30,
+                &quot;description&quot;:&quot;简介&quot;,
+                &quot;type&quot;:&quot;MOVIE&quot;,
+                &quot;category&quot;:&quot;ACTION&quot;,
+                &quot;country&quot;:&quot;USA&quot;,
+                &quot;iconURL&quot;:&quot;&quot;,
+                &quot;posterURL&quot;:&quot;&quot;,
+                &quot;scheduleStart&quot;:&quot;1510208988793&quot;,
+                &quot;scheduleEnd&quot;:&quot;1510208989793&quot;,
+                &quot;numOfPraise&quot;:1000,
+                &quot;numOfView&quot;:200,
+                &quot;online&quot;:true,
+                &quot;weixinURL&quot;:&quot;https://mp.weixin.qq.com/s?__biz=MzI5NjQ3OTg1Mw==&amp;mid=2247483989&amp;idx=1&amp;sn=df852bf7447d293b6d6f34d5791a9d80&amp;chksm=ec42ff57db3576413dbacf1288bc6be4d271a7db7aefc093e485c01026b3a645130e3e7b41a2&amp;scene=0#rd&quot;,
+                &quot;price&quot;:2990,
+                &quot;isHot&quot;:true
+            },
+            &quot;nickName&quot;:&quot;nickaname&quot;,
+            &quot;guideIdList&quot;:[
+                &quot;id1&quot;,
+                &quot;ID2&quot;,
+                &quot;id3&quot;
+            ],
+            &quot;adIdList&quot;:[
+                &quot;id1&quot;,
+                &quot;ID2&quot;,
+                &quot;id3&quot;
+            ]
+        }
+    ]
+}
+</code></pre>
+
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="6">6.双端通信长轮训(用于coms与cms通信)</h2>
+<h3>request</h3>
+<p><code>/cms/long_poll/{cinemaID}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>cinemaID</td>
+	<td>string</td>
+	<td>影院id</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;messageID&quot;: &quot;iejgq9834g9q83hg9898thp9&quot;,  //消息id  
+  &quot;type&quot;: &quot;{TYPE}&quot;,                         //消息类型            
+  &quot;message&quot;: {MESSAGE_OBJECT}               //消息体
+}
+</code></pre>
+
+<h3 id="6_1">6.1有新影片生成</h3>
+<h3>message</h3>
+<pre><code>{
+  &quot;messageID&quot;: &quot;iejgq9834g9q83hg9898thp9&quot;,  //消息id  
+  &quot;type&quot;: &quot;NEW_MOVIE&quot;,                      
+  &quot;message&quot;: {MOVIE_OBJECT}
+}
+</code></pre>
+
+<h3 id="6_2">6.2有新点播任务生成</h3>
+<h3>message</h3>
+<pre><code>{
+  &quot;messageID&quot;: &quot;gjwrpoijeoirjfo3w8989p85&quot;,  //消息id  
+  &quot;type&quot;: &quot;NEW_VOD_TASK&quot;,                      
+  &quot;message&quot;: {VOD_TASK_OBJECT}
+}
+</code></pre>
+
+<h2 id="7">7.cms用户管理</h2>
+<h3 id="7_1">7.1新增用户</h3>
+<h3>request</h3>
+<p><code>POST /cms/users</code></p>
+<pre><code>{
+  &quot;name&quot;: &quot;张三&quot;,
+  &quot;alias&quot;: &quot;zhangsan&quot;,
+  &quot;iconID&quot;: &quot;qje0fiadpaij3q4fepf&quot;,
+  &quot;role&quot;: &quot;SYS_ADMIN,MANAGER&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>name</td>
+	<td>string</td>
+	<td>用户名称</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>alias</td>
+	<td>string</td>
+	<td>用户别名，登陆时使用，只能为英文字母/数字/下划线</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>iconID</td>
+	<td>string</td>
+	<td><a href="#7_2">7.2上传用户头像</a>接口返回的文件id</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>role</td>
+	<td>string</td>
+	<td>用户角色枚举，可传多个，枚举值列表从<a href="#8">获取系统枚举参数</a>中获取</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;userID&quot;: &quot;aepojfoiawrfiu3whri9898y9&quot;
+}
+</code></pre>
+
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="7_2">7.2上传用户头像</h3>
+<h3>request</h3>
+<p><code>POST(Multipart request) /cms/files/users/icon</code></p>
+<pre><code>{
+  &quot;userID&quot;: &quot; vaiuyf8qubvawhrgaeg9q7&quot;,
+  &quot;file&quot;: 文件流
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>userID</td>
+	<td>string</td>
+	<td>用户id</td>
+	<td>是[如果当前用户已经存在]</td>
+</tr>
+<tr>
+	<td>file</td>
+	<td>stream</td>
+	<td>实体文件</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;fileID&quot;: &quot;q03jfp9q38jfp9q38fp9ew&quot;
+}
+</code></pre>
+
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="7_3">7.3查询用户</h3>
+<h3>request</h3>
+<p><code>GET /cms/users</code></p>
+<h3>response</h3>
+<h3 id="7_4">7.4修改用户</h3>
+<h3>request</h3>
+<p><code>PUT /cms/users/{userID}</code></p>
+<h3>response</h3>
+<h3 id="7_5">7.5删除用户</h3>
+<h3>request</h3>
+<p><code>DELETE /cms/users/{userID}</code></p>
+<h3>response</h3>
+<h2 id="8">8.获取系统枚举参数</h2>
+<h3>request</h3>
+<p><code>GET /cms/sys_params/enum</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+    &quot;movieCountryList&quot;: [
+        {
+            &quot;id&quot;: &quot;CHN&quot;,
+            &quot;name&quot;: &quot;中国&quot;,
+            &quot;default&quot;: true
+        },
+        {
+            &quot;id&quot;: &quot;USA&quot;,
+            &quot;name&quot;: &quot;美国&quot;,
+            &quot;default&quot;: false
+        }
+    ],
+    &quot;movieCategoryList&quot;: [
+        {
+            &quot;id&quot;: &quot;ACTION&quot;,
+            &quot;name&quot;: &quot;动作&quot;,
+            &quot;default&quot;: true
+        },
+        {
+            &quot;id&quot;: &quot;SCIENCE&quot;,
+            &quot;name&quot;: &quot;科幻&quot;,
+            &quot;default&quot;: true
+        }
+    ],
+    &quot;cinemaRegionList&quot;: [
+        {
+            &quot;id&quot;: &quot;BEIJING&quot;,
+            &quot;name&quot;: &quot;北京&quot;,
+            &quot;default&quot;: true
+        },
+        {
+            &quot;id&quot;: &quot;SHANGHAI&quot;,
+            &quot;name&quot;: &quot;北京&quot;,
+            &quot;default&quot;: true
+        }
+    ],
+    &quot;userRoleList&quot;: [
+        {
+            &quot;id&quot;: &quot;MANAGER&quot;,
+            &quot;name&quot;: &quot;管理员&quot;,
+            &quot;default&quot;: false
+        },
+        {
+            &quot;id&quot;: &quot;SYS_ADMIN&quot;,
+            &quot;name&quot;: &quot;系统管理员&quot;,
+            &quot;default&quot;: true
+        }
+    ],
+    &quot;seatList&quot;: [
+        {
+            &quot;seatModel&quot;: &quot;model001&quot;,
+            &quot;status&quot;: false,
+            &quot;manufacture&quot;: &quot;sony&quot;,
+            &quot;spec&quot;: &quot;sony&quot;,
+            &quot;desc&quot;: &quot;vr&quot;,
+            &quot;descImage&quot;: &quot;url&quot;
+        }
+    ],
+    &quot;hdmlist&quot;: [
+        {
+            &quot;hmdModel&quot;: &quot;model2&quot;,
+            &quot;status&quot;: true,
+            &quot;manufacture&quot;: &quot;xijianx1&quot;,
+            &quot;spec&quot;: &quot;xijain&quot;,
+            &quot;desc&quot;: &quot;vr&quot;,
+            &quot;descImage&quot;: &quot;url&quot;
+        }
+    ],
+    &quot;movieTypes&quot;: [
+        &quot;MOVIE&quot;,
+        &quot;GUIDE&quot;,
+        &quot;AD&quot;
+    ]
+}
+</code></pre>
+
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="9">9.头盔型号管理</h2>
+<h2 id="10">10.座椅型号管理</h2>
+<h2 id="11">11.文件上传</h2>
+<p><p>本项目使用阿里云oss作为文件存储，前端直接向oss上传文件，上传之前需要向服务器索要上传的policy。上传到oss后，oss会调用服务器的callback接口，然后oss会将callback返回的信息返回给前端。详见<a href="https://help.aliyun.com/document_detail/31927.html?spm=5176.doc31925.6.633.BVDHBQ">阿里云文档</a><p></p>
+<h3 id="11_1">11.1获取上传policy</h3>
+<h3>request</h3>
+<p><code>GET /cms/upload/oss_policy?domain={domain}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>domain</td>
+	<td>string</td>
+	<td>文件所属的业务范围，CINEMA / HALL / VR_CLIENT / MOVIE / USER</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;accessid&quot;: &quot;6MKOqxGiGU4AUk44&quot;,  
+  &quot;host&quot;: &quot;http://post-test.oss-cn-hangzhou.aliyuncs.com&quot;,
+  &quot;policy&quot;: &quot;eyJleHBpcmF0aW9uIjoiMjAxNS0xMS0wNVQyMDo1MjoyOVoiLCJjdb25kaXRpb25zIjpbWyJjdb250ZW50LWxlbmd0aC1yYW5nZSIsMCwxMDQ4NTc2MDAwXSxbInN0YXJ0cy13aXRoIiwiJGtleSIsInVzZXItZGlyXC8iXV19&quot;,
+  &quot;signature&quot;: &quot;VsxOcOudxDbtNSvz93CLaXPz+4s=&quot;,
+  &quot;expire&quot;: 1446727949,
+  &quot;callback&quot;: &quot;eyJjYWxsYmFja1VybCI6Imh0dHA6Ly9vc3MtZGVtby5hbGl5dW5jcy5jdb206MjM0NTAiLCJjYWxsYmFja0hvc3QiOiJvc3MtZGVtby5hbGl5dW5jcy5jdb20iLCJjYWxsYmFja0JvZHkiOiJmaWxlbmFtZT0ke29iamVjdH0mc2l6ZT0ke3NpemV9Jm1pbWVUeXBlPSR7bWltZVR5cGV9JmhlaWdodD0ke2ltYWdlSW5mby5oZWlnaHR9JndpZHRoPSR7aW1hZ2VJdbmZvLndpZHRofSIsImNhbGxiYWNrQm9keVR5cGUiOiJhcHBsaWNhdGlvbi94LXd3dy1mb3JtLXVybGVuY29kZWQifQ==&quot;,
+  &quot;dir&quot;: &quot;tmp_upload/movices&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>accessid</td>
+	<td>string</td>
+	<td>对应上传控件的multipart_params.OSSAccessKeyId</td>
+</tr>
+<tr>
+	<td>host</td>
+	<td>string</td>
+	<td>对应上传控件的url参数</td>
+</tr>
+<tr>
+	<td>policy</td>
+	<td>string</td>
+	<td>对应上传控件的multipart_params.policy</td>
+</tr>
+<tr>
+	<td>signature</td>
+	<td>string</td>
+	<td>对应上传控件的multipart_params.signature</td>
+</tr>
+<tr>
+	<td>expire</td>
+	<td>long</td>
+	<td>policy的过期时间</td>
+</tr>
+<tr>
+	<td>callback</td>
+	<td>string</td>
+	<td>对应上传控件的multipart_params.callback，是服务器回掉地址和参数的base64编码后生成的</td>
+</tr>
+<tr>
+	<td>dir</td>
+	<td>string</td>
+	<td>存储路径，加上文件名称生成上传空间的key</td>
+</tr>
+</tbody>
+</table>
+<h3 id="11_2">11.2阿里云oss回调</h3>
+<h3>request</h3>
+<p><code>POST /cms/upload/oss_callback</code></p>
+<p>request 信息由<a href="https://help.aliyun.com/document_detail/31989.html?spm=5176.doc31927.6.882.4QDDuC">oss官方文档</a>指定</p>
+<h3>response</h3>
+<p>该接口的返回信息会通过oss返回给客户端</p>
+<p>此接口无论成功与否，都会返回200。成功与否通过isSuccess指定</p>
+<pre><code>{
+  &quot;isSuccess&quot;: true,                                //接口是否成功
+  &quot;fileID&quot;: &quot;fj39fj09eafrp93q8jf9aj&quot;,               //文件id
+  &quot;Info&quot;: &quot;成功&quot;                                      //描述
+}
+</code></pre>
+
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
