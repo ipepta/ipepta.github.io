@@ -298,6 +298,7 @@ img {
     cursor: pointer;
 "><a href="#table">返回顶部</a></div>
 <h1>wxs服务接口</h1>
+<p>除微信服务器回调接口外, wxs各接口均使用get参数open_id作为用户登录凭据. 以下不再赘述.</p>
 <h2 id="table">目录</h2>
 <ol>
 <li>
@@ -338,8 +339,7 @@ img {
 <h3>request</h3>
 <p><code>POST /wxs/cart</code></p>
 <pre><code>{
-  &quot;movieID&quot;: &quot;fqofnaieujfoiq3jfoaew&quot;,
-  &quot;openID&quot;: &quot;qjo3fjaefjap3jq83f9p8er9fpq4&quot;
+  &quot;movieID&quot;: &quot;fqofnaieujfoiq3jfoaew&quot;
 }
 </code></pre>
 
@@ -359,12 +359,6 @@ img {
 	<td>所添加的影片id</td>
 	<td>是</td>
 </tr>
-<tr>
-	<td>openID</td>
-	<td>string</td>
-	<td>微信给用户对本公众号分配的唯一标识，获取方法<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1421140842">参考</a></td>
-	<td>是</td>
-</tr>
 </tbody>
 </table>
 <h3>response</h3>
@@ -380,7 +374,6 @@ img {
 <p><code>PUT /wxs/cart</code></p>
 <pre><code>{
   &quot;movieID&quot;: &quot;fqofnaieujfoiq3jfoaew&quot;,
-  &quot;openID&quot;: &quot;qjo3fjaefjap3jq83f9p8er9fpq4&quot;,
   &quot;action&quot;: &quot;MOVEUP&quot;
 }
 </code></pre>
@@ -402,12 +395,6 @@ img {
 	<td>是</td>
 </tr>
 <tr>
-	<td>openID</td>
-	<td>string</td>
-	<td>微信给用户对本公众号分配的唯一标识，获取方法<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1421140842">参考</a></td>
-	<td>是</td>
-</tr>
-<tr>
 	<td>action</td>
 	<td>string</td>
 	<td>MOVEUP, MOVEDOWN, REMOVE 分别对应上移, 下移和删除影片</td>
@@ -426,29 +413,6 @@ img {
 <h3 id="1_3">1.3提交购物车</h3>
 <h3>request</h3>
 <p><code>POST /wxs/cart/submit</code></p>
-<pre><code>{
-  &quot;openID&quot;: &quot;qjo3fjaefjap3jq83f9p8er9fpq4&quot;
-}
-</code></pre>
-
-<table>
-<thead>
-<tr>
-	<th>名称</th>
-	<th>类型</th>
-	<th>描述</th>
-	<th>是否必须</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-	<td>openID</td>
-	<td>string</td>
-	<td>微信给用户对本公众号分配的唯一标识，获取方法<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1421140842">参考</a></td>
-	<td>是</td>
-</tr>
-</tbody>
-</table>
 <h3>response</h3>
 <p>成功 200</p>
 <pre><code>{
@@ -464,25 +428,7 @@ img {
 
 <h3 id="1_4">1.4查询购物车</h3>
 <h3>request</h3>
-<p><code>GET /wxs/cart?open_id={openID}</code></p>
-<table>
-<thead>
-<tr>
-	<th>名称</th>
-	<th>类型</th>
-	<th>描述</th>
-	<th>是否必须</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-	<td>openID</td>
-	<td>string</td>
-	<td>微信给用户对本公众号分配的唯一标识</td>
-	<td>是</td>
-</tr>
-</tbody>
-</table>
+<p><code>GET /wxs/cart</code></p>
 <h3>response</h3>
 <p>成功 200</p>
 <pre><code>{
@@ -499,25 +445,7 @@ img {
 
 <h3 id="1_5">1.5清空购物车</h3>
 <h3>request</h3>
-<p><code>DELETE /wxs/cart?open_id={openID}</code></p>
-<table>
-<thead>
-<tr>
-	<th>名称</th>
-	<th>类型</th>
-	<th>描述</th>
-	<th>是否必须</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-	<td>openID</td>
-	<td>string</td>
-	<td>微信给用户对本公众号分配的唯一标识</td>
-	<td>是</td>
-</tr>
-</tbody>
-</table>
+<p><code>DELETE /wxs/cart</code></p>
 <h3>response</h3>
 <p>成功 200</p>
 <p>失败 400/500</p>
@@ -700,7 +628,7 @@ img {
 <p><code>点播单状态(status)枚举：PENDING_PAYMENT(待付款) / ALREADY_PAID(已付款) / OVER_TIME(支付超时) / COMPLETED(已完成) / CANCELLED(完成付款前被用户撤销)</code></p>
 <p><code>点播单进度(progressPhase)枚举:PENDING_PAYMENT(待付款) / TO_DISTRIBUTE(待派发) / DISTRIBUTED(已派发) / PLAYING(已执行，播放中) / COMPLETED(播放完成) / TO_TERMINATE(待终止，即观众中途离开，并未点击观看完成) / TERMINATED(已终止，即管理员强行将播放终止)</code></p>
 <h3 id="1_7">1.7撤销点播单</h3>
-<p><code>撤销后, 点播单内的电影会回到购物车内, 可修改后再次提交. 而点播单本身不允许修改.</code></p>
+<p><code>撤销后, 点播单内的电影会回到购物车内, 可修改后再次提交. (点播单本身不允许修改)</code></p>
 <h3>request</h3>
 <p><code>DELETE /wxs/tickets?ticket_id={ticketID}</code></p>
 <table>
@@ -731,7 +659,7 @@ img {
 
 <h3 id="1_8">1.8获取支付参数</h3>
 <h3>request</h3>
-<p><code>GET /wxs/payment/wx/params?open_id={openID}&amp;ticket_id={ticketID}</code></p>
+<p><code>GET /wxs/payment/wx/params?ticket_id={ticketID}</code></p>
 <table>
 <thead>
 <tr>
@@ -742,12 +670,6 @@ img {
 </tr>
 </thead>
 <tbody>
-<tr>
-	<td>openID</td>
-	<td>string</td>
-	<td>微信用户openid</td>
-	<td>是</td>
-</tr>
 <tr>
 	<td>ticketID</td>
 	<td>string</td>
@@ -773,11 +695,27 @@ img {
 }
 </code></pre>
 
-<p>参数说明见<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1421141115">微信公众平台</a>
-支付流程见<a href="https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_4">微信支付开发文档</a></p>
 <h3 id="1_81">1.8.1获取JSSDK启动参数</h3>
 <h3>request</h3>
-<p><code>GET /wxs/wx/jssdk_params</code></p>
+<p><code>GET /wxs/wx/jssdk_params?url=http://weixin.com/page</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>url</td>
+	<td>string</td>
+	<td>JSSDK启动页面URL</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
 <h3>response</h3>
 <p>成功 200</p>
 <pre><code>{
@@ -800,7 +738,6 @@ img {
 <p><code>POST /wxs/tickets/complaint</code></p>
 <pre><code>{
   &quot;ticketID&quot;: &quot;fweiqb3285nxqojoew&quot;,
-  &quot;openID&quot;: &quot;qjo3fjaefjap3jq83f9p8er9fpq4&quot;,
   &quot;content&quot;: &quot;影片没有播放完就终止了&quot;
 }
 </code></pre>
@@ -815,12 +752,6 @@ img {
 </tr>
 </thead>
 <tbody>
-<tr>
-	<td>openID</td>
-	<td>string</td>
-	<td>微信用户openid</td>
-	<td>是</td>
-</tr>
 <tr>
 	<td>ticketID</td>
 	<td>string</td>
@@ -1024,7 +955,6 @@ img {
 <pre><code>{
   &quot;ticketID&quot;: &quot;fweiqb3285nxqojoew&quot;,
   &quot;movieID&quot;: &quot;fq3jefj9afrjao3jfr98ear&quot;,
-  &quot;openID&quot;: &quot;fq23jfjp9a8e9q34&quot;
 }
 </code></pre>
 
@@ -1038,12 +968,6 @@ img {
 </tr>
 </thead>
 <tbody>
-<tr>
-	<td>openID</td>
-	<td>string</td>
-	<td>用户id</td>
-	<td>是</td>
-</tr>
 <tr>
 	<td>ticketID</td>
 	<td>string</td>
