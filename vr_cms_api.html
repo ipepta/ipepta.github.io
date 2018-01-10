@@ -1488,7 +1488,12 @@ img {
 <h3>request</h3>
 <p><code>PUT /cms/movies/{movieId}/attachAD</code></p>
 <pre><code>{
-  &quot;adList&quot;:[{&quot;movieId&quot;:&quot;fqjfj9p384u9f83jfq3948f983&quot;, &quot;regionId&quot;:&quot;SHANGHAI&quot;},...]
+  &quot;adList&quot;: [
+        {
+            &quot;adId&quot;: &quot;fqjfj9p384u9f83jfq3948f983&quot;,
+            &quot;regionId&quot;: &quot;BEIJING&quot;
+        }
+    ]
 }
 </code></pre>
 
@@ -1503,19 +1508,19 @@ img {
 </thead>
 <tbody>
 <tr>
-	<td>movieId(url)</td>
+	<td>movieId</td>
 	<td>string</td>
 	<td>电影id</td>
 	<td>是</td>
 </tr>
 <tr>
-	<td>ADIdList</td>
+	<td>adList</td>
 	<td>list</td>
-	<td>为影片添加的广告列表</td>
+	<td>为影片设置的广告列表</td>
 	<td>是</td>
 </tr>
 <tr>
-	<td>movieId(post body)</td>
+	<td>adId</td>
 	<td>string</td>
 	<td>广告影片id</td>
 	<td>是</td>
