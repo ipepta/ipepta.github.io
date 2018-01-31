@@ -321,8 +321,9 @@ img {
 <ul>
 <li><a href="#2_1">2.1查询微信用户</a></li>
 <li><a href="#2_2">2.2查询用户当前sceneid</a></li>
-<li><a href="#2_3">2.3获取AccessToken</a></li>
-<li><a href="#2_4">2.4微信回调接口</a></li>
+<li><a href="#2_3">2.3登记用户扫描设备</a></li>
+<li><a href="#2_4">2.4获取AccessToken</a></li>
+<li><a href="#2_5">2.5微信回调接口</a></li>
 </ul>
 </li>
 <li>
@@ -929,7 +930,39 @@ img {
 }
 </code></pre>
 
-<h3 id="2_3">2.3获取AccessToken</h3>
+<h3 id="2_3">2.3登记用户扫描设备</h3>
+<h3>request</h3>
+<p><code>POST /wxs/users/qr_scan</code></p>
+<pre><code>{
+  &quot;qrResult&quot;: &quot;http://weixin.qq.com/q/02fdsaj99rcF310690w07R&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>qrResult</td>
+	<td>string</td>
+	<td>二维码的扫描结果</td>
+</tr>
+</tbody>
+</table>
+<h3>reponse</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="2_4">2.4获取AccessToken</h3>
 <h3>request</h3>
 <p><code>GET /wxs/wx/accesstoken</code></p>
 <h3>reponse</h3>
@@ -943,7 +976,7 @@ img {
 }
 </code></pre>
 
-<h3 id="2_4">2.4微信回调接口</h3>
+<h3 id="2_5">2.5微信回调接口</h3>
 <h3>request</h3>
 <p><code>GET&amp;POST /wxs/wx/callback</code></p>
 <p>用于和微信服务器通信, 接收服务器验证握手, 事件推送等.</p>

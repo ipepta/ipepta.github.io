@@ -964,6 +964,12 @@ img {
 	<td>否</td>
 </tr>
 <tr>
+	<td>qr_result</td>
+	<td>string</td>
+	<td>二维码扫描结果</td>
+	<td>否</td>
+</tr>
+<tr>
 	<td>start</td>
 	<td>int</td>
 	<td>分页开始，默认为0</td>
@@ -994,7 +1000,9 @@ img {
       &quot;HMDModel&quot;: &quot;hmd109&quot;,
       &quot;MACAddr&quot;: &quot;99:ed:9d:3b:e8:36&quot;,
       &quot;IPAddr&quot;: &quot;192.168.8.28&quot;,
-      &quot;description&quot;: &quot;描述&quot;
+      &quot;description&quot;: &quot;描述&quot;,
+      &quot;qrCodeUrl&quot;: &quot;http://vr-cloud.oss-cn-beijing.aliyuncs.com/qr_code/qr_code_ea77fh8ed9ae9ede35c6790b70&quot;,
+      &quot;qrCodeResult&quot;: &quot;http://weixin.qq.com/q/02jK1ffs3rcF318660w07R&quot;,
     },{
       ...
     }
@@ -1002,7 +1010,7 @@ img {
 }
 </code></pre>
 
-<p><code>座椅状态(status)枚举：SHUT_DOWN(关机) / IDLE(空闲) / IN_VOD(点播) / PLAYING(播放) / ERROR(错误)</code></p>
+<p><code>座椅状态(status)枚举：INITIALIZING(初始化) / SHUT_DOWN(关机) / IDLE(空闲) / IN_VOD(点播) / PLAYING(播放) / ERROR(错误)</code></p>
 <h3 id="3_3">3.3修改终端</h3>
 <h3>request</h3>
 <p><code>PUT /cms/vr_clients/{client_id}</code></p>
@@ -1748,10 +1756,11 @@ img {
 <p><code>POST /cms/users</code></p>
 <pre><code>{
   &quot;userName&quot;: &quot;cinemaadmin1&quot;,
-  &quot;password&quot;: &quot;cinemapassword1&quot;
+  &quot;password&quot;: &quot;cinemapassword1&quot;,
   &quot;chineseName&quot;: &quot;张大庆&quot;,
   &quot;authLevel&quot;: &quot;CINEMA_MANAGER&quot;,
-  &quot;authTarget&quot;: &quot;gjwrpoijeoirjfo3w8989p85&quot;
+  &quot;authTarget&quot;: &quot;gjwrpoijeoirjfo3w8989p85&quot;,
+  &quot;description&quot;: &quot;测试阶段店长&quot;
 }
 </code></pre>
 
@@ -1794,6 +1803,12 @@ img {
 	<td>string</td>
 	<td>权限对象</td>
 	<td>是</td>
+</tr>
+<tr>
+	<td>description</td>
+	<td>string</td>
+	<td>介绍</td>
+	<td>否</td>
 </tr>
 </tbody>
 </table>
