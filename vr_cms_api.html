@@ -347,6 +347,7 @@ img {
 <li><a href="#5_1">5.1创建点播任务</a></li>
 <li><a href="#5_1">5.2查询点播任务</a>  
 </li>
+<li><a href="#5_3">5.3验证场景号</a></li>
 </ul>
 </li>
 <li>
@@ -967,6 +968,12 @@ img {
 	<td>qr_result</td>
 	<td>string</td>
 	<td>二维码扫描结果</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>scene_guid</td>
+	<td>string</td>
+	<td>微信场景号</td>
 	<td>否</td>
 </tr>
 <tr>
@@ -1620,7 +1627,7 @@ img {
 }
 </code></pre>
 
-<h3 id="5_1">5.2查询点播任务</h3>
+<h3 id="5_2">5.2查询点播任务</h3>
 <h3>request</h3>
 <p><code>GET /cms/vod_tasks?time={time}&amp;cinemaId={cinemaId}&amp;hallId={hallId}&amp;ticketNumber={ticketNumber}</code></p>
 <table>
@@ -1696,6 +1703,36 @@ img {
 }
 </code></pre>
 
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="5_3">5.3验证场景号</h3>
+<p><code>本接口用于在创建点播单和支付单前, 验证某一场景号所对应的设备当前是否可用.</code></p>
+<h3>request</h3>
+<p><code>GET /cms/vod_tasks/validate_scene_id/{sceneID}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>sceneID</td>
+	<td>String</td>
+	<td>场景号</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
