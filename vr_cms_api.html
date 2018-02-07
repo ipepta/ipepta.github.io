@@ -337,8 +337,7 @@ img {
 <li><a href="#4_3">4.3修改影片</a></li>
 <li><a href="#4_4">4.4为影片点赞</a></li>
 <li><a href="#4_5">4.5删除影片</a></li>
-<li><a href="#4_6">4.6分发到影院</a></li>
-<li><a href="#4_7">4.7影片添加广告</a></li>
+<li><a href="#4_6">4.6影片添加广告</a></li>
 </ul>
 </li>
 <li>
@@ -348,6 +347,7 @@ img {
 <li><a href="#5_1">5.2查询点播任务</a>  
 </li>
 <li><a href="#5_3">5.3验证场景号</a></li>
+<li><a href="#5_4">5.4完成点播任务</a></li>
 </ul>
 </li>
 <li>
@@ -391,6 +391,14 @@ img {
 <ul>
 <li><a href="#11_1">11.1获取上传policy</a></li>
 <li><a href="#11_2">11.2文件上传callback</a></li>
+</ul>
+</li>
+<li>
+<a href="#12">影片分发管理</a>
+<ul>
+<li><a href="#12_1">12.1分发影片</a></li>
+<li><a href="#12_2">12.2修改分发状态</a></li>
+<li><a href="#12_3">12.3查询影片分发状态</a></li>
 </ul>
 </li>
 </ol>
@@ -1461,47 +1469,7 @@ img {
 }
 </code></pre>
 
-<h3 id="4_6">4.6分发到影院</h3>
-<h3>request</h3>
-<p><code>POST /cms/movies/{movie_id}/_distribute</code></p>
-<pre><code>{
-  &quot;cinemaIDList&quot;:[&quot;fqjfj9p384u9f83jfq3948f983&quot;, &quot;weori9348g9s8eh4p958jf98&quot;]
-}
-</code></pre>
-
-<table>
-<thead>
-<tr>
-	<th>名称</th>
-	<th>类型</th>
-	<th>描述</th>
-	<th>是否必须</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-	<td>movie_id</td>
-	<td>string</td>
-	<td>电影id</td>
-	<td>是</td>
-</tr>
-<tr>
-	<td>cinemaIDList</td>
-	<td>list</td>
-	<td>影院id列表，是分发到所有影院的id列表</td>
-	<td>是</td>
-</tr>
-</tbody>
-</table>
-<h3>response</h3>
-<p>成功 200</p>
-<p>失败 400/500</p>
-<pre><code>{
-  &quot;info&quot;: &quot;失败描述&quot;
-}
-</code></pre>
-
-<h3 id="4_7">4.7影片设置广告</h3>
+<h3 id="4_6">4.6影片设置广告</h3>
 <h3>request</h3>
 <p><code>PUT /cms/movies/{movieId}/attachAD</code></p>
 <pre><code>{
@@ -1727,6 +1695,35 @@ img {
 	<td>sceneID</td>
 	<td>String</td>
 	<td>场景号</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="5_4">5.4完成点播任务</h3>
+<h3>request</h3>
+<p><code>GET /cms/vod_tasks/{taskID}/complete</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>taskID</td>
+	<td>String</td>
+	<td>点播单号</td>
 	<td>是</td>
 </tr>
 </tbody>
@@ -2774,6 +2771,176 @@ img {
   &quot;isSuccess&quot;: true,                                //接口是否成功
   &quot;fileID&quot;: &quot;fj39fj09eafrp93q8jf9aj&quot;,               //文件id
   &quot;Info&quot;: &quot;成功&quot;                                      //描述
+}
+</code></pre>
+
+<h2 id="12">12.影片分发管理</h2>
+<h3 id="12_1">12.1分发影片</h3>
+<h3>request</h3>
+<p><code>POST /cms/movies/{movie_id}/distribute</code></p>
+<pre><code>[
+    &quot;fqjfj9p384u9f83jfq3948f983&quot;, 
+    &quot;weori9348g9s8eh4p958jf98&quot;
+]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>movie_id</td>
+	<td>string</td>
+	<td>电影id</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>[postBody]</td>
+	<td>list</td>
+	<td>目标影院id列表</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="12_2">12.2修改分发状态</h3>
+<h3>request</h3>
+<p><code>PUT /cms/movies/{movie_id}/distribute</code></p>
+<pre><code>{
+  &quot;cinemaId&quot;: &quot;fqjfj9p384u9f83jfq3948f983&quot;,
+  &quot;status&quot;: &quot;SUCCESS&quot;,
+  &quot;failedReason&quot;: &quot;&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>movie_id</td>
+	<td>string</td>
+	<td>电影id</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>cinemaIDList</td>
+	<td>string</td>
+	<td>目标影院id</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>status</td>
+	<td>string</td>
+	<td>更新的目标状态. 见13.3</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>failedReason</td>
+	<td>string</td>
+	<td>失败详情</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="1232">12.3查询影片分发状态</h3>
+<h3>request</h3>
+<p><code>GET /cms/movies/{movie_id}/distribute</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>movie_id</td>
+	<td>string</td>
+	<td>电影id</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>[
+    {
+      &quot;cinemaId&quot;: &quot;fqjfj9p384u9f83jfq3948f983&quot;,
+      &quot;movieId&quot;: &quot;weori9348g9s8eh4p958jf98&quot;
+      &quot;distributeStatus&quot;: &quot;SUCCESS&quot;,
+      &quot;failedReason&quot;: &quot;&quot;
+    },
+    ...
+]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>cinemaId</td>
+	<td>string</td>
+	<td>影院id</td>
+</tr>
+<tr>
+	<td>movieId</td>
+	<td>string</td>
+	<td>影片id</td>
+</tr>
+<tr>
+	<td>distributeStatus</td>
+	<td>string</td>
+	<td>分发状态</td>
+</tr>
+<tr>
+	<td>failedReason</td>
+	<td>string</td>
+	<td>失败原因</td>
+</tr>
+</tbody>
+</table>
+<p><code>分发状态: CREATED, PROCESSING, COMPLETED, FAILED :  启动分发, 处理中, 分发成功, 分发失败</code></p>
+<p><code>由于前端使用场景特殊, 本接口不支持分页.</code> </p>
+<p><code>另外本接口只会返回启动分发的记录. 如果某一影院没有查询到对应的分发记录, 应判定为&quot;尚未分发&quot;状态</code></p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
 }
 </code></pre>
 
