@@ -308,6 +308,8 @@ img {
 <li><a href="#1_3">1.3修改影院</a></li>
 <li><a href="#1_4">1.4删除影院</a></li>
 <li><a href="#1_5">1.5导出影院</a></li>
+<li><a href="#1_6">1.6获取影院激活码</a></li>
+<li><a href="#1_7">1.7激活影院</a></li>
 </ul>
 </li>
 <li>
@@ -327,6 +329,7 @@ img {
 <li><a href="#3_3">3.3修改终端</a></li>
 <li><a href="#3_4">3.4删除终端</a></li>
 <li><a href="#3_5">3.5生成终端二维码</a></li>
+<li><a href="#3_6">3.6提交终端事件</a></li>
 </ul>
 </li>
 <li>
@@ -629,7 +632,7 @@ img {
 
 <h3 id="1_5">1.5导出影院</h3>
 <h3>request</h3>
-<p><code>GET /cms/cinemas/export?cinema_id={cinema_id}</code></p>
+<p><code>GET /cms/cinemas/{cinemaId}/export</code></p>
 <table>
 <thead>
 <tr>
@@ -641,15 +644,84 @@ img {
 </thead>
 <tbody>
 <tr>
-	<td>cinema_id</td>
+	<td>cinemaId</td>
 	<td>string</td>
-	<td>影院id，<code>cinema_id={cinema_id}</code></td>
+	<td>影院id</td>
 	<td>是</td>
 </tr>
 </tbody>
 </table>
 <h3>response</h3>
 <p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="1_6">1.6获取影院激活码</h3>
+<h3>request</h3>
+<p><code>GET /cms/cinemas/{cinemaId}/activation</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>cinemaId</td>
+	<td>string</td>
+	<td>影院id</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;activationCode&quot;: &quot;1022486597&quot;,
+  &quot;expireDate&quot;: &quot;1518092487885&quot;
+}
+</code></pre>
+
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="1_7">1.7激活影院</h3>
+<h3>request</h3>
+<p><code>POST /cms/cinemas/{activationCode}/activation</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>activationCode</td>
+	<td>string</td>
+	<td>激活码</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;cinemaID&quot;: &quot;qiejgq3984jf9384jf9ef93q8&quot;
+}
+</code></pre>
+
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
@@ -1089,6 +1161,48 @@ img {
 <pre><code>二维码图片
 </code></pre>
 
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="3_6">3.6提交终端事件</h3>
+<h3>request</h3>
+<p><code>POST /cms/vr_clients/{scene_id}/event</code></p>
+<pre><code>{
+  &quot;event&quot;: &quot;SCAN&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>scene_id</td>
+	<td>string</td>
+	<td>客户端sceneId</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>event</td>
+	<td>string</td>
+	<td>事件类型</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<p><code>本接口响应支付成功以外的设备事件, 并转交COMS执行. 支付成功由点播任务(5)接口处理.</code></p>
+<p><code>支持的事件类型: SCAN, SUBMIT_ORDER. 扫描设备, 生成订单</code></p>
+<h3>response</h3>
+<p>成功 200</p>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
