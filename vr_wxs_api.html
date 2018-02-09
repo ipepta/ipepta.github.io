@@ -315,11 +315,8 @@ img {
 <li>
 <a href="#2">微信管理</a>
 <ul>
-<li><a href="#2_1">2.1查询微信用户</a></li>
-<li><a href="#2_2">2.2查询用户当前sceneid</a></li>
-<li><a href="#2_3">2.3登记用户扫描设备</a></li>
-<li><a href="#2_4">2.4获取AccessToken</a></li>
-<li><a href="#2_5">2.5微信回调接口</a></li>
+<li><a href="#2_1">2.1获取AccessToken</a></li>
+<li><a href="#2_2">2.2微信回调接口</a></li>
 </ul>
 </li>
 <li>
@@ -337,6 +334,15 @@ img {
 <li><a href="#4_3">4.3提交购物车</a></li>
 <li><a href="#4_4">4.4查询购物车</a></li>
 <li><a href="#4_5">4.5清空购物车</a></li>
+<li><a href="#4_6">4.6查询购物车操作时间</a></li>
+</ul>
+</li>
+<li>
+<a href="#5">用户管理</a>
+<ul>
+<li><a href="#5_1">5.1查询微信用户</a></li>
+<li><a href="#5_2">5.2查询用户当前sceneid</a></li>
+<li><a href="#5_3">5.3登记用户扫描设备</a></li>
 </ul>
 </li>
 </ol>
@@ -692,194 +698,7 @@ img {
 </code></pre>
 
 <h2 id="2">2.微信管理</h2>
-<h3 id="2_1">2.1查询微信用户</h3>
-<h3>request</h3>
-<p><code>GET /wxs/users/wx?open_id={openID}</code></p>
-<table>
-<thead>
-<tr>
-	<th>名称</th>
-	<th>类型</th>
-	<th>描述</th>
-	<th>是否必须</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-	<td>openID</td>
-	<td>string</td>
-	<td>用户id</td>
-	<td>否</td>
-</tr>
-<tr>
-	<td>start</td>
-	<td>int</td>
-	<td>分页开始，默认为0</td>
-	<td>否</td>
-</tr>
-<tr>
-	<td>limit</td>
-	<td>int</td>
-	<td>页面大小，默认为20</td>
-	<td>否</td>
-</tr>
-</tbody>
-</table>
-<h3>reponse</h3>
-<p>成功 200</p>
-<pre><code>{
-  &quot;totalCount&quot;: 30,
-  &quot;itemList&quot;: [
-    {
-        &quot;openID&quot;: &quot;fq23jfjp9a8e9q34&quot;,
-        &quot;nickName&quot;: &quot;张三&quot;,
-        &quot;iconURL&quot;: &quot;https://weixin.com.cn/ajfw90fa9.jpg&quot;,
-        &quot;attentionTime&quot;: 1510995105068,
-        &quot;sceneID&quot;: 2000,
-        &quot;subscribed&quot;: 1
-    },{
-      ...
-    }
-  ]
-}
-</code></pre>
-
-<table>
-<thead>
-<tr>
-	<th>名称</th>
-	<th>类型</th>
-	<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-	<td>openID</td>
-	<td>string</td>
-	<td>用户id</td>
-</tr>
-<tr>
-	<td>nickName</td>
-	<td>string</td>
-	<td>用户昵称</td>
-</tr>
-<tr>
-	<td>iconURL</td>
-	<td>string</td>
-	<td>用户头像</td>
-</tr>
-<tr>
-	<td>attentionTime</td>
-	<td>string</td>
-	<td>用户关注本公众号的时间</td>
-</tr>
-<tr>
-	<td>sceneID</td>
-	<td>int</td>
-	<td>用户最新扫面的二维码场景值</td>
-</tr>
-<tr>
-	<td>subscribed</td>
-	<td>bool</td>
-	<td>用户当前是否仍在关注</td>
-</tr>
-</tbody>
-</table>
-<p>失败 400/500</p>
-<pre><code>{
-  &quot;info&quot;: &quot;失败描述&quot;
-}
-</code></pre>
-
-<h3 id="2_2">2.2查询用户当前sceneid</h3>
-<h3>request</h3>
-<p><code>GET /wxs/users/sceneid?open_id={openID}</code></p>
-<table>
-<thead>
-<tr>
-	<th>名称</th>
-	<th>类型</th>
-	<th>描述</th>
-	<th>是否必须</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-	<td>openID</td>
-	<td>string</td>
-	<td>用户id</td>
-	<td>是</td>
-</tr>
-</tbody>
-</table>
-<h3>reponse</h3>
-<p>成功 200</p>
-<pre><code>{
-  &quot;sceneID&quot;: 10025,
-  &quot;scanTime&quot;: &quot;1511457450&quot;
-}
-</code></pre>
-
-<table>
-<thead>
-<tr>
-	<th>名称</th>
-	<th>类型</th>
-	<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-	<td>sceneID</td>
-	<td>int</td>
-	<td>场景ID</td>
-</tr>
-<tr>
-	<td>scanTime</td>
-	<td>string</td>
-	<td>扫描事件微信时间戳(10位)</td>
-</tr>
-</tbody>
-</table>
-<p>失败 400/500</p>
-<pre><code>{
-  &quot;info&quot;: &quot;失败描述&quot;
-}
-</code></pre>
-
-<h3 id="2_3">2.3登记用户扫描设备</h3>
-<h3>request</h3>
-<p><code>POST /wxs/users/qr_scan</code></p>
-<pre><code>{
-  &quot;qrResult&quot;: &quot;http://weixin.qq.com/q/02fdsaj99rcF310690w07R&quot;
-}
-</code></pre>
-
-<table>
-<thead>
-<tr>
-	<th>名称</th>
-	<th>类型</th>
-	<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-	<td>qrResult</td>
-	<td>string</td>
-	<td>二维码的扫描结果</td>
-</tr>
-</tbody>
-</table>
-<h3>reponse</h3>
-<p>成功 200</p>
-<p>失败 400/500</p>
-<pre><code>{
-  &quot;info&quot;: &quot;失败描述&quot;
-}
-</code></pre>
-
-<h3 id="2_4">2.4获取AccessToken</h3>
+<h3 id="2_1">2.1获取AccessToken</h3>
 <h3>request</h3>
 <p><code>GET /wxs/wx/accesstoken</code></p>
 <h3>reponse</h3>
@@ -893,10 +712,10 @@ img {
 }
 </code></pre>
 
-<h3 id="2_5">2.5微信回调接口</h3>
+<h3 id="2_2">2.2微信回调接口</h3>
 <h3>request</h3>
 <p><code>GET&amp;POST /wxs/wx/callback</code></p>
-<p>用于和微信服务器通信, 接收服务器验证握手, 事件推送等.</p>
+<p><code>用于和微信服务器通信, 接收服务器验证握手, 事件推送等.</code></p>
 <h2 id="3">3.点赞管理</h2>
 <h3 id="3_1">3.1提交点赞</h3>
 <h3>request</h3>
@@ -1111,6 +930,244 @@ img {
 <h3>request</h3>
 <p><code>DELETE /wxs/cart</code></p>
 <h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="4_6">4.6查询购物车操作时间</h3>
+<h3>request</h3>
+<p><code>GET /wxs/cart/last_update?open_id={openId}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>openId</td>
+	<td>string</td>
+	<td>用户id</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>reponse</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;lastUpdate&quot;: &quot;15114574500&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>lastUpdate</td>
+	<td>string</td>
+	<td>最后一次更新时间戳</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="5">5.用户管理</h2>
+<h3 id="5_1">5.1查询微信用户</h3>
+<h3>request</h3>
+<p><code>GET /wxs/users/wx?open_id={openID}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>openID</td>
+	<td>string</td>
+	<td>用户id</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>start</td>
+	<td>int</td>
+	<td>分页开始，默认为0</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>limit</td>
+	<td>int</td>
+	<td>页面大小，默认为20</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>reponse</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;totalCount&quot;: 30,
+  &quot;itemList&quot;: [
+    {
+        &quot;openID&quot;: &quot;fq23jfjp9a8e9q34&quot;,
+        &quot;nickName&quot;: &quot;张三&quot;,
+        &quot;iconURL&quot;: &quot;https://weixin.com.cn/ajfw90fa9.jpg&quot;,
+        &quot;attentionTime&quot;: 1510995105068,
+        &quot;sceneID&quot;: 2000,
+        &quot;subscribed&quot;: 1
+    },{
+      ...
+    }
+  ]
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>openID</td>
+	<td>string</td>
+	<td>用户id</td>
+</tr>
+<tr>
+	<td>nickName</td>
+	<td>string</td>
+	<td>用户昵称</td>
+</tr>
+<tr>
+	<td>iconURL</td>
+	<td>string</td>
+	<td>用户头像</td>
+</tr>
+<tr>
+	<td>attentionTime</td>
+	<td>string</td>
+	<td>用户关注本公众号的时间</td>
+</tr>
+<tr>
+	<td>sceneID</td>
+	<td>int</td>
+	<td>用户最新扫面的二维码场景值</td>
+</tr>
+<tr>
+	<td>subscribed</td>
+	<td>bool</td>
+	<td>用户当前是否仍在关注</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="5_2">5.2查询用户当前sceneid</h3>
+<h3>request</h3>
+<p><code>GET /wxs/users/sceneid?open_id={openID}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>openID</td>
+	<td>string</td>
+	<td>用户id</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>reponse</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;sceneID&quot;: 10025,
+  &quot;scanTime&quot;: &quot;1511457450&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>sceneID</td>
+	<td>int</td>
+	<td>场景ID</td>
+</tr>
+<tr>
+	<td>scanTime</td>
+	<td>string</td>
+	<td>扫描事件微信时间戳(10位)</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="5_3">5.3登记用户扫描设备</h3>
+<h3>request</h3>
+<p><code>POST /wxs/users/qr_scan</code></p>
+<pre><code>{
+  &quot;qrResult&quot;: &quot;http://weixin.qq.com/q/02fdsaj99rcF310690w07R&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>qrResult</td>
+	<td>string</td>
+	<td>二维码的扫描结果</td>
+</tr>
+</tbody>
+</table>
+<h3>reponse</h3>
 <p>成功 200</p>
 <p>失败 400/500</p>
 <pre><code>{

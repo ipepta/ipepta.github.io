@@ -1171,7 +1171,9 @@ img {
 <h3>request</h3>
 <p><code>POST /cms/vr_clients/{scene_id}/event</code></p>
 <pre><code>{
-  &quot;event&quot;: &quot;SCAN&quot;
+  &quot;event&quot;: &quot;SCAN&quot;,
+  &quot;openId&quot;: &quot;g928gj98es9gw45jg98rsgfp9s8u&quot;,
+  &quot;expireDate&quot;:　&quot;1510208988793&quot;
 }
 </code></pre>
 
@@ -1197,10 +1199,22 @@ img {
 	<td>事件类型</td>
 	<td>是</td>
 </tr>
+<tr>
+	<td>openId</td>
+	<td>string</td>
+	<td>扫描用户的openId</td>
+	<td>扫描事件时必须</td>
+</tr>
+<tr>
+	<td>expireDate</td>
+	<td>string</td>
+	<td>订单过期时间</td>
+	<td>订单事件时必须</td>
+</tr>
 </tbody>
 </table>
 <p><code>本接口响应支付成功以外的设备事件, 并转交COMS执行. 支付成功由点播任务(5)接口处理.</code></p>
-<p><code>支持的事件类型: SCAN, SUBMIT_ORDER. 扫描设备, 生成订单</code></p>
+<p><code>支持的事件类型: SCAN, CREATE_TICKET. 扫描设备, 生成订单</code></p>
 <h3>response</h3>
 <p>成功 200</p>
 <p>失败 400/500</p>
