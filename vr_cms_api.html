@@ -404,6 +404,15 @@ img {
 <li><a href="#12_3">12.3查询影片分发状态</a></li>
 </ul>
 </li>
+<li>
+<a href="#13">制片方管理</a>
+<ul>
+<li><a href="#13_1">13.1新增片方</a></li>
+<li><a href="#13_2">13.2查询片方</a></li>
+<li><a href="#13_3">13.3修改片方</a></li>
+<li><a href="#13_4">13.4删除片方</a></li>
+</ul>
+</li>
 </ol>
 <h2 id="1">1.影院管理</h2>
 <h3 id="1_1">1.1创建影院</h3>
@@ -419,6 +428,8 @@ img {
   &quot;comsIPAddr&quot;: &quot;192.168.8.21&quot;,
   &quot;description&quot;: &quot;第二家店&quot;,
   &quot;address&quot;: &quot;北京市朝阳区测试道路1号&quot;,
+  &quot;longitude&quot;: 116.3742256165,
+  &quot;latitude&quot;: 39.8881383092,
   &quot;phone&quot;: &quot;010-66667777&quot;
 }
 </code></pre>
@@ -479,6 +490,18 @@ img {
 	<td>address</td>
 	<td>string</td>
 	<td>影院地址，限制在256字符内</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>longitude</td>
+	<td>double</td>
+	<td>经度</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>latitude</td>
+	<td>double</td>
+	<td>纬度</td>
 	<td>否</td>
 </tr>
 <tr>
@@ -563,6 +586,8 @@ img {
       &quot;comsIPAddr&quot;: &quot;192.168.8.21&quot;,
       &quot;description&quot;: &quot;第二家店&quot;,
       &quot;address&quot;: &quot;五道口宇宙中心&quot;,
+      &quot;longitude&quot;: 116.3742256165,
+      &quot;latitude&quot;: 39.8881383092,
       &quot;phone&quot;: &quot;010-66666&quot;
     },{
       ...
@@ -653,6 +678,27 @@ img {
 </table>
 <h3>response</h3>
 <p>成功 200</p>
+<pre><code>{
+  &quot;downloadUrl&quot;: &quot;https://oss.aliyun.com/1518092487885.zip&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>downloadUrl</td>
+	<td>string</td>
+	<td>导出压缩包下载地址</td>
+</tr>
+</tbody>
+</table>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
@@ -924,7 +970,7 @@ img {
 <pre><code>{
   &quot;hallID&quot;: &quot;fqofjp98jf9p8q3948fq3&quot;,
   &quot;seatNumber&quot;: &quot;02&quot;,
-  &quot;hostModel&quot;: &quot;windows07&quot;,  
+  &quot;performanceLevel&quot;: 720,  
   &quot;seatModel&quot;: &quot;vr0109&quot;,
   &quot;HMDModel&quot;: &quot;hmd109&quot;,
   &quot;MACAddr&quot;: &quot;99:ed:9d:3b:e8:36&quot;,
@@ -957,10 +1003,10 @@ img {
 	<td>否</td>
 </tr>
 <tr>
-	<td>hostModel</td>
-	<td>string</td>
-	<td>播放终端使用的主机型号</td>
-	<td>否</td>
+	<td>performanceLevel</td>
+	<td>double</td>
+	<td>终端的播放性能水平</td>
+	<td>是</td>
 </tr>
 <tr>
 	<td>seatModel</td>
@@ -1235,6 +1281,8 @@ img {
   &quot;type&quot;: &quot;MOVIE&quot;,
   &quot;category&quot;: &quot;ACTION&quot;,
   &quot;country&quot;: &quot;USA&quot;,
+  &quot;performanceLevel&quot;: 480,
+  &quot;movieProducer&quot;: &quot;df852bf7447d293b6d6f34d&quot;,
   &quot;fileID&quot;: &quot;q3eifj3f98h3w94hf83wffq324s&quot;,
   &quot;iconID&quot;: &quot;asdfhf09q38fdhuf98q938f98pq&quot;,
   &quot;posterID&quot;: &quot;g928gj98es9gw45jg98rsgfp9s8u&quot;,
@@ -1299,6 +1347,18 @@ img {
 	<td>string</td>
 	<td>电影发行国家枚举，有USA(美国)，CHN(中国)等</td>
 	<td>是</td>
+</tr>
+<tr>
+	<td>performanceLevel</td>
+	<td>double</td>
+	<td>影片要求的播放设备性能水平</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>movieProducer</td>
+	<td>string</td>
+	<td>制片方</td>
+	<td>否</td>
 </tr>
 <tr>
 	<td>fileID</td>
@@ -2189,7 +2249,7 @@ img {
 </tr>
 </tbody>
 </table>
-<p><code>权限对象组: ALL, REGION, CINEMA, MOVIE. 权限对象组为ALL时, 创建用户不必填写权限对象. 其他值填写对应的权限对象ID</code></p>
+<p><code>权限对象组: ALL, REGION, CINEMA, MOVIE, MOVIE_PRODUCER 权限对象组为ALL时, 创建用户不必填写权限对象. 其他值填写对应的权限对象ID</code></p>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
@@ -2238,42 +2298,20 @@ img {
             &quot;default&quot;: true
         }
     ],
-    &quot;userRoleList&quot;: [
-        {
-            &quot;id&quot;: &quot;MANAGER&quot;,
-            &quot;name&quot;: &quot;管理员&quot;,
-            &quot;default&quot;: false
-        },
-        {
-            &quot;id&quot;: &quot;SYS_ADMIN&quot;,
-            &quot;name&quot;: &quot;系统管理员&quot;,
-            &quot;default&quot;: true
-        }
-    ],
-    &quot;seatList&quot;: [
-        {
-            &quot;seatModel&quot;: &quot;model001&quot;,
-            &quot;status&quot;: false,
-            &quot;manufacture&quot;: &quot;sony&quot;,
-            &quot;spec&quot;: &quot;sony&quot;,
-            &quot;desc&quot;: &quot;vr&quot;,
-            &quot;descImage&quot;: &quot;url&quot;
-        }
-    ],
-    &quot;hdmlist&quot;: [
-        {
-            &quot;hmdModel&quot;: &quot;model2&quot;,
-            &quot;status&quot;: true,
-            &quot;manufacture&quot;: &quot;xijianx1&quot;,
-            &quot;spec&quot;: &quot;xijain&quot;,
-            &quot;desc&quot;: &quot;vr&quot;,
-            &quot;descImage&quot;: &quot;url&quot;
-        }
-    ],
     &quot;movieTypes&quot;: [
         &quot;MOVIE&quot;,
         &quot;GUIDE&quot;,
         &quot;AD&quot;
+    ]
+    &quot;performanceLevelList&quot;: [
+       {
+         &quot;level&quot;: 480,
+         &quot;name&quot;: &quot;480P&quot;
+       } .
+       {
+         &quot;level&quot;: 720,
+         &quot;name&quot;: &quot;720P&quot;
+       }
     ]
 }
 </code></pre>
@@ -3066,6 +3104,204 @@ img {
 <p><code>分发状态: CREATED, PROCESSING, COMPLETED, FAILED :  启动分发, 处理中, 分发成功, 分发失败</code></p>
 <p><code>由于前端使用场景特殊, 本接口不支持分页.</code> </p>
 <p><code>另外本接口只会返回启动分发的记录. 如果某一影院没有查询到对应的分发记录, 应判定为&quot;尚未分发&quot;状态</code></p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="13">13.制片方管理</h2>
+<h3 id="13_1">13.1新增片方</h3>
+<h3>request</h3>
+<p><code>POST /cms/movie_producer</code></p>
+<pre><code>{
+  &quot;producerName&quot;: &quot;华谊兄弟&quot;,
+  &quot;contact&quot;: &quot;张大庆&quot;,
+  &quot;phone&quot;: &quot;021-67891234&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>producerName</td>
+	<td>string</td>
+	<td>片方名称</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>contact</td>
+	<td>string</td>
+	<td>联系人</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>phone</td>
+	<td>string</td>
+	<td>联系电话</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;producerId&quot;: &quot;aepojfoiawrfiu3whri9898y9&quot;
+}
+</code></pre>
+
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="13_2">13.2查询片方</h3>
+<h3>request</h3>
+<p><code>GET /cms/movie_producer?producer_id={producerId}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>producerName</td>
+	<td>string</td>
+	<td>片方名称</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>producerId</td>
+	<td>string</td>
+	<td>片方ID</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>start</td>
+	<td>int</td>
+	<td>分页开始，默认为0</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>limit</td>
+	<td>int</td>
+	<td>页面大小，默认为20</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;totalCount&quot;: 100,
+  &quot;itemList&quot;: [
+    {
+      &quot;producerId&quot;: &quot;gjwjfj320nvpaj23h9p85&quot;,
+      &quot;producerName&quot;: &quot;华谊兄弟&quot;,
+      &quot;contact&quot;: &quot;张大庆&quot;,
+      &quot;phone&quot;: &quot;021-67891234&quot;
+    }, ...
+    ]   
+}
+</code></pre>
+
+<h4>字段描述见<a href="#13_1">13.1创建片方</a></h4>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="13_3">13.3修改片方</h3>
+<h3>request</h3>
+<p><code>PUT /cms/movie_producer/{producerId}</code></p>
+<pre><code>{
+  &quot;producerName&quot;: &quot;华谊兄弟&quot;,
+  &quot;contact&quot;: &quot;张大庆&quot;,
+  &quot;phone&quot;: &quot;021-67891234&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>producerId</td>
+	<td>string</td>
+	<td>片方ID</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>producerName</td>
+	<td>string</td>
+	<td>片方名称</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>contact</td>
+	<td>string</td>
+	<td>联系人</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>phone</td>
+	<td>string</td>
+	<td>联系电话</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="13_4">13.4删除片方</h3>
+<h3>request</h3>
+<p><code>DELETE /cms/movie_producer?producer_id={producerId}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>producerId</td>
+	<td>string</td>
+	<td>片方ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
