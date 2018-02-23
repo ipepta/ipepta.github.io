@@ -413,6 +413,12 @@ img {
 <li><a href="#13_4">13.4删除片方</a></li>
 </ul>
 </li>
+<li>
+<a href="#14">流水统计</a>
+<ul>
+<li><a href="#14_1">14.1下载报告</a></li>
+</ul>
+</li>
 </ol>
 <h2 id="1">1.影院管理</h2>
 <h3 id="1_1">1.1创建影院</h3>
@@ -3308,6 +3314,79 @@ img {
 </table>
 <h3>response</h3>
 <p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="14">14.流水统计</h2>
+<h3 id="14_1">14.1下载报告</h3>
+<h3>request</h3>
+<p><code>GET /cms/statistics?start_date=1519389095087&amp;end_date=1519390665087</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>start_date</td>
+	<td>long</td>
+	<td>起始日期, 默认昨天</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>end_date</td>
+	<td>long</td>
+	<td>结束日期, 默认昨天</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>report_type</td>
+	<td>string</td>
+	<td>报告类型</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>movie_id</td>
+	<td>string</td>
+	<td>影片ID</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>movie_category</td>
+	<td>string</td>
+	<td>影片类型</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>cinema_id</td>
+	<td>string</td>
+	<td>影院ID</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>cinema_region</td>
+	<td>string</td>
+	<td>影院地区</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<p><code>支持的报告类型: BY_MOVIE, BY_MOVIE_ALL_CINEMA, BY_MOVIE_CATEGORY, BY_MOVIE_CATEGORY_ALL_CINEMA, BY_CINEMA, BY_SEAT, FULL_RECORD</code></p>
+<p><code>除日期和类型外, 其他参数只对部分报告有效. 例如, BY_MOVIE报告传影院ID, 影院地区参数均会被系统忽略.</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;downloadUrl&quot;: &quot;https://www.alioss.com/gjwjfj320nvpaj23h9p85&quot;
+}
+</code></pre>
+
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
