@@ -1461,7 +1461,7 @@ img {
 	<td>movie_id</td>
 	<td>string</td>
 	<td>电影id，可多传<code>movie_id={movie_id1}&amp;movie_id={movie_id2}</code></td>
-	<td>&nbsp;</td>
+	<td>否</td>
 </tr>
 <tr>
 	<td>open_id</td>
@@ -1533,6 +1533,12 @@ img {
 	<td>time</td>
 	<td>long</td>
 	<td>档期日期</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>ignore_scene_id</td>
+	<td>bool</td>
+	<td>微信用户查询不使用设备筛选</td>
 	<td>否</td>
 </tr>
 </tbody>
@@ -3113,7 +3119,7 @@ img {
 </tr>
 </tbody>
 </table>
-<p><code>分发状态: CREATED, PROCESSING, COMPLETED, FAILED :  启动分发, 处理中, 分发成功, 分发失败</code></p>
+<p><code>分发状态: NOT_STARTED, CREATED, PROCESSING, COMPLETED, FAILED :  启动分发, 处理中, 分发成功, 分发失败</code></p>
 <p><code>由于前端使用场景特殊, 本接口不支持分页.</code> </p>
 <p><code>另外本接口只会返回启动分发的记录. 如果某一影院没有查询到对应的分发记录, 应判定为&quot;尚未分发&quot;状态</code></p>
 <p>失败 400/500</p>
