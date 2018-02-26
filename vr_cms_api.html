@@ -428,10 +428,7 @@ img {
 <pre><code>{
   &quot;cinemaCode&quot;: &quot;huabeiqu_cinema_0001&quot;,
   &quot;name&quot;: &quot;X立方长宁缤谷&quot;,
-  &quot;numberOfHalls&quot;: 4,
-  &quot;regionID&quot;: &quot;fqj943f89ad8f9q3hf489ewa&quot;,
-  &quot;comsMACAddr&quot;: &quot;ef:23:7e:cc:8a&quot;,  
-  &quot;comsIPAddr&quot;: &quot;192.168.8.21&quot;,
+  &quot;regionID&quot;: &quot;BEIJING&quot;,
   &quot;description&quot;: &quot;第二家店&quot;,
   &quot;address&quot;: &quot;北京市朝阳区测试道路1号&quot;,
   &quot;longitude&quot;: 116.3742256165,
@@ -463,28 +460,10 @@ img {
 	<td>是</td>
 </tr>
 <tr>
-	<td>numberOfHalls</td>
-	<td>int</td>
-	<td>放映厅数量</td>
-	<td>否</td>
-</tr>
-<tr>
 	<td>regionID</td>
 	<td>string</td>
 	<td>区域id</td>
 	<td>是</td>
-</tr>
-<tr>
-	<td>comsMACAddr</td>
-	<td>string</td>
-	<td>COMS系统主机的mac地址</td>
-	<td>否</td>
-</tr>
-<tr>
-	<td>comsIPAddr</td>
-	<td>string</td>
-	<td>COMS主机的本地局域网IP地址</td>
-	<td>否</td>
 </tr>
 <tr>
 	<td>description</td>
@@ -587,7 +566,7 @@ img {
       &quot;cinemaCode&quot;: &quot;huabeiqu_cinema_0001&quot;,
       &quot;name&quot;: &quot;X立方长宁缤谷&quot;,
       &quot;numberOfHalls&quot;: 4,
-      &quot;regionID&quot;: &quot;fqj943f89ad8f9q3hf489ewa&quot;,
+      &quot;regionID&quot;: &quot;BEIJING&quot;,
       &quot;comsMACAddr&quot;: &quot;ef:23:7e:cc:8a&quot;,
       &quot;comsIPAddr&quot;: &quot;192.168.8.21&quot;,
       &quot;description&quot;: &quot;第二家店&quot;,
@@ -602,6 +581,72 @@ img {
 }
 </code></pre>
 
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>cinemaCode</td>
+	<td>string</td>
+	<td>影院的唯一的识别码，可读</td>
+</tr>
+<tr>
+	<td>name</td>
+	<td>string</td>
+	<td>影院名称，限制在256字符内</td>
+</tr>
+<tr>
+	<td>numberOfHalls</td>
+	<td>int</td>
+	<td>放映厅数量</td>
+</tr>
+<tr>
+	<td>regionID</td>
+	<td>string</td>
+	<td>区域id</td>
+</tr>
+<tr>
+	<td>comsMACAddr</td>
+	<td>string</td>
+	<td>COMS系统主机的mac地址</td>
+</tr>
+<tr>
+	<td>comsIPAddr</td>
+	<td>string</td>
+	<td>COMS主机的本地局域网IP地址</td>
+</tr>
+<tr>
+	<td>description</td>
+	<td>string</td>
+	<td>描述比如地址联系方式等，限制在256字符内</td>
+</tr>
+<tr>
+	<td>address</td>
+	<td>string</td>
+	<td>影院地址，限制在256字符内</td>
+</tr>
+<tr>
+	<td>longitude</td>
+	<td>double</td>
+	<td>经度</td>
+</tr>
+<tr>
+	<td>latitude</td>
+	<td>double</td>
+	<td>纬度</td>
+</tr>
+<tr>
+	<td>phone</td>
+	<td>string</td>
+	<td>影院联系方式，限制在256字符内</td>
+</tr>
+</tbody>
+</table>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
@@ -3119,7 +3164,7 @@ img {
 </tr>
 </tbody>
 </table>
-<p><code>分发状态: NOT_STARTED, CREATED, PROCESSING, COMPLETED, FAILED :  启动分发, 处理中, 分发成功, 分发失败</code></p>
+<p><code>分发状态: NOT_STARTED, CREATED, PROCESSING, COMPLETED, FAILED : 未分发, 启动分发, 处理中, 分发成功, 分发失败</code></p>
 <p><code>由于前端使用场景特殊, 本接口不支持分页.</code> </p>
 <p><code>另外本接口只会返回启动分发的记录. 如果某一影院没有查询到对应的分发记录, 应判定为&quot;尚未分发&quot;状态</code></p>
 <p>失败 400/500</p>
