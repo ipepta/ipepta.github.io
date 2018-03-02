@@ -1046,7 +1046,8 @@ img {
   &quot;MACAddr&quot;: &quot;99:ed:9d:3b:e8:36&quot;,
   &quot;IPAddr&quot;: &quot;192.168.8.28&quot;,
   &quot;description&quot;: &quot;描述&quot;,
-  &quot;clientCode&quot;:&quot;vrdevice&quot;
+  &quot;clientCode&quot;:&quot;vrdevice&quot;,
+  &quot;actionFileVersion&quot;: &quot;tier1&quot;,
 }
 </code></pre>
 
@@ -1107,6 +1108,12 @@ img {
 	<td>string</td>
 	<td>描述(最长265个字)</td>
 	<td>否</td>
+</tr>
+<tr>
+	<td>actionFileVersion</td>
+	<td>string</td>
+	<td>动作文件型号</td>
+	<td>是</td>
 </tr>
 </tbody>
 </table>
@@ -1204,6 +1211,7 @@ img {
       &quot;MACAddr&quot;: &quot;99:ed:9d:3b:e8:36&quot;,
       &quot;IPAddr&quot;: &quot;192.168.8.28&quot;,
       &quot;description&quot;: &quot;描述&quot;,
+      &quot;actionFileVersion&quot;: &quot;tier1&quot;,
       &quot;qrCodeUrl&quot;: &quot;http://vr-cloud.oss-cn-beijing.aliyuncs.com/qr_code/qr_code_ea77fh8ed9ae9ede35c6790b70&quot;,
       &quot;qrCodeResult&quot;: &quot;http://weixin.qq.com/q/02jK1ffs3rcF318660w07R&quot;,
     },{
@@ -1227,7 +1235,8 @@ img {
   &quot;HMDModel&quot;: &quot;hmd109&quot;,
   &quot;MACAddr&quot;: &quot;99:ed:9d:3b:e8:36&quot;,
   &quot;IPAddr&quot;: &quot;192.168.8.28&quot;,
-  &quot;description&quot;: &quot;描述&quot;
+  &quot;description&quot;: &quot;描述&quot;,
+  &quot;actionFileVersion&quot;: &quot;tier1&quot;,
 }
 </code></pre>
 
@@ -1363,6 +1372,7 @@ img {
   &quot;price&quot;: 2990,
   &quot;isHot&quot;: true,
   &quot;region&quot;:&quot;北京&quot;,
+  &quot;actionFileVersion&quot;: &quot;tier1&quot;
 }
 </code></pre>
 
@@ -1489,6 +1499,12 @@ img {
 	<td>string</td>
 	<td>影片地区</td>
 	<td>否</td>
+</tr>
+<tr>
+	<td>actionFileVersion</td>
+	<td>string</td>
+	<td>动作文件版本</td>
+	<td>是</td>
 </tr>
 </tbody>
 </table>
@@ -1640,6 +1656,7 @@ img {
             &quot;isHot&quot;: null,
             &quot;region&quot;: &quot;北京&quot;,
             &quot;posterURL&quot;: null,
+            &quot;actionFileVersion&quot;: &quot;tier1&quot;,
             &quot;iconURL&quot;: null,
             &quot;fileURL&quot;: null,
             &quot;adList&quot;: [
@@ -1685,6 +1702,7 @@ img {
   &quot;posterID&quot;: &quot;g928gj98es9gw45jg98rsgfp9s8u&quot;,
   &quot;scheduleStart&quot;: &quot;1510208988793&quot;,
   &quot;scheduleEnd&quot;: &quot;1510208989793&quot;,  
+  &quot;actionFileVersion&quot;: &quot;tier2&quot;
   &quot;online&quot;: true,
   &quot;weixinURL&quot;: &quot;https://mp.weixin.qq.com/s?__biz=MzI5NjQ3OTg1Mw==&amp;mid=2247483989&amp;idx=1&amp;sn=df852bf7447d293b6d6f34d5791a9d80&amp;chksm=ec42ff57db3576413dbacf1288bc6be4d271a7db7aefc093e485c01026b3a645130e3e7b41a2&amp;scene=0#rd&quot;,
   &quot;price&quot;: 3000,
@@ -2355,6 +2373,16 @@ img {
          &quot;level&quot;: 720,
          &quot;name&quot;: &quot;720P&quot;
        }
+    ],
+    &quot;actionFileVersionList&quot;: [
+        {
+            &quot;version&quot;: &quot;tier1&quot;,
+            &quot;name&quot;: &quot;第一代&quot;
+        },
+        {
+            &quot;version&quot;: &quot;tier2&quot;,
+            &quot;name&quot;: &quot;第二代&quot;
+        },
     ]
 }
 </code></pre>
