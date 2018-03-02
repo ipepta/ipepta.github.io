@@ -308,8 +308,10 @@ img {
 <li><a href="#1_2">1.2撤销点播单</a></li>
 <li><a href="#1_3">1.3获取支付参数</a></li>
 <li><a href="#1_3_1">1.3.1获取JSSDK启动参数</a></li>
+<li><a href="#1_3_2">1.3.2获取APP支付相关参数</a></li>
 <li><a href="#1_4">1.4向点播单报告问题</a></li>
 <li><a href="#1_5">1.5完成点播单</a></li>
+<li><a href="#1_6">1.6通知点播单支付完成(APP)</a></li>
 </ul>
 </li>
 <li>
@@ -348,8 +350,12 @@ img {
 </ol>
 <h2 id="1">1.点播单管理</h2>
 <h3 id="1_1">1.1查询点播单</h3>
+<p><code>微信页面访问本接口时, 由APIGateway负责拼装GET参数open_id. 页面不需要额外操作.</code> </p>
+<p><code>CMS访问本接口时, 使用GET参数token.</code> </p>
+<p><code>APP访问本接口时, 使用GET参数token和app_user_id.</code></p>
+<p><code>WXS各接口均采用这一设定, 下文不再重复. 不是所有接口都允许CMS或APP访问.</code></p>
 <h3>request</h3>
-<p><code>GET /wxs/tickets?open_id={openID}&amp;status={status}</code></p>
+<p><code>GET /wxs/tickets?open_id={openID}&amp;status={status}&amp;movie_id={movieID}</code></p>
 <table>
 <thead>
 <tr>
@@ -371,6 +377,18 @@ img {
 	<td>string</td>
 	<td>微信用户openid</td>
 	<td>否</td>
+</tr>
+<tr>
+	<td>unionID</td>
+	<td>string</td>
+	<td>微信用户unionID. 本参数优先级高于appUserID.</td>
+	<td>否, 仅限APP调用</td>
+</tr>
+<tr>
+	<td>movieID</td>
+	<td>string</td>
+	<td>影片ID</td>
+	<td>否, 不能脱离用户ID使用</td>
 </tr>
 <tr>
 	<td>status</td>
@@ -638,6 +656,38 @@ img {
 }
 </code></pre>
 
+<h3 id="1_3_2">1.3.2获取APP支付相关参数</h3>
+<h3>request</h3>
+<p><code>GET /wxs/payment/wx/app_params</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;orderExpireMilliseconds&quot;: 300000
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>orderExpireMilliseconds</td>
+	<td>long</td>
+	<td>订单超时时限(毫秒)</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
 <h3 id="1_4">1.4向点播单报告问题</h3>
 <h3>request</h3>
 <p><code>POST /wxs/tickets/complaint</code></p>
@@ -680,9 +730,39 @@ img {
 </code></pre>
 
 <h3 id="1_5">1.5完成点播单</h3>
-<p><code>本接口使用token={wxsSecret}进行身份认证, open_id/union_id认证无效</code></p>
+<p><code>本接口使用token={wxsSecret}进行身份认证, 供COMS使用, open_id/app认证无效</code></p>
 <h3>request</h3>
 <p><code>POST /wxs/tickets/{ticketID}/complete</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>ticketID</td>
+	<td>string</td>
+	<td>点播单号</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="1_6">1.6通知点播单支付完成(APP)</h3>
+<p><code>本接口仅限APP使用.</code></p>
+<h3>request</h3>
+<p><code>POST /wxs/tickets/{ticketID}/payment_callback</code></p>
 <table>
 <thead>
 <tr>
@@ -908,6 +988,36 @@ img {
 <h3 id="4_3">4.3提交购物车</h3>
 <h3>request</h3>
 <p><code>POST /wxs/cart/submit</code></p>
+<pre><code>{
+  &quot;nickName&quot;: &quot;张大庆&quot;,
+  &quot;unionID&quot;: &quot;fqofnaieujfoiq3jfoaew&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>nickName</td>
+	<td>string</td>
+	<td>app用户昵称</td>
+	<td>APP调用必须, 微信调用不使用</td>
+</tr>
+<tr>
+	<td>unionID</td>
+	<td>string</td>
+	<td>app用户unionID</td>
+	<td>APP调用必须, 微信调用不使用</td>
+</tr>
+</tbody>
+</table>
 <h3>response</h3>
 <p>成功 200</p>
 <pre><code>{
@@ -927,7 +1037,7 @@ img {
 <h3>response</h3>
 <p>成功 200</p>
 <pre><code>{
-  &quot;openID&quot;: &quot;fweiqb3285nxqojoew&quot;,
+  &quot;userID&quot;: &quot;fweiqb3285nxqojoew&quot;,
   &quot;movieList&quot;: [&quot;fqp9j384jf83498uf9e&quot;, &quot;9j3gfdja9ngf9ejf83&quot;, &quot;1ht984nfvq84q39uf9e&quot;]
 }
 </code></pre>
@@ -1115,8 +1225,14 @@ img {
 <tr>
 	<td>openID</td>
 	<td>string</td>
-	<td>用户id</td>
-	<td>是</td>
+	<td>微信用户id</td>
+	<td>与appUserID互斥, 二者不可同时为空</td>
+</tr>
+<tr>
+	<td>appUserID</td>
+	<td>string</td>
+	<td>app用户id</td>
+	<td>与openID互斥, 二者不可同时为空</td>
 </tr>
 </tbody>
 </table>
@@ -1124,7 +1240,7 @@ img {
 <p>成功 200</p>
 <pre><code>{
   &quot;sceneID&quot;: 10025,
-  &quot;scanTime&quot;: &quot;1511457450&quot;
+  &quot;scanTime&quot;: &quot;1511457450000&quot;
 }
 </code></pre>
 
@@ -1145,10 +1261,11 @@ img {
 <tr>
 	<td>scanTime</td>
 	<td>string</td>
-	<td>扫描事件微信时间戳(10位)</td>
+	<td>扫描事件时间戳</td>
 </tr>
 </tbody>
 </table>
+<p><code>如果用户扫描时间早于有效时间范围, 本接口会返回空值.</code></p>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
