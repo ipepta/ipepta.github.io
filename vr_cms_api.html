@@ -2092,8 +2092,8 @@ img {
   &quot;userName&quot;: &quot;cinemaadmin1&quot;,
   &quot;password&quot;: &quot;cinemapassword1&quot;,
   &quot;chineseName&quot;: &quot;张大庆&quot;,
-  &quot;authLevel&quot;: &quot;CINEMA_MANAGER&quot;,
-  &quot;authTarget&quot;: &quot;gjwrpoijeoirjfo3w8989p85&quot;,
+  &quot;roleId&quot;: &quot;gjwrpoijeoirjfok9ls001r5&quot;,
+  &quot;authTarget&quot;: [&quot;gjwrpoijeoirjfo3w8989p85&quot;],
   &quot;description&quot;: &quot;测试阶段店长&quot;
 }
 </code></pre>
@@ -2127,14 +2127,14 @@ img {
 	<td>是</td>
 </tr>
 <tr>
-	<td>authLevel</td>
+	<td>roleId</td>
 	<td>string</td>
-	<td>权限等级</td>
+	<td>角色名称</td>
 	<td>是</td>
 </tr>
 <tr>
 	<td>authTarget</td>
-	<td>string</td>
+	<td>list</td>
 	<td>权限对象</td>
 	<td>是</td>
 </tr>
@@ -2255,14 +2255,38 @@ img {
         {
           &quot;userName&quot;: &quot;cinemaadmin1&quot;,
           &quot;chineseName&quot;: &quot;张大庆&quot;,
-          &quot;authLevel&quot;: &quot;CINEMA_MANAGER&quot;,
-          &quot;authTarget&quot;: &quot;gjwrpoijeoirjfo3w8989p85&quot;
+          &quot;roleId&quot;: &quot;gjwrpoijeoirjfok9ls001r5&quot;,
+          &quot;authTarget&quot;: [&quot;gjwrpoijeoirjfo3w8989p85&quot;],
+          &quot;status&quot;: &quot;ENABLED&quot;,
+          &quot;createdDate&quot;: 1520140451860
         },
         ...
     ]
 }
 </code></pre>
 
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>status</td>
+	<td>string</td>
+	<td>用户状态</td>
+</tr>
+<tr>
+	<td>createdDate</td>
+	<td>long</td>
+	<td>创建时间</td>
+</tr>
+</tbody>
+</table>
+<p><code>用户状态: ENABLED, DISABLED. 启用, 停用</code></p>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
@@ -2275,8 +2299,9 @@ img {
 <pre><code>{
   &quot;password&quot;: &quot;cinemapassword1&quot;
   &quot;chineseName&quot;: &quot;张大庆&quot;,
-  &quot;authLevel&quot;: &quot;CINEMA_MANAGER&quot;,
-  &quot;authTarget&quot;: &quot;gjwrpoijeoirjfo3w8989p85&quot;
+  &quot;roleId&quot;: &quot;gjwrpoijeoirjfok9ls001r5&quot;,
+  &quot;authTarget&quot;: [&quot;gjwrpoijeoirjfo3w8989p85&quot;],
+  &quot;status&quot;: &quot;DISABLED&quot;,
 }
 </code></pre>
 
@@ -3634,7 +3659,6 @@ img {
   &quot;cinemaRead&quot;: &quot;GRANTED&quot;,
   &quot;cinemaWrite&quot;: &quot;DENIED&quot;,
   &quot;vodTaskRead&quot;: &quot;GRANTED&quot;,
-  &quot;vodTaskWrite&quot;: &quot;AUTH_GROUP_ONLY&quot;,
   &quot;complaintRead&quot;: &quot;GRANTED&quot;,
   &quot;complaintWrite&quot;: &quot;DENIED&quot;,
   &quot;clientRead&quot;: &quot;GRANTED&quot;,
@@ -3705,12 +3729,6 @@ img {
 	<td>vodTaskRead</td>
 	<td>string</td>
 	<td>点播读权限</td>
-	<td>是</td>
-</tr>
-<tr>
-	<td>vodTaskWrite</td>
-	<td>string</td>
-	<td>点播写权限</td>
 	<td>是</td>
 </tr>
 <tr>
@@ -3798,7 +3816,6 @@ img {
                       &quot;cinemaRead&quot;: &quot;GRANTED&quot;,
                       &quot;cinemaWrite&quot;: &quot;DENIED&quot;,
                       &quot;vodTaskRead&quot;: &quot;GRANTED&quot;,
-                      &quot;vodTaskWrite&quot;: &quot;AUTH_GROUP_ONLY&quot;,
                       &quot;complaintRead&quot;: &quot;GRANTED&quot;,
                       &quot;complaintWrite&quot;: &quot;DENIED&quot;,
                       &quot;clientRead&quot;: &quot;GRANTED&quot;,
@@ -3829,7 +3846,6 @@ img {
   &quot;cinemaRead&quot;: &quot;GRANTED&quot;,
   &quot;cinemaWrite&quot;: &quot;DENIED&quot;,
   &quot;vodTaskRead&quot;: &quot;GRANTED&quot;,
-  &quot;vodTaskWrite&quot;: &quot;AUTH_GROUP_ONLY&quot;,
   &quot;complaintRead&quot;: &quot;GRANTED&quot;,
   &quot;complaintWrite&quot;: &quot;DENIED&quot;,
   &quot;clientRead&quot;: &quot;GRANTED&quot;,
