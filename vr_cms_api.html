@@ -1152,7 +1152,13 @@ img {
 <tr>
 	<td>client_code</td>
 	<td>string</td>
-	<td>客户端识别码</td>
+	<td>客户端识别码(精准匹配)</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>client_code_like</td>
+	<td>string</td>
+	<td>客户端识别码(模糊查询)</td>
 	<td>否</td>
 </tr>
 <tr>
@@ -1401,7 +1407,7 @@ img {
 <tr>
 	<td>duration</td>
 	<td>int</td>
-	<td>电影时长，单位是分钟</td>
+	<td>电影时长，单位是秒</td>
 	<td>是</td>
 </tr>
 <tr>
@@ -3587,7 +3593,8 @@ img {
 <h3>response</h3>
 <p>成功 200</p>
 <pre><code>{
-  &quot;limit&quot;: 3    
+  &quot;limit&quot;: 3,
+  &quot;allowDownload&quot;: true 
 }
 </code></pre>
 
@@ -3604,6 +3611,11 @@ img {
 	<td>limit</td>
 	<td>int</td>
 	<td>本月剩余下载次数</td>
+</tr>
+<tr>
+	<td>allowDownload</td>
+	<td>bool</td>
+	<td>允许下载</td>
 </tr>
 </tbody>
 </table>
