@@ -312,6 +312,8 @@ img {
 <li><a href="#1_4">1.4向点播单报告问题</a></li>
 <li><a href="#1_5">1.5完成点播单</a></li>
 <li><a href="#1_6">1.6通知点播单支付完成(APP)</a></li>
+<li><a href="#1_7_1">1.6.1通知点播单跳过支付(微信)</a></li>
+<li><a href="#1_7">1.7查询座椅订单锁</a></li>
 </ul>
 </li>
 <li>
@@ -433,7 +435,8 @@ img {
         &quot;actualPriceList&quot;: [3000, 5000, 3499],
         &quot;originalPriceList&quot;: [3999, 5999, 3499],
         &quot;startTime&quot;: 1510995105068,
-        &quot;expireTime&quot;: 3000
+        &quot;expireTime&quot;: 3000,
+        &quot;allowPaymentSkip&quot;: false,
     },{
       ...
     }
@@ -545,6 +548,11 @@ img {
 	<td>expireTime</td>
 	<td>int</td>
 	<td>订单失效时间间隔</td>
+</tr>
+<tr>
+	<td>allowPaymentSkip</td>
+	<td>bool</td>
+	<td>允许使用1.6.1接口跳过支付</td>
 </tr>
 </tbody>
 </table>
@@ -790,6 +798,88 @@ img {
 </table>
 <h3>response</h3>
 <p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="1_6_1">1.6.1通知点播单跳过支付(微信)</h3>
+<p><code>本接口仅限微信使用.</code></p>
+<p><code>本接口仅限允许跳过支付的订单使用</code></p>
+<h3>request</h3>
+<p><code>POST /wxs/tickets/{ticketID}/payment_skip</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>ticketID</td>
+	<td>string</td>
+	<td>点播单号</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="1_7">1.7查询座椅订单锁</h3>
+<p><code>本接口仅限CMS使用.</code></p>
+<h3>request</h3>
+<p><code>GET /wxs/tickets/scene_lock?scene_id={sceneID}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>sceneID</td>
+	<td>string</td>
+	<td>场景号</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;expireTimeStamp&quot;: &quot;1510995105068&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>expireTimeStamp</td>
+	<td>string</td>
+	<td>订单锁过期时间(为空时没有锁)</td>
+</tr>
+</tbody>
+</table>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
