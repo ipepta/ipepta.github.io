@@ -3529,8 +3529,9 @@ img {
 
 <h2 id="15">15.片方专用流水统计</h2>
 <h3 id="15_1">15.1查询影片数据</h3>
+<p><code>因柱状图要求, 本接口不支持分页.</code></p>
 <h3>request</h3>
-<p><code>GET /cms/producer_statistics/movie_brief?start={start}&amp;limit={limit}</code></p>
+<p><code>GET /cms/producer_statistics/movie_brief?month_date={monthDate}</code></p>
 <table>
 <thead>
 <tr>
@@ -3542,16 +3543,10 @@ img {
 </thead>
 <tbody>
 <tr>
-	<td>start</td>
-	<td>int</td>
-	<td>分页开始，默认为0</td>
-	<td>否</td>
-</tr>
-<tr>
-	<td>limit</td>
-	<td>int</td>
-	<td>页面大小，默认为20</td>
-	<td>否</td>
+	<td>monthDate</td>
+	<td>long</td>
+	<td>查询月份时间戳, 使用当月任何时刻</td>
+	<td>是</td>
 </tr>
 </tbody>
 </table>
