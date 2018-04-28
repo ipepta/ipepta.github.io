@@ -442,6 +442,46 @@ img {
 <li><a href="#17_2">17.2查询定价</a></li>
 </ul>
 </li>
+<li>
+<a href="#18">影片国家管理</a>
+<ul>
+<li><a href="#18_1">18.1新增影片国家</a></li>
+<li><a href="#18_2">18.2查询影片国家</a></li>
+<li><a href="#18_3">18.3修改影片国家</a></li>
+<li><a href="#18_4">18.4删除影片国家</a></li>
+</ul>
+</li>
+<li>
+<a href="#19">影片类型管理</a>
+<ul>
+<li><a href="#19_1">19.1新增影片类型</a></li>
+<li><a href="#19_2">19.2查询影片类型</a></li>
+<li><a href="#19_3">19.3修改影片类型</a></li>
+<li><a href="#19_4">19.4删除影片类型</a></li>
+</ul>
+</li>
+<li>
+<a href="#20">影院地区管理</a>
+<ul>
+<li><a href="#20_1">20.1新增影片类型</a></li>
+<li><a href="#20_2">20.2查询影片类型</a></li>
+<li><a href="#20_3">20.3修改影片类型</a></li>
+<li><a href="#20_4">20.4删除影片类型</a></li>
+</ul>
+</li>
+<li>
+<a href="#21">二维码管理</a>
+<ul>
+<li><a href="#21_1">21.1查询二维码</a></li>
+<li><a href="#21_2">21.2二维码绑定设备</a></li>
+</ul>
+</li>
+<li>
+<a href="#22">CMS操作日志管理</a>
+<ul>
+<li><a href="#22_1">22.1查询操作日志</a></li>
+</ul>
+</li>
 </ol>
 <h2 id="1">1.影院管理</h2>
 <h3 id="1_1">1.1创建影院</h3>
@@ -2384,42 +2424,6 @@ img {
 <h3>response</h3>
 <p>成功 200</p>
 <pre><code>{
-    &quot;movieCountryList&quot;: [
-        {
-            &quot;id&quot;: &quot;CHN&quot;,
-            &quot;name&quot;: &quot;中国&quot;,
-            &quot;default&quot;: true
-        },
-        {
-            &quot;id&quot;: &quot;USA&quot;,
-            &quot;name&quot;: &quot;美国&quot;,
-            &quot;default&quot;: false
-        }
-    ],
-    &quot;movieCategoryList&quot;: [
-        {
-            &quot;id&quot;: &quot;ACTION&quot;,
-            &quot;name&quot;: &quot;动作&quot;,
-            &quot;default&quot;: true
-        },
-        {
-            &quot;id&quot;: &quot;SCIENCE&quot;,
-            &quot;name&quot;: &quot;科幻&quot;,
-            &quot;default&quot;: true
-        }
-    ],
-    &quot;cinemaRegionList&quot;: [
-        {
-            &quot;id&quot;: &quot;BEIJING&quot;,
-            &quot;name&quot;: &quot;北京&quot;,
-            &quot;default&quot;: true
-        },
-        {
-            &quot;id&quot;: &quot;SHANGHAI&quot;,
-            &quot;name&quot;: &quot;北京&quot;,
-            &quot;default&quot;: true
-        }
-    ],
     &quot;movieTypes&quot;: [
         &quot;MOVIE&quot;,
         &quot;GUIDE&quot;,
@@ -4075,6 +4079,739 @@ img {
 </table>
 <p><code>由于前端使用场景特殊, 本接口不支持分页.</code> </p>
 <p><code>另外本接口只会返回设置了分影院定价的结果. 如果没有查询到对应的定价记录, 应使用影片的默认价格(4.2接口返回的价格)</code></p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="18">18.影片国家管理</h2>
+<h3 id="18_1">18.1新增国家</h3>
+<h3>request</h3>
+<p><code>POST /cms/movie_country</code></p>
+<pre><code>{
+  &quot;countryName&quot;: &quot;中国&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>countryName</td>
+	<td>string</td>
+	<td>国家名称</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="18_2">18.2查询国家</h3>
+<h3>request</h3>
+<p><code>GET /cms/movie_country?start={start}&amp;limit={limit}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>start</td>
+	<td>int</td>
+	<td>分页开始，默认为0</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>limit</td>
+	<td>int</td>
+	<td>页面大小，默认为20</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;totalCount&quot;: 100,
+  &quot;itemList&quot;: [
+                  {
+                     &quot;countryId&quot;: &quot;fqjfj9p384u9f83jfq3948f983&quot;,
+                     &quot;countryName&quot;: &quot;中国&quot;
+                  }...
+            ]   
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>countryId</td>
+	<td>string</td>
+	<td>国家id</td>
+</tr>
+<tr>
+	<td>countryName</td>
+	<td>string</td>
+	<td>显示名称</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="18_3">18.3修改国家</h3>
+<h3>request</h3>
+<p><code>PUT /cms/movie_country/{countryId}</code></p>
+<pre><code>{
+  &quot;countryName&quot;: &quot;美国&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>countryId</td>
+	<td>string</td>
+	<td>国家id</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>countryName</td>
+	<td>string</td>
+	<td>显示名称</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="18_4">18.4删除国家</h3>
+<h3>request</h3>
+<p><code>DELETE /cms/movie_country?country_id={countryId}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>countryId</td>
+	<td>string</td>
+	<td>国家ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="19">19.影片类型管理</h2>
+<h3 id="19_1">19.1新增类型</h3>
+<h3>request</h3>
+<p><code>POST /cms/movie_category</code></p>
+<pre><code>{
+  &quot;categoryName&quot;: &quot;动作&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>categoryName</td>
+	<td>string</td>
+	<td>类型名称</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="19_2">19.2查询类型</h3>
+<h3>request</h3>
+<p><code>GET /cms/movie_category?start={start}&amp;limit={limit}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>start</td>
+	<td>int</td>
+	<td>分页开始，默认为0</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>limit</td>
+	<td>int</td>
+	<td>页面大小，默认为20</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;totalCount&quot;: 100,
+  &quot;itemList&quot;: [
+                  {
+                     &quot;categoryId&quot;: &quot;fqjfj9p384u9f83jfq3948f983&quot;,
+                     &quot;categoryName&quot;: &quot;动作&quot;
+                  }...
+            ]   
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>categoryId</td>
+	<td>string</td>
+	<td>类型id</td>
+</tr>
+<tr>
+	<td>categoryName</td>
+	<td>string</td>
+	<td>显示名称</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="19_3">19.3修改类型</h3>
+<h3>request</h3>
+<p><code>PUT /cms/movie_category/{categoryId}</code></p>
+<pre><code>{
+  &quot;categoryName&quot;: &quot;科幻&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>categoryId</td>
+	<td>string</td>
+	<td>类型id</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>categoryName</td>
+	<td>string</td>
+	<td>显示名称</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="19_4">19.4删除类型</h3>
+<h3>request</h3>
+<p><code>DELETE /cms/movie_category?category_id={categoryId}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>categoryId</td>
+	<td>string</td>
+	<td>类型ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="20">20.影院地区管理</h2>
+<h3 id="20_1">20.1新增地区</h3>
+<h3>request</h3>
+<p><code>POST /cms/cinema_region</code></p>
+<pre><code>{
+  &quot;regionName&quot;: &quot;北京&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>regionName</td>
+	<td>string</td>
+	<td>地区名称</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="20_2">20.2查询地区</h3>
+<h3>request</h3>
+<p><code>GET /cms/cinema_region?start={start}&amp;limit={limit}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>start</td>
+	<td>int</td>
+	<td>分页开始，默认为0</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>limit</td>
+	<td>int</td>
+	<td>页面大小，默认为20</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;totalCount&quot;: 100,
+  &quot;itemList&quot;: [
+                  {
+                     &quot;regionId&quot;: &quot;fqjfj9p384u9f83jfq3948f983&quot;,
+                     &quot;regionName&quot;: &quot;北京&quot;
+                  }...
+            ]   
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>regionId</td>
+	<td>string</td>
+	<td>地区id</td>
+</tr>
+<tr>
+	<td>regionName</td>
+	<td>string</td>
+	<td>地区名称</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="20_3">20.3修改地区</h3>
+<h3>request</h3>
+<p><code>PUT /cms/cinema_region/{regionId}</code></p>
+<pre><code>{
+  &quot;regionName&quot;: &quot;上海&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>regionId</td>
+	<td>string</td>
+	<td>地区id</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>regionName</td>
+	<td>string</td>
+	<td>显示名称</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="20_4">20.4删除地区</h3>
+<h3>request</h3>
+<p><code>DELETE /cms/cinema_region?region_id={regionId}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>regionId</td>
+	<td>string</td>
+	<td>地区ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="21">21.二维码管理</h2>
+<h3 id="21_1">21.1查询二维码</h3>
+<h3>request</h3>
+<p><code>GET /cms/qrcode?start={start}&amp;limit={limit}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>start</td>
+	<td>int</td>
+	<td>分页开始，默认为0</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>limit</td>
+	<td>int</td>
+	<td>页面大小，默认为20</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;totalCount&quot;: 100,
+  &quot;itemList&quot;: [
+                  {
+                     &quot;sceneGUID&quot;: &quot;fqjfj9p384u9f83jfq3948f983&quot;,
+                     &quot;qrCodeUrl&quot;: &quot;http://vr.oss-cn-beijing.aliyuncs.com/qr_code/fqjfj988jfq3948f983.webp&quot;,
+                     &quot;qrResult&quot;: &quot;http://weixin.qq.com/q/fq00q1j48vmhbjfq3948f983&quot;,
+                     &quot;clientId&quot;: &quot;fqj001pqhgnb7320gf48f983&quot;
+                  }...
+            ]   
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>sceneGUID</td>
+	<td>string</td>
+	<td>二维码ID</td>
+</tr>
+<tr>
+	<td>qrCodeUrl</td>
+	<td>string</td>
+	<td>二维码图片地址</td>
+</tr>
+<tr>
+	<td>qrResult</td>
+	<td>string</td>
+	<td>二维码扫描结果</td>
+</tr>
+<tr>
+	<td>clientId</td>
+	<td>string</td>
+	<td>当前绑定设备id</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="21_2">21.2绑定设备</h3>
+<h3>request</h3>
+<p><code>PUT /cms/qrcode/{sceneGUID}</code></p>
+<pre><code>{
+  &quot;clientId&quot;: &quot;fqj001pqhgnb7320gf48f990&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>sceneGUID</td>
+	<td>string</td>
+	<td>二维码ID</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>clientId</td>
+	<td>string</td>
+	<td>目标设备ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="22">22.CMS操作日志管理</h2>
+<h3 id="22_1">22.1查询操作日志</h3>
+<h3>request</h3>
+<p><code>GET /cms/operation_log?start={start}&amp;limit={limit}&amp;start_date={startDate}&amp;end_date={endDate}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>startDate</td>
+	<td>long</td>
+	<td>起始日期时间戳(毫秒), 默认当天凌晨零点</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>endDate</td>
+	<td>long</td>
+	<td>结束日期时间戳(毫秒), 默认当时</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>start</td>
+	<td>int</td>
+	<td>分页开始，默认为0</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>limit</td>
+	<td>int</td>
+	<td>页面大小，默认为20</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;totalCount&quot;: 100,
+  &quot;itemList&quot;: [
+                  {
+                     &quot;logId&quot;: &quot;fqjfj9p384u9f83jfq3948f983&quot;,
+                     &quot;createdDate&quot;: 1524892357332,
+                     &quot;operationTarget&quot;: &quot;CINEMA&quot;,
+                     &quot;operationType&quot;: &quot;INSERT&quot;,
+                     &quot;parameter&quot;: &quot;{...}&quot;
+                  }...
+            ]   
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>logId</td>
+	<td>string</td>
+	<td>二维码ID</td>
+</tr>
+<tr>
+	<td>createdDate</td>
+	<td>long</td>
+	<td>操作日期时间戳</td>
+</tr>
+<tr>
+	<td>operationTarget</td>
+	<td>string</td>
+	<td>操作目标类型</td>
+</tr>
+<tr>
+	<td>operationType</td>
+	<td>string</td>
+	<td>操作类型</td>
+</tr>
+<tr>
+	<td>parameter</td>
+	<td>string</td>
+	<td>输入参数</td>
+</tr>
+</tbody>
+</table>
+<p><code>操作目标类型: CINEMA, HALL, CLIENT, MOVIE. 对应: 影院, 影厅, 设备, 影片</code></p>
+<p><code>操作类型: INSERT, UPDATE, DELETE. 对应: 新增, 修改, 删除</code></p>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
