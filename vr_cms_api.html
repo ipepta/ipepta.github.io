@@ -4090,6 +4090,7 @@ img {
 <h3>request</h3>
 <p><code>POST /cms/movie_country</code></p>
 <pre><code>{
+  &quot;countryCode&quot;: &quot;CHN&quot;,
   &quot;countryName&quot;: &quot;中国&quot;
 }
 </code></pre>
@@ -4108,6 +4109,12 @@ img {
 	<td>countryName</td>
 	<td>string</td>
 	<td>国家名称</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>countryCode</td>
+	<td>string</td>
+	<td>国家识别码</td>
 	<td>是</td>
 </tr>
 </tbody>
@@ -4154,6 +4161,7 @@ img {
   &quot;itemList&quot;: [
                   {
                      &quot;countryId&quot;: &quot;fqjfj9p384u9f83jfq3948f983&quot;,
+                     &quot;countryCode&quot;: &quot;CHN&quot;,
                      &quot;countryName&quot;: &quot;中国&quot;
                   }...
             ]   
@@ -4175,6 +4183,11 @@ img {
 	<td>国家id</td>
 </tr>
 <tr>
+	<td>countryCode</td>
+	<td>string</td>
+	<td>国家识别码</td>
+</tr>
+<tr>
 	<td>countryName</td>
 	<td>string</td>
 	<td>显示名称</td>
@@ -4191,7 +4204,8 @@ img {
 <h3>request</h3>
 <p><code>PUT /cms/movie_country/{countryId}</code></p>
 <pre><code>{
-  &quot;countryName&quot;: &quot;美国&quot;
+  &quot;countryName&quot;: &quot;美国&quot;,
+  &quot;countryCode&quot;: &quot;US&quot;
 }
 </code></pre>
 
@@ -4215,7 +4229,13 @@ img {
 	<td>countryName</td>
 	<td>string</td>
 	<td>显示名称</td>
-	<td>是</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>countryCode</td>
+	<td>string</td>
+	<td>国家识别码</td>
+	<td>否</td>
 </tr>
 </tbody>
 </table>
@@ -4261,7 +4281,8 @@ img {
 <h3>request</h3>
 <p><code>POST /cms/movie_category</code></p>
 <pre><code>{
-  &quot;categoryName&quot;: &quot;动作&quot;
+  &quot;categoryName&quot;: &quot;动作&quot;,
+  &quot;categoryCode&quot;: &quot;ACTION&quot;
 }
 </code></pre>
 
@@ -4279,6 +4300,12 @@ img {
 	<td>categoryName</td>
 	<td>string</td>
 	<td>类型名称</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>categoryCode</td>
+	<td>string</td>
+	<td>类型识别码</td>
 	<td>是</td>
 </tr>
 </tbody>
@@ -4325,6 +4352,7 @@ img {
   &quot;itemList&quot;: [
                   {
                      &quot;categoryId&quot;: &quot;fqjfj9p384u9f83jfq3948f983&quot;,
+                     &quot;categoryCode&quot;: &quot;ACTION&quot;,
                      &quot;categoryName&quot;: &quot;动作&quot;
                   }...
             ]   
@@ -4346,6 +4374,11 @@ img {
 	<td>类型id</td>
 </tr>
 <tr>
+	<td>categoryCode</td>
+	<td>string</td>
+	<td>类型识别码</td>
+</tr>
+<tr>
 	<td>categoryName</td>
 	<td>string</td>
 	<td>显示名称</td>
@@ -4362,7 +4395,8 @@ img {
 <h3>request</h3>
 <p><code>PUT /cms/movie_category/{categoryId}</code></p>
 <pre><code>{
-  &quot;categoryName&quot;: &quot;科幻&quot;
+  &quot;categoryName&quot;: &quot;科幻&quot;,
+  &quot;categoryCode&quot;: &quot;SCIENCE&quot;,
 }
 </code></pre>
 
@@ -4383,10 +4417,16 @@ img {
 	<td>是</td>
 </tr>
 <tr>
+	<td>categoryCode</td>
+	<td>string</td>
+	<td>类型识别码</td>
+	<td>否</td>
+</tr>
+<tr>
 	<td>categoryName</td>
 	<td>string</td>
 	<td>显示名称</td>
-	<td>是</td>
+	<td>否</td>
 </tr>
 </tbody>
 </table>
@@ -4432,7 +4472,8 @@ img {
 <h3>request</h3>
 <p><code>POST /cms/cinema_region</code></p>
 <pre><code>{
-  &quot;regionName&quot;: &quot;北京&quot;
+  &quot;regionName&quot;: &quot;北京&quot;,
+  &quot;regionCode&quot;: &quot;BEIJING&quot;
 }
 </code></pre>
 
@@ -4450,6 +4491,12 @@ img {
 	<td>regionName</td>
 	<td>string</td>
 	<td>地区名称</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>regionCode</td>
+	<td>string</td>
+	<td>地区识别码</td>
 	<td>是</td>
 </tr>
 </tbody>
@@ -4496,6 +4543,7 @@ img {
   &quot;itemList&quot;: [
                   {
                      &quot;regionId&quot;: &quot;fqjfj9p384u9f83jfq3948f983&quot;,
+                     &quot;regionCode&quot;: &quot;BEIJING&quot;,
                      &quot;regionName&quot;: &quot;北京&quot;
                   }...
             ]   
@@ -4517,6 +4565,11 @@ img {
 	<td>地区id</td>
 </tr>
 <tr>
+	<td>regionCode</td>
+	<td>string</td>
+	<td>地区识别码</td>
+</tr>
+<tr>
 	<td>regionName</td>
 	<td>string</td>
 	<td>地区名称</td>
@@ -4533,7 +4586,8 @@ img {
 <h3>request</h3>
 <p><code>PUT /cms/cinema_region/{regionId}</code></p>
 <pre><code>{
-  &quot;regionName&quot;: &quot;上海&quot;
+  &quot;regionName&quot;: &quot;上海&quot;,
+  &quot;regionCode&quot;: &quot;SHANGHAI&quot;
 }
 </code></pre>
 
@@ -4554,10 +4608,16 @@ img {
 	<td>是</td>
 </tr>
 <tr>
+	<td>regionCode</td>
+	<td>string</td>
+	<td>地区识别码</td>
+	<td>否</td>
+</tr>
+<tr>
 	<td>regionName</td>
 	<td>string</td>
 	<td>显示名称</td>
-	<td>是</td>
+	<td>否</td>
 </tr>
 </tbody>
 </table>
