@@ -351,6 +351,7 @@ img {
 </li>
 <li><a href="#5_3">5.3验证场景号</a></li>
 <li><a href="#5_4">5.4完成点播任务</a></li>
+<li><a href="#5_5">5.5登记前导片</a></li>
 </ul>
 </li>
 <li>
@@ -2085,7 +2086,7 @@ img {
 
 <h3 id="5_4">5.4完成点播任务</h3>
 <h3>request</h3>
-<p><code>GET /cms/vod_tasks/{taskID}/complete</code></p>
+<p><code>GET /cms/vod_tasks/{ticketNumber}/complete</code></p>
 <table>
 <thead>
 <tr>
@@ -2097,9 +2098,49 @@ img {
 </thead>
 <tbody>
 <tr>
-	<td>taskID</td>
+	<td>ticketNumber</td>
 	<td>String</td>
 	<td>点播单号</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="5_5">5.5登记前导片</h3>
+<h3>request</h3>
+<p><code>POST /cms/vod_tasks/{ticketNumber}/guide</code></p>
+<pre><code>{
+  &quot;guideId&quot;: &quot;747ee8eca0174dc08aaf17cbae43d2a5&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>ticketNumber</td>
+	<td>string</td>
+	<td>点播单号</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>guideId</td>
+	<td>string</td>
+	<td>前导片id</td>
 	<td>是</td>
 </tr>
 </tbody>
@@ -4862,8 +4903,9 @@ img {
                   {
                      &quot;logId&quot;: &quot;fqjfj9p384u9f83jfq3948f983&quot;,
                      &quot;createdDate&quot;: 1524892357332,
-                     &quot;operationTarget&quot;: &quot;CINEMA&quot;,
+                     &quot;operationTargetType&quot;: &quot;CINEMA&quot;,
                      &quot;operationType&quot;: &quot;INSERT&quot;,
+                     &quot;OperationTarget&quot;: &quot;fqjfj9p384u9f83jfq3933f983&quot;,
                      &quot;parameter&quot;: &quot;{...}&quot;
                   }...
             ]   
@@ -4890,7 +4932,7 @@ img {
 	<td>操作日期时间戳</td>
 </tr>
 <tr>
-	<td>operationTarget</td>
+	<td>operationTargetType</td>
 	<td>string</td>
 	<td>操作目标类型</td>
 </tr>
@@ -4898,6 +4940,11 @@ img {
 	<td>operationType</td>
 	<td>string</td>
 	<td>操作类型</td>
+</tr>
+<tr>
+	<td>operationTarget</td>
+	<td>string</td>
+	<td>操作目标</td>
 </tr>
 <tr>
 	<td>parameter</td>
