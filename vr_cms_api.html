@@ -417,6 +417,7 @@ img {
 <a href="#14">流水统计</a>
 <ul>
 <li><a href="#14_1">14.1下载报告</a></li>
+<li><a href="#14_2">14.2下载当日完整流水</a></li>
 </ul>
 </li>
 <li>
@@ -3586,6 +3587,22 @@ img {
 }
 </code></pre>
 
+<h3 id="14_2">14.2下载当日完整流水</h3>
+<h3>request</h3>
+<p><code>GET /cms/statistics_today</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;downloadUrl&quot;: &quot;https://www.alioss.com/gjwjfj320nvpaj23h9p85&quot;
+}
+</code></pre>
+
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
 <h2 id="15">15.片方专用流水统计</h2>
 <h3 id="15_1">15.1查询影片数据</h3>
 <p><code>因柱状图要求, 本接口不支持分页.</code></p>
@@ -4747,7 +4764,8 @@ img {
                      &quot;hallId&quot;: &quot;fqj001pqhgnb7320gf48f983&quot;,
                      &quot;hallName&quot;: &quot;三号厅&quot;,
                      &quot;cinemaId&quot;: &quot;fqj001pqhgnb7320gf48f332&quot;,
-                     &quot;cinemaName&quot;: &quot;王府井横店影院&quot;
+                     &quot;cinemaName&quot;: &quot;王府井横店影院&quot;,
+                     &quot;clientCode&quot;: &quot;BJ_WFJ_CLIENT_01&quot;,
                   }...
             ]   
 }
@@ -4806,6 +4824,11 @@ img {
 	<td>cinemaName</td>
 	<td>string</td>
 	<td>影院名称</td>
+</tr>
+<tr>
+	<td>clientCode</td>
+	<td>string</td>
+	<td>设备识别码</td>
 </tr>
 </tbody>
 </table>
