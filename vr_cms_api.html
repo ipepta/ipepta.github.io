@@ -2500,6 +2500,16 @@ img {
             &quot;type&quot;: &quot;3DLRF&quot;,
             &quot;name&quot;: &quot;左右3D&quot;
         }
+    ],
+    &quot;operationTargetTypeList&quot;: [
+        {
+            &quot;type&quot;: &quot;CINEMA&quot;,
+            &quot;name&quot;: &quot;影院&quot;
+        },
+        {
+            &quot;type&quot;: &quot;MOVIE&quot;,
+            &quot;name&quot;: &quot;影片&quot;
+        }
     ]
 }
 </code></pre>
@@ -4934,7 +4944,8 @@ img {
                      &quot;createdDate&quot;: 1524892357332,
                      &quot;operationTargetType&quot;: &quot;CINEMA&quot;,
                      &quot;operationType&quot;: &quot;INSERT&quot;,
-                     &quot;OperationTarget&quot;: &quot;fqjfj9p384u9f83jfq3933f983&quot;,
+                     &quot;operationTarget&quot;: &quot;fqjfj9p384u9f83jfq3933f983&quot;,
+                     &quot;operationTargetName&quot;: &quot;王府井影院&quot;,
                      &quot;parameter&quot;: &quot;{...}&quot;,
                      &quot;userId&quot;: &quot;admin&quot;
                   }...
@@ -4977,86 +4988,18 @@ img {
 	<td>操作目标</td>
 </tr>
 <tr>
+	<td>operationTargetName</td>
+	<td>string</td>
+	<td>操作目标名称</td>
+</tr>
+<tr>
 	<td>parameter</td>
 	<td>string</td>
 	<td>输入参数</td>
 </tr>
 </tbody>
 </table>
-<table>
-<thead>
-<tr>
-	<th>操作目标类型</th>
-	<th>对应含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-	<td>MOVIE</td>
-	<td>影片</td>
-</tr>
-<tr>
-	<td>CINEMA</td>
-	<td>影院</td>
-</tr>
-<tr>
-	<td>CINEMA_ACTIVATION</td>
-	<td>影院激活</td>
-</tr>
-<tr>
-	<td>CINEMA_REGION</td>
-	<td>影院地区</td>
-</tr>
-<tr>
-	<td>COMPLAINT</td>
-	<td>投诉</td>
-</tr>
-<tr>
-	<td>HALL</td>
-	<td>影厅</td>
-</tr>
-<tr>
-	<td>MOVIE_DISTRIBUTE</td>
-	<td>影片分发</td>
-</tr>
-<tr>
-	<td>MOVIE_PRICE</td>
-	<td>影片定价</td>
-</tr>
-<tr>
-	<td>MOVIE_AD</td>
-	<td>贴片广告</td>
-</tr>
-<tr>
-	<td>MOVIE_COUNTRY</td>
-	<td>影片国家</td>
-</tr>
-<tr>
-	<td>MOVIE_CATEGORY</td>
-	<td>影片类型</td>
-</tr>
-<tr>
-	<td>MOVIE_PRODUCER</td>
-	<td>片方</td>
-</tr>
-<tr>
-	<td>CLIENT</td>
-	<td>设备</td>
-</tr>
-<tr>
-	<td>ROLE</td>
-	<td>角色</td>
-</tr>
-<tr>
-	<td>USER</td>
-	<td>用户</td>
-</tr>
-<tr>
-	<td>QRCODE</td>
-	<td>二维码</td>
-</tr>
-</tbody>
-</table>
+<p><code>操作目标类型: 8接口返回</code></p>
 <p><code>操作类型: INSERT, UPDATE, DELETE, CONSUME. 对应: 新增, 修改, 删除, 使用</code></p>
 <p>失败 400/500</p>
 <pre><code>{
