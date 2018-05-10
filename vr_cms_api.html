@@ -3664,7 +3664,26 @@ img {
 <h3 id="14_3">14.3获取报告数据页面展示</h3>
 <h3>request</h3>
 <p><code>GET /cms/statistics_data?start_date=1519389095087&amp;end_date=1519390665087</code></p>
-<h3>参数与14.1接口完全相同.</h3>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>date_period_segment</td>
+	<td>string</td>
+	<td>应用日期额外拆分, 用于折线图.</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<p><code>日期拆分方法: BY_DAY, BY_HOUR</code></p>
+<h3>其余参数与14.1接口相同.</h3>
 <h3>response</h3>
 <p>成功 200</p>
 <pre><code>{
@@ -3733,6 +3752,7 @@ img {
 </tr>
 </tbody>
 </table>
+<p><code>筛选条件: MOVIE, MOVIE_PRODUCER, MOVIE_CATEGORY, CINEMA, REGION</code></p>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
