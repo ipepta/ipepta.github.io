@@ -321,6 +321,7 @@ img {
 <ul>
 <li><a href="#2_1">2.1获取AccessToken</a></li>
 <li><a href="#2_2">2.2微信回调接口</a></li>
+<li><a href="#2_3">2.3获取小程序AccessToken</a></li>
 </ul>
 </li>
 <li>
@@ -905,6 +906,20 @@ img {
 <h3>request</h3>
 <p><code>GET&amp;POST /wxs/wx/callback</code></p>
 <p><code>用于和微信服务器通信, 接收服务器验证握手, 事件推送等.</code></p>
+<h3 id="2_3">2.3获取小程序AccessToken</h3>
+<h3>request</h3>
+<p><code>GET /wxs/wx/accesstoken_weapp</code></p>
+<h3>reponse</h3>
+<p>成功 200</p>
+<pre><code>&quot;gzwzM7sD2y0sos7EhoibXawJ1VbUcqesUaUmc8SPJaR6rHvyfIR95GVQxSXtprAD0lFpg7OdhfVhh1&quot;
+</code></pre>
+
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
 <h2 id="3">3.点赞管理</h2>
 <h3 id="3_1">3.1提交点赞</h3>
 <h3>request</h3>
@@ -1389,10 +1404,21 @@ img {
 <tr>
 	<td>qrResult</td>
 	<td>string</td>
-	<td>二维码的扫描结果</td>
+	<td>微信二维码的扫描结果</td>
+</tr>
+<tr>
+	<td>weappScene</td>
+	<td>string</td>
+	<td>小程序二维码的scene</td>
+</tr>
+<tr>
+	<td>weappQrResult</td>
+	<td>string</td>
+	<td>小程序二维码的扫描结果</td>
 </tr>
 </tbody>
 </table>
+<p><code>本接口参数互斥. 按由上至下的顺序, 以第一个非空值为准</code></p>
 <h3>reponse</h3>
 <p>成功 200</p>
 <p>失败 400/500</p>
