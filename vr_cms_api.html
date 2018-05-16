@@ -474,7 +474,7 @@ img {
 </ul>
 </li>
 <li>
-<a href="#21">二维码管理</a>
+<a href="#21">二维码管理(微信)</a>
 <ul>
 <li><a href="#21_1">21.1查询二维码</a></li>
 <li><a href="#21_2">21.2二维码绑定设备</a></li>
@@ -484,6 +484,13 @@ img {
 <a href="#22">CMS操作日志管理</a>
 <ul>
 <li><a href="#22_1">22.1查询操作日志</a></li>
+</ul>
+</li>
+<li>
+<a href="#23">二维码管理(小程序)</a>
+<ul>
+<li><a href="#23_1">23.1查询二维码</a></li>
+<li><a href="#23_2">23.2二维码绑定设备</a></li>
 </ul>
 </li>
 </ol>
@@ -4906,7 +4913,7 @@ img {
 }
 </code></pre>
 
-<h2 id="21">21.二维码管理</h2>
+<h2 id="21">21.二维码管理(微信)</h2>
 <h3 id="21_1">21.1查询二维码</h3>
 <h3>request</h3>
 <p><code>GET /cms/qrcode?start={start}&amp;limit={limit}&amp;url={url}</code></p>
@@ -5181,6 +5188,168 @@ img {
 </table>
 <p><code>操作目标类型: 8接口返回</code></p>
 <p><code>操作类型: INSERT, UPDATE, DELETE, CONSUME. 对应: 新增, 修改, 删除, 使用</code></p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="23">23.二维码管理(小程序)</h2>
+<h3 id="23_1">23.1查询二维码</h3>
+<h3>request</h3>
+<p><code>GET /cms/qrcode_weapp?start={start}&amp;limit={limit}&amp;url={url}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>start</td>
+	<td>int</td>
+	<td>分页开始，默认为0</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>limit</td>
+	<td>int</td>
+	<td>页面大小，默认为20</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>url</td>
+	<td>string</td>
+	<td>qrUrl OR qrResult</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;totalCount&quot;: 100,
+  &quot;itemList&quot;: [
+                  {
+                     &quot;sceneGUID&quot;: &quot;fqjfj9p384u9f83jfq3948f983&quot;,
+                     &quot;qrCodeUrl&quot;: &quot;http://vr.oss-cn-beijing.aliyuncs.com/qr_code/fqjfj988jfq3948f983.webp&quot;,
+                     &quot;qrResult&quot;: &quot;http://weixin.qq.com/q/fq00q1j48vmhbjfq3948f983&quot;,
+                     &quot;clientId&quot;: &quot;fqj001pqhgnb7320gf48f983&quot;,
+                     &quot;seatNumber&quot;: &quot;05&quot;,
+                     &quot;hallId&quot;: &quot;fqj001pqhgnb7320gf48f983&quot;,
+                     &quot;hallName&quot;: &quot;三号厅&quot;,
+                     &quot;cinemaId&quot;: &quot;fqj001pqhgnb7320gf48f332&quot;,
+                     &quot;cinemaName&quot;: &quot;王府井横店影院&quot;,
+                     &quot;clientCode&quot;: &quot;BJ_WFJ_CLIENT_01&quot;,
+                  }...
+            ]   
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>sceneGUID</td>
+	<td>string</td>
+	<td>二维码ID</td>
+</tr>
+<tr>
+	<td>qrCodeUrl</td>
+	<td>string</td>
+	<td>二维码图片地址</td>
+</tr>
+<tr>
+	<td>qrResult</td>
+	<td>string</td>
+	<td>二维码扫描结果</td>
+</tr>
+<tr>
+	<td>clientId</td>
+	<td>string</td>
+	<td>当前绑定设备id</td>
+</tr>
+<tr>
+	<td>seatNumber</td>
+	<td>string</td>
+	<td>座位号</td>
+</tr>
+<tr>
+	<td>hallId</td>
+	<td>string</td>
+	<td>影厅id</td>
+</tr>
+<tr>
+	<td>hallName</td>
+	<td>string</td>
+	<td>影厅名称</td>
+</tr>
+<tr>
+	<td>cinemaId</td>
+	<td>string</td>
+	<td>影院id</td>
+</tr>
+<tr>
+	<td>cinemaName</td>
+	<td>string</td>
+	<td>影院名称</td>
+</tr>
+<tr>
+	<td>clientCode</td>
+	<td>string</td>
+	<td>设备识别码</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="23_2">23.2绑定设备</h3>
+<h3>request</h3>
+<p><code>PUT /cms/qrcode_weapp/{sceneGUID}</code></p>
+<pre><code>{
+  &quot;clientId&quot;: &quot;fqj001pqhgnb7320gf48f990&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>sceneGUID</td>
+	<td>string</td>
+	<td>二维码ID</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>clientId</td>
+	<td>string</td>
+	<td>目标设备ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
