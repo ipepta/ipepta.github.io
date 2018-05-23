@@ -369,7 +369,6 @@ img {
 <li><a href="#7_2">7.2用户登录</a></li>
 <li><a href="#7_3">7.3查询用户</a></li>
 <li><a href="#7_4">7.4修改用户</a></li>
-<li><a href="#7_5">7.5删除用户</a></li>
 </ul>
 </li>
 <li><a href="#8">获取系统枚举参数</a></li>
@@ -491,6 +490,20 @@ img {
 <ul>
 <li><a href="#23_1">23.1查询二维码</a></li>
 <li><a href="#23_2">23.2二维码绑定设备</a></li>
+</ul>
+</li>
+<li>
+<a href="#24">cms片方用户管理</a>
+<ul>
+<li><a href="#24_1">24.1新增用户</a></li>
+<li><a href="#24_2">24.2查询用户</a></li>
+<li><a href="#24_3">24.3修改用户</a></li>
+</ul>
+</li>
+<li>
+<a href="#25">COMS日志管理</a>
+<ul>
+<li><a href="#25_1">25.1查询操作日志</a></li>
 </ul>
 </li>
 </ol>
@@ -2414,7 +2427,7 @@ img {
 
 <h3 id="7_3">7.3查询用户</h3>
 <h3>request</h3>
-<p><code>GET /cms/users?user_name={userName}&amp;auth_level={authLevel}&amp;auth_target={authTarget}</code></p>
+<p><code>GET /cms/users?name={name}</code></p>
 <table>
 <thead>
 <tr>
@@ -2426,21 +2439,9 @@ img {
 </thead>
 <tbody>
 <tr>
-	<td>userName</td>
+	<td>name</td>
 	<td>string</td>
-	<td>用户名</td>
-	<td>否</td>
-</tr>
-<tr>
-	<td>authLevel</td>
-	<td>string</td>
-	<td>权限等级</td>
-	<td>否</td>
-</tr>
-<tr>
-	<td>authTarget</td>
-	<td>string</td>
-	<td>权限对象</td>
+	<td>用户名中文名模糊查询</td>
 	<td>否</td>
 </tr>
 <tr>
@@ -2515,35 +2516,6 @@ img {
 }
 </code></pre>
 
-<h3>response</h3>
-<p>成功 200</p>
-<p>失败 400/500</p>
-<pre><code>{
-  &quot;info&quot;: &quot;失败描述&quot;
-}
-</code></pre>
-
-<h3 id="7_5">7.5删除用户</h3>
-<h3>request</h3>
-<p><code>DELETE /cms/users?user_name={userName}</code></p>
-<table>
-<thead>
-<tr>
-	<th>名称</th>
-	<th>类型</th>
-	<th>描述</th>
-	<th>是否必须</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-	<td>userName</td>
-	<td>string</td>
-	<td>用户ID</td>
-	<td>是</td>
-</tr>
-</tbody>
-</table>
 <h3>response</h3>
 <p>成功 200</p>
 <p>失败 400/500</p>
@@ -5409,6 +5381,282 @@ img {
 </table>
 <h3>response</h3>
 <p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="24">24.cms片方用户管理</h2>
+<h3 id="24_1">24.1新增用户</h3>
+<h3>request</h3>
+<p><code>POST /cms/movie_producer_users</code></p>
+<pre><code>{
+  &quot;userName&quot;: &quot;cinemaadmin1&quot;,
+  &quot;password&quot;: &quot;cinemapassword1&quot;,
+  &quot;chineseName&quot;: &quot;张大庆&quot;,
+  &quot;authTarget&quot;: [&quot;gjwrpoijeoirjfo3w8989p85&quot;],
+  &quot;description&quot;: &quot;测试阶段店长&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>userName</td>
+	<td>string</td>
+	<td>用户名</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>password</td>
+	<td>string</td>
+	<td>用户密码</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>chineseName</td>
+	<td>string</td>
+	<td>中文名称(用于展示)</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>authTarget</td>
+	<td>list</td>
+	<td>权限对象, 仅限制片方</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>description</td>
+	<td>string</td>
+	<td>介绍</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="24_2">24.2查询用户</h3>
+<h3>request</h3>
+<p><code>GET /cms/movie_producer_users?name={name}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>name</td>
+	<td>string</td>
+	<td>用户名/中文名模糊查询</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>start</td>
+	<td>int</td>
+	<td>分页开始，默认为0</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>limit</td>
+	<td>int</td>
+	<td>页面大小，默认为20</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+    &quot;totalCount&quot;:&quot;1&quot;,
+    &quot;itemList&quot;:[
+        {
+          &quot;userName&quot;: &quot;cinemaadmin1&quot;,
+          &quot;chineseName&quot;: &quot;张大庆&quot;,
+          &quot;authTarget&quot;: [&quot;gjwrpoijeoirjfo3w8989p85&quot;],
+          &quot;status&quot;: &quot;ENABLED&quot;,
+          &quot;createdDate&quot;: 1520140451860
+        },
+        ...
+    ]
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>status</td>
+	<td>string</td>
+	<td>用户状态</td>
+</tr>
+<tr>
+	<td>createdDate</td>
+	<td>long</td>
+	<td>创建时间</td>
+</tr>
+</tbody>
+</table>
+<p><code>用户状态: ENABLED, DISABLED. 启用, 停用</code></p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="24_3">24.3修改用户</h3>
+<h3>request</h3>
+<p><code>PUT /cms/movie_producer_users/{userName}</code></p>
+<pre><code>{
+  &quot;password&quot;: &quot;cinemapassword1&quot;
+  &quot;chineseName&quot;: &quot;张大庆&quot;,
+  &quot;authTarget&quot;: [&quot;gjwrpoijeoirjfo3w8989p85&quot;],
+  &quot;status&quot;: &quot;DISABLED&quot;,
+}
+</code></pre>
+
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="25">25.COMS日志管理</h2>
+<h3 id="25_1">25.1查询日志</h3>
+<h3>request</h3>
+<p><code>GET /cms/coms_log?start={start}&amp;limit={limit}&amp;start_date={startDate}&amp;end_date={endDate}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>startDate</td>
+	<td>long</td>
+	<td>起始日期时间戳(毫秒), 默认当天凌晨零点</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>endDate</td>
+	<td>long</td>
+	<td>结束日期时间戳(毫秒), 默认当时</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>comsLogType</td>
+	<td>string</td>
+	<td>COMS日志类型, 8接口返回</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>cinemaId</td>
+	<td>string</td>
+	<td>影院ID</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>start</td>
+	<td>int</td>
+	<td>分页开始，默认为0</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>limit</td>
+	<td>int</td>
+	<td>页面大小，默认为20</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;totalCount&quot;: 100,
+  &quot;itemList&quot;: [
+                  {
+                     &quot;logId&quot;: &quot;fqjfj9p384u9f83jfq3948f983&quot;,
+                     &quot;createdDate&quot;: 1524892357332,
+                     &quot;comsLogType&quot;: &quot;MOVIE_DISTRIBUTE&quot;,
+                     &quot;cinemaId&quot;: &quot;fqjfj9p384u9f83jfq3948f983&quot;,
+                     &quot;cinemaName&quot;: &quot;COMS测试影院&quot;
+                     &quot;log&quot;: &quot;分发影片成功. 影片进入就绪状态&quot;,
+                  }...
+            ]   
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>logId</td>
+	<td>string</td>
+	<td>日志ID</td>
+</tr>
+<tr>
+	<td>createdDate</td>
+	<td>long</td>
+	<td>操作日期时间戳</td>
+</tr>
+<tr>
+	<td>comsLogType</td>
+	<td>string</td>
+	<td>日志类型</td>
+</tr>
+<tr>
+	<td>cinemaId</td>
+	<td>string</td>
+	<td>影院ID</td>
+</tr>
+<tr>
+	<td>cinemaName</td>
+	<td>string</td>
+	<td>影院名称</td>
+</tr>
+<tr>
+	<td>log</td>
+	<td>string</td>
+	<td>日志</td>
+</tr>
+</tbody>
+</table>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
