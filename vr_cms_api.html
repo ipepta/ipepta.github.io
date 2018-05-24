@@ -5817,7 +5817,8 @@ img {
 <h3>request</h3>
 <p><code>POST /cms/weixin_banner</code></p>
 <pre><code>{
-  &quot;fileId&quot;: &quot;fqjfj9p384u9f83jfq3948f009&quot;
+  &quot;fileId&quot;: &quot;fqjfj9p384u9f83jfq3948f009&quot;,
+  &quot;weixinUrl&quot;: &quot;https://mp.weixin.qq.com/s/nBHuJMxWLLbvMRrF9vJEQw&quot;
 }
 </code></pre>
 
@@ -5835,6 +5836,12 @@ img {
 	<td>fileId</td>
 	<td>string</td>
 	<td>文件Id</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>weixinUrl</td>
+	<td>string</td>
+	<td>富文本地址</td>
 	<td>是</td>
 </tr>
 </tbody>
@@ -5861,6 +5868,7 @@ img {
                      &quot;fileId&quot;: &quot;fqjfj9p384u9f83jfq3948f791&quot;,
                      &quot;bannerIndex&quot;: &quot;1&quot;,
                      &quot;url&quot;: &quot;http://vr-cloud.oss.aliyun.com/fqjfj9p384u9f83jfq3948f481&quot;,
+                     &quot;weixinUrl&quot;: &quot;https://mp.weixin.qq.com/s/nBHuJMxWLLbvMRrF9vJEQw&quot;
                   }...
             ]   
 }
@@ -5894,6 +5902,11 @@ img {
 	<td>url</td>
 	<td>string</td>
 	<td>图片地址</td>
+</tr>
+<tr>
+	<td>weixinUrl</td>
+	<td>string</td>
+	<td>富文本地址</td>
 </tr>
 </tbody>
 </table>
