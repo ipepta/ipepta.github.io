@@ -503,8 +503,36 @@ img {
 <li>
 <a href="#25">COMS日志管理</a>
 <ul>
-<li><a href="#25_1">25.1查询操作日志</a></li>
+<li><a href="#25_1">25.1查询日志</a></li>
+<li><a href="#25_2">25.2提交日志</a></li>
+<li><a href="#25_3">25.3提交日志(历史版本)</a></li>
 </ul>
+</li>
+<li>
+<a href="#26">公众号轮播图管理</a>
+<ul>
+<li><a href="#26_1">26.1增加轮播图</a></li>
+<li><a href="#26_2">26.2查询轮播图</a></li>
+<li><a href="#26_3">26.3修改轮播图顺序</a></li>
+<li><a href="#26_4">26.4删除轮播图</a></li>
+</ul>
+</li>
+<li>
+<a href="#27">影片宣传图管理</a>
+<ul>
+<li><a href="#27_1">27.1增加宣传图</a></li>
+<li><a href="#27_2">27.2查询宣传图</a></li>
+<li><a href="#27_3">27.3修改宣传图顺序</a></li>
+<li><a href="#27_4">27.4删除宣传图</a></li>
+</ul>
+</li>
+<li>
+<a href="#28">影院布局图管理</a>
+<ul>
+<li><a href="#28_1">28.1增加布局图</a></li>
+<li><a href="#28_2">28.2查询布局图</a></li>
+</ul>
+<h2>- <a href="#28_3">28.3删除布局图</a></h2>
 </li>
 </ol>
 <h2 id="1">1.影院管理</h2>
@@ -2585,6 +2613,16 @@ img {
         &quot;name&quot;: &quot;超刺激！心跳加速&quot;
       },
     ]
+    &quot;comsLogTargetList&quot;: [
+        {
+            &quot;type&quot;: &quot;MOVIE&quot;,
+            &quot;name&quot;: &quot;影片分发&quot;
+        },
+        {
+            &quot;type&quot;: &quot;CLIENT&quot;,
+            &quot;name&quot;: &quot;设备任务&quot;
+        }
+    ],
 }
 </code></pre>
 
@@ -5574,9 +5612,15 @@ img {
 	<td>否</td>
 </tr>
 <tr>
+	<td>comsLogTarget</td>
+	<td>string</td>
+	<td>COMS日志对象, 8接口返回</td>
+	<td>否</td>
+</tr>
+<tr>
 	<td>comsLogType</td>
 	<td>string</td>
-	<td>COMS日志类型, 8接口返回</td>
+	<td>COMS日志类型</td>
 	<td>否</td>
 </tr>
 <tr>
@@ -5599,6 +5643,7 @@ img {
 </tr>
 </tbody>
 </table>
+<p><code>COMS日志类型: INFO, WARN, ERROR. 信息, 错误, 故障.</code></p>
 <h3>response</h3>
 <p>成功 200</p>
 <pre><code>{
@@ -5607,7 +5652,8 @@ img {
                   {
                      &quot;logId&quot;: &quot;fqjfj9p384u9f83jfq3948f983&quot;,
                      &quot;createdDate&quot;: 1524892357332,
-                     &quot;comsLogType&quot;: &quot;MOVIE_DISTRIBUTE&quot;,
+                     &quot;comsLogTarget&quot;: &quot;MOVIE_DISTRIBUTE&quot;,
+                     &quot;comsLogType&quot;: &quot;INFO&quot;,
                      &quot;cinemaId&quot;: &quot;fqjfj9p384u9f83jfq3948f983&quot;,
                      &quot;cinemaName&quot;: &quot;COMS测试影院&quot;
                      &quot;log&quot;: &quot;分发影片成功. 影片进入就绪状态&quot;,
@@ -5636,6 +5682,11 @@ img {
 	<td>操作日期时间戳</td>
 </tr>
 <tr>
+	<td>comsLogTarget</td>
+	<td>string</td>
+	<td>日志目标</td>
+</tr>
+<tr>
 	<td>comsLogType</td>
 	<td>string</td>
 	<td>日志类型</td>
@@ -5657,6 +5708,607 @@ img {
 </tr>
 </tbody>
 </table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="25_2">25.2提交日志</h3>
+<h3>request</h3>
+<p><code>POST /cms/cinemas/{cinemaId}/log</code></p>
+<pre><code>[
+  {
+    &quot;logTarget&quot;: &quot;MOVIE&quot;,
+    &quot;logType&quot;: &quot;INFO&quot;,
+    &quot;log&quot;: &quot;影片分发完成&quot;
+  }
+]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>cinemaId</td>
+	<td>string</td>
+	<td>影院ID</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>logTarget</td>
+	<td>string</td>
+	<td>日志对象</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>logType</td>
+	<td>string</td>
+	<td>日志类型</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>log</td>
+	<td>list</td>
+	<td>日志内容</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="25_3">25.3提交日志(历史版本)</h3>
+<h3>request</h3>
+<p><code>POST /cms/cinemas/log?cinema_id={cinemaId}</code></p>
+<pre><code>[
+  &quot;影片分发成功&quot;,
+  &quot;影片进入就绪状态&quot;
+]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>cinemaId</td>
+	<td>string</td>
+	<td>影院ID</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>PostBody</td>
+	<td>List String</td>
+	<td>日志清单</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<p><code>COMSv0.9.25(含)以前版本使用的日志提交接口. 经本接口提交的日志无法在CMS页面中查看. 可在数据库中直接查看.</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="26">26.公众号轮播图管理</h2>
+<h3 id="26_1">26.1新增轮播图</h3>
+<h3>request</h3>
+<p><code>POST /cms/weixin_banner</code></p>
+<pre><code>{
+  &quot;fileId&quot;: &quot;fqjfj9p384u9f83jfq3948f009&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>fileId</td>
+	<td>string</td>
+	<td>文件Id</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="26_2">26.2查询轮播图</h3>
+<h3>request</h3>
+<p>`GET /cms/weixin_banner</p>
+<p><code>本接口不支持分页</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;totalCount&quot;: 100,
+  &quot;itemList&quot;: [
+                  {
+                     &quot;bannerId&quot;: &quot;fqjfj9p384u9f83jfq3948f983&quot;,
+                     &quot;fileId&quot;: &quot;fqjfj9p384u9f83jfq3948f791&quot;,
+                     &quot;bannerIndex&quot;: &quot;1&quot;,
+                     &quot;url&quot;: &quot;http://vr-cloud.oss.aliyun.com/fqjfj9p384u9f83jfq3948f481&quot;,
+                  }...
+            ]   
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>bannerId</td>
+	<td>string</td>
+	<td>轮播图ID</td>
+</tr>
+<tr>
+	<td>fileId</td>
+	<td>string</td>
+	<td>文件ID</td>
+</tr>
+<tr>
+	<td>bannerIndex</td>
+	<td>string</td>
+	<td>排序编号</td>
+</tr>
+<tr>
+	<td>url</td>
+	<td>string</td>
+	<td>图片地址</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="26_3">26_3修改轮播图顺序</h3>
+<h3>request</h3>
+<p><code>PUT /cms/weixin_banner/{bannerId}</code></p>
+<pre><code>{
+  &quot;action&quot;: &quot;MOVE_UP&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>action</td>
+	<td>string</td>
+	<td>操作类型</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<p><code>支持的操作类型: MOVE_UP, MOVE_DOWN, MOVE_TO_TOP, MOVE_TO_BOTTOM</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="26_4">26.4删除轮播图</h3>
+<h3>request</h3>
+<p><code>DELETE /cms/weixin_banner?banner_id={bannerId}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>bannerId</td>
+	<td>string</td>
+	<td>轮播图ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="27">27.影片宣传图管理</h2>
+<h3 id="27_1">27.1新增宣传图</h3>
+<h3>request</h3>
+<p><code>POST /cms/movie_poster</code></p>
+<pre><code>{
+  &quot;movieId&quot;: &quot;fqjfj9p384u9f83jfq3948f983&quot;,
+  &quot;fileId&quot;: &quot;fqjfj9p384u9f83jfq3948f009&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>movieId</td>
+	<td>string</td>
+	<td>影片Id</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>fileId</td>
+	<td>string</td>
+	<td>文件Id</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="27_2">27.2查询宣传图</h3>
+<h3>request</h3>
+<p><code>GET /cms/movie_poster?movie_id={movieId}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>movie_id</td>
+	<td>String</td>
+	<td>影片ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<p><code>本接口不支持分页</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;totalCount&quot;: 100,
+  &quot;itemList&quot;: [
+                  {
+                     &quot;posterId&quot;: &quot;fqjfj9p384u9f83jfq3948f983&quot;,
+                     &quot;movieId&quot;: &quot;fqjfj9p384u9f83jfq3948f004&quot;,
+                     &quot;fileId&quot;: &quot;fqjfj9p384u9f83jfq3948f791&quot;,
+                     &quot;posterIndex&quot;: &quot;1&quot;,
+                     &quot;url&quot;: &quot;http://vr-cloud.oss.aliyun.com/fqjfj9p384u9f83jfq3948f481&quot;,
+                  }...
+            ]   
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>posterId</td>
+	<td>string</td>
+	<td>宣传图ID</td>
+</tr>
+<tr>
+	<td>movieId</td>
+	<td>string</td>
+	<td>影片ID</td>
+</tr>
+<tr>
+	<td>fileId</td>
+	<td>string</td>
+	<td>文件ID</td>
+</tr>
+<tr>
+	<td>posterIndex</td>
+	<td>string</td>
+	<td>排序编号</td>
+</tr>
+<tr>
+	<td>url</td>
+	<td>string</td>
+	<td>图片地址</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="27_3">27_3修改宣传图顺序</h3>
+<h3>request</h3>
+<p><code>PUT /cms/movie_poster/{posterId}</code></p>
+<pre><code>{
+  &quot;action&quot;: &quot;MOVE_UP&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>action</td>
+	<td>string</td>
+	<td>操作类型</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<p><code>支持的操作类型: MOVE_UP, MOVE_DOWN, MOVE_TO_TOP, MOVE_TO_BOTTOM</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="27_4">27.4删除宣传图</h3>
+<h3>request</h3>
+<p><code>DELETE /cms/movie_poster?poster_id={posterId}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>posterId</td>
+	<td>string</td>
+	<td>轮播图ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="28">28.影院布局图管理</h2>
+<h3 id="28_1">28.1新增布局图</h3>
+<h3>request</h3>
+<p><code>POST /cms/cinema_layout</code></p>
+<pre><code>{
+  &quot;cinemaId&quot;: &quot;fqjfj9p384u9f83jfq3948f983&quot;,
+  &quot;fileId&quot;: &quot;fqjfj9p384u9f83jfq3948f009&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>cinemaId</td>
+	<td>string</td>
+	<td>影院Id</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>fileId</td>
+	<td>string</td>
+	<td>文件Id</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="28_2">28.2查询布局图</h3>
+<h3>request</h3>
+<p><code>GET /cms/cinema_layout?cinema_id={cinemaId}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>cinema_id</td>
+	<td>String</td>
+	<td>影院ID</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>start</td>
+	<td>int</td>
+	<td>分页开始, 默认0</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>limit</td>
+	<td>int</td>
+	<td>分页大小, 默认20</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;totalCount&quot;: 100,
+  &quot;itemList&quot;: [
+                  {
+                     &quot;layoutId&quot;: &quot;fqjfj9p384u9f83jfq3948f983&quot;,
+                     &quot;cinemaId&quot;: &quot;fqjfj9p384u9f83jfq3948f004&quot;,
+                     &quot;fileId&quot;: &quot;fqjfj9p384u9f83jfq3948f791&quot;,
+                     &quot;posterIndex&quot;: &quot;1&quot;,
+                     &quot;url&quot;: &quot;http://vr-cloud.oss.aliyun.com/fqjfj9p384u9f83jfq3948f481&quot;,
+                  }...
+            ]   
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>layoutId</td>
+	<td>string</td>
+	<td>布局图ID</td>
+</tr>
+<tr>
+	<td>cinemaId</td>
+	<td>string</td>
+	<td>影院ID</td>
+</tr>
+<tr>
+	<td>fileId</td>
+	<td>string</td>
+	<td>文件ID</td>
+</tr>
+<tr>
+	<td>posterIndex</td>
+	<td>string</td>
+	<td>排序编号</td>
+</tr>
+<tr>
+	<td>url</td>
+	<td>string</td>
+	<td>图片地址</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="28_3">28.3删除布局图</h3>
+<h3>request</h3>
+<p><code>DELETE /cms/cinema_layout?layout_id={layoutId}</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>layoutId</td>
+	<td>string</td>
+	<td>布局图ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
