@@ -531,8 +531,8 @@ img {
 <ul>
 <li><a href="#28_1">28.1增加布局图</a></li>
 <li><a href="#28_2">28.2查询布局图</a></li>
+<li><a href="#28_3">28.3删除布局图</a></li>
 </ul>
-<h2>- <a href="#28_3">28.3删除布局图</a></h2>
 </li>
 </ol>
 <h2 id="1">1.影院管理</h2>
@@ -4039,115 +4039,121 @@ img {
 	<td>roleName</td>
 	<td>string</td>
 	<td>角色名称</td>
-	<td>是</td>
+	<td>否, 默认拒绝</td>
 </tr>
 <tr>
 	<td>authGroup</td>
 	<td>string</td>
 	<td>部分授予维度</td>
-	<td>是</td>
+	<td>否, 默认拒绝</td>
 </tr>
 <tr>
 	<td>userRead</td>
 	<td>string</td>
 	<td>用户读权限</td>
-	<td>是</td>
+	<td>否, 默认拒绝</td>
 </tr>
 <tr>
 	<td>userWrite</td>
 	<td>string</td>
 	<td>用户写权限</td>
-	<td>是</td>
+	<td>否, 默认拒绝</td>
+</tr>
+<tr>
+	<td>movieProducerUserRead</td>
+	<td>string</td>
+	<td>片方用户读权限</td>
+	<td>否, 默认拒绝</td>
+</tr>
+<tr>
+	<td>movieProducerUserWrite</td>
+	<td>string</td>
+	<td>片方用户写权限</td>
+	<td>否, 默认拒绝</td>
 </tr>
 <tr>
 	<td>movieRead</td>
 	<td>string</td>
 	<td>影片读权限</td>
-	<td>是</td>
+	<td>否, 默认拒绝</td>
 </tr>
 <tr>
 	<td>movieWrite</td>
 	<td>string</td>
 	<td>影片写权限</td>
-	<td>是</td>
+	<td>否, 默认拒绝</td>
 </tr>
 <tr>
 	<td>cinemaRead</td>
 	<td>string</td>
 	<td>影院读权限</td>
-	<td>是</td>
+	<td>否, 默认拒绝</td>
 </tr>
 <tr>
 	<td>cinemaWrite</td>
 	<td>string</td>
 	<td>影院写权限</td>
-	<td>是</td>
+	<td>否, 默认拒绝</td>
 </tr>
 <tr>
 	<td>vodTaskRead</td>
 	<td>string</td>
 	<td>点播读权限</td>
-	<td>是</td>
+	<td>否, 默认拒绝</td>
 </tr>
 <tr>
 	<td>complaintRead</td>
 	<td>string</td>
 	<td>投诉读权限</td>
-	<td>是</td>
+	<td>否, 默认拒绝</td>
 </tr>
 <tr>
 	<td>complaintWrite</td>
 	<td>string</td>
 	<td>投诉写权限</td>
-	<td>是</td>
+	<td>否, 默认拒绝</td>
 </tr>
 <tr>
 	<td>clientRead</td>
 	<td>string</td>
 	<td>终端读权限</td>
-	<td>是</td>
+	<td>否, 默认拒绝</td>
 </tr>
 <tr>
 	<td>clientWrite</td>
 	<td>string</td>
 	<td>终端写权限</td>
-	<td>是</td>
-</tr>
-<tr>
-	<td>movieProducer</td>
-	<td>string</td>
-	<td>片方权限</td>
-	<td>是</td>
+	<td>否, 默认拒绝</td>
 </tr>
 <tr>
 	<td>moviePriceRead</td>
 	<td>string</td>
 	<td>影片价格读权限</td>
-	<td>是</td>
+	<td>否, 默认拒绝</td>
 </tr>
 <tr>
 	<td>moviePriceWrite</td>
 	<td>string</td>
 	<td>影片价格写权限</td>
-	<td>是</td>
+	<td>否, 默认拒绝</td>
 </tr>
 <tr>
 	<td>statistics</td>
 	<td>string</td>
 	<td>流水统计权限</td>
-	<td>是</td>
+	<td>否, 默认拒绝</td>
 </tr>
 <tr>
 	<td>statisticsToday</td>
 	<td>string</td>
 	<td>当日流水权限</td>
-	<td>是</td>
+	<td>否, 默认拒绝</td>
 </tr>
 <tr>
 	<td>operationLogRead</td>
 	<td>string</td>
 	<td>CMS操作日志权限</td>
-	<td>是</td>
+	<td>否, 默认拒绝</td>
 </tr>
 </tbody>
 </table>
