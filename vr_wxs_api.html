@@ -1102,7 +1102,8 @@ img {
 <p><code>POST /wxs/cart/submit</code></p>
 <pre><code>{
   &quot;nickName&quot;: &quot;张大庆&quot;,
-  &quot;unionID&quot;: &quot;fqofnaieujfoiq3jfoaew&quot;
+  &quot;unionID&quot;: &quot;fqofnaieujfoiq3jfoaew&quot;,
+  &quot;taskSource&quot;: &quot;WEAPP&quot;
 }
 </code></pre>
 
@@ -1128,8 +1129,15 @@ img {
 	<td>app用户unionID</td>
 	<td>APP调用必须, 微信调用不使用</td>
 </tr>
+<tr>
+	<td>taskSource</td>
+	<td>string</td>
+	<td>app订单来源</td>
+	<td>APP调用可选, 默认值为APP, 微信调用不使用</td>
+</tr>
 </tbody>
 </table>
+<p><code>订单来源: APP, WEAPP</code></p>
 <h3>response</h3>
 <p>成功 200</p>
 <pre><code>{
