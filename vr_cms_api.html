@@ -515,6 +515,7 @@ img {
 <li><a href="#26_2">26.2查询轮播图</a></li>
 <li><a href="#26_3">26.3修改轮播图顺序</a></li>
 <li><a href="#26_4">26.4删除轮播图</a></li>
+<li><a href="#26_5">26.5修改轮播图</a></li>
 </ul>
 </li>
 <li>
@@ -5825,7 +5826,8 @@ img {
 <p><code>POST /cms/weixin_banner</code></p>
 <pre><code>{
   &quot;fileId&quot;: &quot;fqjfj9p384u9f83jfq3948f009&quot;,
-  &quot;weixinUrl&quot;: &quot;https://mp.weixin.qq.com/s/nBHuJMxWLLbvMRrF9vJEQw&quot;
+  &quot;weixinUrl&quot;: &quot;https://mp.weixin.qq.com/s/nBHuJMxWLLbvMRrF9vJEQw&quot;,
+  &quot;movieId&quot;: &quot;fqjfj9p384u9f83jfq3948f130&quot;
 }
 </code></pre>
 
@@ -5849,7 +5851,13 @@ img {
 	<td>weixinUrl</td>
 	<td>string</td>
 	<td>富文本地址</td>
-	<td>是</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>movieId</td>
+	<td>string</td>
+	<td>影片ID</td>
+	<td>否</td>
 </tr>
 </tbody>
 </table>
@@ -5875,7 +5883,8 @@ img {
                      &quot;fileId&quot;: &quot;fqjfj9p384u9f83jfq3948f791&quot;,
                      &quot;bannerIndex&quot;: &quot;1&quot;,
                      &quot;url&quot;: &quot;http://vr-cloud.oss.aliyun.com/fqjfj9p384u9f83jfq3948f481&quot;,
-                     &quot;weixinUrl&quot;: &quot;https://mp.weixin.qq.com/s/nBHuJMxWLLbvMRrF9vJEQw&quot;
+                     &quot;weixinUrl&quot;: &quot;https://mp.weixin.qq.com/s/nBHuJMxWLLbvMRrF9vJEQw&quot;,
+                     &quot;movieId&quot;: &quot;fqjfj9p384u9f83jfq3948f682&quot;
                   }...
             ]   
 }
@@ -5915,6 +5924,11 @@ img {
 	<td>string</td>
 	<td>富文本地址</td>
 </tr>
+<tr>
+	<td>movieId</td>
+	<td>string</td>
+	<td>影片ID</td>
+</tr>
 </tbody>
 </table>
 <p>失败 400/500</p>
@@ -5925,7 +5939,7 @@ img {
 
 <h3 id="26_3">26_3修改轮播图顺序</h3>
 <h3>request</h3>
-<p><code>PUT /cms/weixin_banner/{bannerId}</code></p>
+<p><code>PUT /cms/weixin_banner/{bannerId}/banner_index</code></p>
 <pre><code>{
   &quot;action&quot;: &quot;MOVE_UP&quot;
 }
@@ -5976,6 +5990,60 @@ img {
 	<td>string</td>
 	<td>轮播图ID</td>
 	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="26_5">26_5修改轮播图</h3>
+<h3>request</h3>
+<p><code>PUT /cms/weixin_banner/{bannerId}</code></p>
+<pre><code>{
+  &quot;fileId&quot;: &quot;fqjfj9p384u9f83jfq3948f009&quot;,
+  &quot;weixinUrl&quot;: &quot;https://mp.weixin.qq.com/s/nBHuJMxWLLbvMRrF9vJEQw&quot;,
+  &quot;movieId&quot;: &quot;fqjfj9p384u9f83jfq3948f130&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>bannerId</td>
+	<td>string</td>
+	<td>轮播图id</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>fileId</td>
+	<td>string</td>
+	<td>文件Id</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>weixinUrl</td>
+	<td>string</td>
+	<td>富文本地址</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>movieId</td>
+	<td>string</td>
+	<td>影片ID</td>
+	<td>否</td>
 </tr>
 </tbody>
 </table>
