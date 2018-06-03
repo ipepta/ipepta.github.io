@@ -443,6 +443,7 @@ img {
 <ul>
 <li><a href="#17_1">17.1设置定价</a></li>
 <li><a href="#17_2">17.2查询定价</a></li>
+<li><a href="#17_3">17.3删除定价</a></li>
 </ul>
 </li>
 <li>
@@ -550,7 +551,8 @@ img {
   &quot;longitude&quot;: 116.3742256165,
   &quot;latitude&quot;: 39.8881383092,
   &quot;phone&quot;: &quot;010-66667777&quot;,
-  &quot;contact&quot;: &quot;张大庆&quot;
+  &quot;contact&quot;: &quot;张大庆&quot;,
+  &quot;appDisplayStatus&quot;: &quot;READY&quot;
 }
 </code></pre>
 
@@ -616,6 +618,12 @@ img {
 	<td>contact</td>
 	<td>string</td>
 	<td>联系人</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>appDisplayStatus</td>
+	<td>string</td>
+	<td>APP显示状态</td>
 	<td>否</td>
 </tr>
 </tbody>
@@ -697,7 +705,8 @@ img {
       &quot;longitude&quot;: 116.3742256165,
       &quot;latitude&quot;: 39.8881383092,
       &quot;phone&quot;: &quot;010-66666&quot;,
-      &quot;contact&quot;: &quot;张大庆&quot;
+      &quot;contact&quot;: &quot;张大庆&quot;,
+      &quot;appDisplayStatus&quot;: &quot;READY&quot;
     },{
       ...
     }
@@ -774,6 +783,12 @@ img {
 	<td>string</td>
 	<td>联系人</td>
 </tr>
+<tr>
+	<td>appDisplayStatus</td>
+	<td>string</td>
+	<td>APP显示状态</td>
+	<td>否</td>
+</tr>
 </tbody>
 </table>
 <p>失败 400/500</p>
@@ -797,7 +812,8 @@ img {
   &quot;address&quot;: &quot;五道口宇宙中心&quot;,
   &quot;longitude&quot;: 116.3742256165,
   &quot;latitude&quot;: 39.8881383092,
-  &quot;contact&quot;: &quot;张大庆&quot;
+  &quot;contact&quot;: &quot;张大庆&quot;, 
+  &quot;appDisplayStatus&quot;: &quot;READY&quot;
 }
 </code></pre>
 
@@ -1785,6 +1801,12 @@ img {
 	<td>动作文件版本</td>
 	<td>否</td>
 </tr>
+<tr>
+	<td>online</td>
+	<td>boolean</td>
+	<td>是否在档期内</td>
+	<td>否</td>
+</tr>
 </tbody>
 </table>
 <p><code>有效的排序字段: scheduleStart, numOfView, numOfPraise, recommendIndex</code></p>
@@ -2624,6 +2646,16 @@ img {
             &quot;name&quot;: &quot;设备任务&quot;
         }
     ],
+    &quot;appDisplayStatusList&quot;: [
+      {
+        &quot;status&quot;: &quot;READY&quot;,
+        &quot;name&quot;: &quot;就绪&quot;
+      },
+      {
+        &quot;status&quot;: &quot;PRE_RELEASE&quot;,
+        &quot;name&quot;: &quot;预发布&quot;
+      }
+    ] 
 }
 </code></pre>
 
@@ -4411,6 +4443,53 @@ img {
 </table>
 <p><code>由于前端使用场景特殊, 本接口不支持分页.</code> </p>
 <p><code>另外本接口只会返回设置了分影院定价的结果. 如果没有查询到对应的定价记录, 应使用影片的默认价格(4.2接口返回的价格)</code></p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="17_3">17.3删除定价</h3>
+<h3>request</h3>
+<p><code>DELETE /cms/movies/price</code></p>
+<pre><code>[
+    {
+        &quot;movieId&quot;: &quot;VsxOcOudxDbtNSvz93CLaXPz&quot;,
+        &quot;cinemaId&quot;: &quot;gjwjfj320nvpaj23h9p85&quot;
+    },
+    {
+        &quot;movieId&quot;: &quot;VsxOcOudxDbtNSvz93CLaXPz&quot;,
+        &quot;cinemaId&quot;: &quot;gjwjfj320nvpaj23h9p85&quot;
+    }
+]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>movieId</td>
+	<td>string</td>
+	<td>影片id</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>cinemaId</td>
+	<td>string</td>
+	<td>影院id</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
