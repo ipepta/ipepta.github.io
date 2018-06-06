@@ -305,7 +305,7 @@ img {
 <ul>
 <li><a href="#1_1">1.1查询用户身份(后端)</a>  
 </li>
-<li><a href="#1_2">1.1查询CMS用户身份(前端)</a></li>
+<li><a href="#1_2">1.2查询CMS用户身份(前端)</a></li>
 <li><a href="#1_3">1.3注销CMS用户</a></li>
 </ul>
 </li>
@@ -353,7 +353,7 @@ img {
 }
 </code></pre>
 
-<h3 id="1_2">1.1查询CMS用户身份(前端)</h3>
+<h3 id="1_2">1.2查询CMS用户身份(前端)</h3>
 <h3>request</h3>
 <p><code>GET /auth/brief</code></p>
 <h3>response</h3>
@@ -361,11 +361,43 @@ img {
 <pre><code>{
   &quot;cmsUserName&quot;: &quot;admin&quot;,
   &quot;cmsChineseName&quot;: &quot;张大庆&quot;,
-  &quot;isCmsMovieProducer&quot;: false
+  &quot;isCmsMovieProducer&quot;: false,
+  &quot;isUserAdmin&quot;: true
   
 }
 </code></pre>
 
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>cmsUserName</td>
+	<td>string</td>
+	<td>用户名</td>
+</tr>
+<tr>
+	<td>cmsChineseName</td>
+	<td>string</td>
+	<td>显示名</td>
+</tr>
+<tr>
+	<td>isCmsMovieProducer</td>
+	<td>boolean</td>
+	<td>是否为片方用户</td>
+</tr>
+<tr>
+	<td>isUserAdmin</td>
+	<td>boolean</td>
+	<td>是否有用户写权限(影响用户弹窗)</td>
+</tr>
+</tbody>
+</table>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
@@ -375,6 +407,9 @@ img {
 <h3 id="1_3">1.3注销cms用户</h3>
 <h3>request</h3>
 <p><code>POST /auth/expire_cms_user?token={token}</code></p>
+<pre><code>    &quot;admin&quot;
+</code></pre>
+
 <table>
 <thead>
 <tr>
@@ -389,7 +424,13 @@ img {
 	<td>token</td>
 	<td>string</td>
 	<td>登录token</td>
-	<td>是</td>
+	<td>后端必传, 前端不用</td>
+</tr>
+<tr>
+	<td>{postBody}</td>
+	<td>string</td>
+	<td>目标用户</td>
+	<td>后端必传, 前端不用</td>
 </tr>
 </tbody>
 </table>
