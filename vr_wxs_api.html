@@ -1331,7 +1331,7 @@ img {
 
 <h3 id="5_2">5.2查询用户当前sceneid</h3>
 <h3>request</h3>
-<p><code>GET /wxs/users/sceneid?open_id={openID}</code></p>
+<p><code>GET /wxs/users/sceneid?union_id={unionID}</code></p>
 <table>
 <thead>
 <tr>
@@ -1346,16 +1346,23 @@ img {
 	<td>openID</td>
 	<td>string</td>
 	<td>微信用户id</td>
-	<td>与appUserID互斥, 二者不可同时为空</td>
+	<td>优先级最高</td>
+</tr>
+<tr>
+	<td>unionID</td>
+	<td>string</td>
+	<td>用户unionID</td>
+	<td>优先级其次</td>
 </tr>
 <tr>
 	<td>appUserID</td>
 	<td>string</td>
 	<td>app用户id</td>
-	<td>与openID互斥, 二者不可同时为空</td>
+	<td>优先级最低</td>
 </tr>
 </tbody>
 </table>
+<p><code>按照优先级顺序, 三个参数中第一个不为空的起作用. 不可同时为空.</code></p>
 <h3>reponse</h3>
 <p>成功 200</p>
 <pre><code>{
