@@ -336,6 +336,7 @@ img {
 <ul>
 <li><a href="#5_1">5.1数据key列表及分组情况</a></li>
 <li><a href="#5_2">5.2导入报告类型列表</a></li>
+<li><a href="#5_3">5.3枚举翻译</a></li>
 </ul>
 </li>
 </ol>
@@ -632,6 +633,11 @@ img {
 	<td>string</td>
 	<td>导入名</td>
 </tr>
+<tr>
+	<td>importStatus</td>
+	<td>enum</td>
+	<td>用5.3接口翻译</td>
+</tr>
 </tbody>
 </table>
 <p>失败 400/500</p>
@@ -926,6 +932,55 @@ img {
 	<td>name</td>
 	<td>string</td>
 	<td>分组名</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="5_3">5.3枚举翻译</h3>
+<h3>request</h3>
+<p><code>GET /Meta/EnumTranslate</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;Enum1&quot;: {
+             &quot;key1&quot;: &quot;name1&quot;,
+             &quot;key2&quot;: &quot;name2&quot;
+           },
+  &quot;Enum2&quot;: {
+             &quot;key3&quot;: &quot;name3&quot;,
+             &quot;key4&quot;: &quot;name4&quot; 
+           }
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>enum</td>
+	<td>string</td>
+	<td>枚举名称</td>
+</tr>
+<tr>
+	<td>key</td>
+	<td>string</td>
+	<td>接口返回值</td>
+</tr>
+<tr>
+	<td>name</td>
+	<td>string</td>
+	<td>页面展示值</td>
 </tr>
 </tbody>
 </table>
