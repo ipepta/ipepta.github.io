@@ -721,6 +721,24 @@ img {
 <h3 id="4_1">4.1数据列表</h3>
 <h3>request</h3>
 <p><code>GET /Data/DataList?start=0&amp;limit=20</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>name</td>
+	<td>string</td>
+	<td>姓名模糊查询</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
 <h3>response</h3>
 <p>成功 200</p>
 <p>通用表格结构. 固定键:</p>
@@ -734,7 +752,7 @@ img {
 </thead>
 <tbody>
 <tr>
-	<td>dataId</td>
+	<td>recordId</td>
 	<td>string</td>
 	<td>数据编号</td>
 </tr>
@@ -758,7 +776,7 @@ img {
 
 <h3 id="4_2">4.2数据详情</h3>
 <h3>request</h3>
-<p><code>GET /Data/DataDetail?dataId=0262b6e9-8b4e-47ca-8f9c-fc5a1b465d7c&amp;dataSource=LOCAL</code></p>
+<p><code>GET /Data/DataDetail?recordId=0262b6e9-8b4e-47ca-8f9c-fc5a1b465d7c&amp;dataSource=LOCAL</code></p>
 <table>
 <thead>
 <tr>
@@ -770,7 +788,7 @@ img {
 </thead>
 <tbody>
 <tr>
-	<td>dataId</td>
+	<td>recordId</td>
 	<td>string</td>
 	<td>数据编号</td>
 	<td>是</td>
@@ -801,7 +819,7 @@ img {
 
 <h3 id="4_3">4.3变更记录</h3>
 <h3>request</h3>
-<p><code>GET /Data/UpdateLog?dataId=0262b6e9-8b4e-47ca-8f9c-fc5a1b465d7c&amp;dataSource=LOCAL&amp;importId=da0a943d-1456-4e87-a4c8-509710dfd1cc</code></p>
+<p><code>GET /Data/UpdateLog?recordId=0262b6e9-8b4e-47ca-8f9c-fc5a1b465d7c&amp;dataSource=LOCAL&amp;importId=da0a943d-1456-4e87-a4c8-509710dfd1cc</code></p>
 <table>
 <thead>
 <tr>
@@ -813,10 +831,16 @@ img {
 </thead>
 <tbody>
 <tr>
+	<td>recordId</td>
+	<td>string</td>
+	<td>数据编号</td>
+	<td>否</td>
+</tr>
+<tr>
 	<td>dataType</td>
 	<td>string</td>
 	<td>文件类型</td>
-	<td>是</td>
+	<td>否</td>
 </tr>
 <tr>
 	<td>dataSource</td>
