@@ -335,8 +335,7 @@ img {
 <a href="#5">参数接口</a>
 <ul>
 <li><a href="#5_1">5.1数据key列表及分组情况</a></li>
-<li><a href="#5_2">5.2导入报告类型列表</a></li>
-<li><a href="#5_3">5.3枚举翻译</a></li>
+<li><a href="#5_2">5.2枚举翻译</a></li>
 </ul>
 </li>
 </ol>
@@ -423,7 +422,7 @@ img {
 </table>
 <p>所有接口返回结果通过http状态码来标识</p>
 <p>200代表成功，400代表请求参数错误，500代表服务器错误，401表示登录超时</p>
-<p>类型为enum的参数/返回值请使用5.3接口进行翻译.</p>
+<p>类型为enum的参数/返回值请使用5.2接口进行翻译.</p>
 <h2 id="2">2.登录接口</h2>
 <h3 id="2_1">2.1用户登录</h3>
 <h3>request</h3>
@@ -838,7 +837,7 @@ img {
 </tr>
 <tr>
 	<td>dataType</td>
-	<td>string</td>
+	<td>enum</td>
 	<td>文件类型</td>
 	<td>否</td>
 </tr>
@@ -865,6 +864,22 @@ img {
 <h3>response</h3>
 <p>成功 200</p>
 <p>通用表格结构. </p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>dataType</td>
+	<td>enum</td>
+	<td>报告类型</td>
+</tr>
+</tbody>
+</table>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
@@ -923,46 +938,7 @@ img {
 }
 </code></pre>
 
-<h3 id="5_2">5.2导入报告类型列表</h3>
-<h3>request</h3>
-<p><code>GET /Meta/DataType</code></p>
-<h3>response</h3>
-<p>成功 200</p>
-<pre><code>{
-  &quot;type1&quot;: &quot;name1&quot;,
-  &quot;type2&quot;: &quot;name2&quot;
-  ...
-}
-</code></pre>
-
-<table>
-<thead>
-<tr>
-	<th>名称</th>
-	<th>类型</th>
-	<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-	<td>type</td>
-	<td>string</td>
-	<td>分组</td>
-</tr>
-<tr>
-	<td>name</td>
-	<td>string</td>
-	<td>分组名</td>
-</tr>
-</tbody>
-</table>
-<p>失败 400/500</p>
-<pre><code>{
-  &quot;info&quot;: &quot;失败描述&quot;
-}
-</code></pre>
-
-<h3 id="5_3">5.3枚举翻译</h3>
+<h3 id="5_2">5.2枚举翻译</h3>
 <h3>request</h3>
 <p><code>GET /Meta/EnumTranslate</code></p>
 <h3>response</h3>
