@@ -338,6 +338,12 @@ img {
 <li><a href="#5_2">5.2枚举翻译</a></li>
 </ul>
 </li>
+<li>
+<a href="#6">文件上传接口</a>
+<ul>
+<li><a href="#6_1">6.1导入数据上传</a></li>
+</ul>
+</li>
 </ol>
 <h2 id="1">1.通用结构</h2>
 <h3 id="1_1">1.1通用数据表结构</h3>
@@ -548,8 +554,7 @@ img {
 <h2 id="3">3.导入接口</h2>
 <h3 id="3_1">3.1导入数据</h3>
 <h3>request</h3>
-<p><code>POST /Import/ImportData?dataType=BASIC&amp;dataSource=LOCAL&amp;importName=8月19日导入</code></p>
-<p><code>Content-Type : multipart/form-data</code></p>
+<p><code>POST /Import/ImportData?dataType=BASIC&amp;dataSource=LOCAL&amp;importName=8月19日导入&amp;fileName=a973fbab-e985-4363-9bc7-e29623230cfc.xlsx</code></p>
 <table>
 <thead>
 <tr>
@@ -562,7 +567,7 @@ img {
 <tbody>
 <tr>
 	<td>dataType</td>
-	<td>string</td>
+	<td>enum</td>
 	<td>文件类型</td>
 	<td>是</td>
 </tr>
@@ -578,11 +583,21 @@ img {
 	<td>用户输入的导入名</td>
 	<td>否, 为空时后台自动生成一个</td>
 </tr>
+<tr>
+	<td>fileName</td>
+	<td>string</td>
+	<td>文件名</td>
+	<td>是, 6.1接口返回</td>
+</tr>
 </tbody>
 </table>
-<p><code>文件类型: 接口返回</code></p>
 <h3>response</h3>
 <p>成功 200</p>
+<pre><code>{
+  &quot;importId&quot;: &quot;fe6b0d72-d9dd-4fbd-8237-f0245513607c&quot;
+}
+</code></pre>
+
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
@@ -978,6 +993,40 @@ img {
 	<td>name</td>
 	<td>string</td>
 	<td>页面展示值</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="6">6.文件上传接口</h2>
+<h3 id="6_1">6.1导入数据上传</h3>
+<h3>request</h3>
+<p><code>POST /File/UploadImportExcel</code></p>
+<p><code>Content-Type : multipart/form-data</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;fileName&quot;: &quot;4605e2e8-a666-4dc4-8b5f-5711e16010a4.xlsx&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>fileName</td>
+	<td>string</td>
+	<td>文件名</td>
 </tr>
 </tbody>
 </table>
