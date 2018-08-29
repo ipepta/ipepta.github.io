@@ -594,10 +594,68 @@ img {
 <h3>response</h3>
 <p>成功 200</p>
 <pre><code>{
-  &quot;importId&quot;: &quot;fe6b0d72-d9dd-4fbd-8237-f0245513607c&quot;
+  &quot;importId&quot;: &quot;fe6b0d72-d9dd-4fbd-8237-f0245513607c&quot;,
+  &quot;importName&quot;: &quot;测试导入0827_01&quot;,
+  &quot;userChineseName&quot;: &quot;管理员(测试)&quot;,
+  &quot;totalCount&quot;: 100,
+  &quot;insertCount&quot;: 30,
+  &quot;updateCount&quot;: 70,
+  &quot;successCount&quot;: 95,
+  &quot;failedCount&quot;: 5
 }
 </code></pre>
 
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>importId</td>
+	<td>string</td>
+	<td>导入编号(不用显示)</td>
+</tr>
+<tr>
+	<td>importName</td>
+	<td>string</td>
+	<td>导入名</td>
+</tr>
+<tr>
+	<td>userChineseName</td>
+	<td>string</td>
+	<td>导入管理员</td>
+</tr>
+<tr>
+	<td>totalCount</td>
+	<td>int</td>
+	<td>数据总数</td>
+</tr>
+<tr>
+	<td>insertCount</td>
+	<td>int</td>
+	<td>新增数据</td>
+</tr>
+<tr>
+	<td>updateCount</td>
+	<td>int</td>
+	<td>更新数据</td>
+</tr>
+<tr>
+	<td>successCount</td>
+	<td>int</td>
+	<td>导入成功</td>
+</tr>
+<tr>
+	<td>failedCount</td>
+	<td>int</td>
+	<td>导入失败</td>
+</tr>
+</tbody>
+</table>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
