@@ -312,6 +312,7 @@ img {
 <ul>
 <li><a href="#2_1">2.1用户登录</a></li>
 <li><a href="#2_2">2.2检查登录</a></li>
+<li><a href="#2_3">2.3用户列表</a></li>
 </ul>
 </li>
 <li>
@@ -342,6 +343,27 @@ img {
 <a href="#6">文件上传接口</a>
 <ul>
 <li><a href="#6_1">6.1导入数据上传</a></li>
+</ul>
+</li>
+<li>
+<a href="#7">风险点接口</a>
+<ul>
+<li><a href="#7_1">7.1计算状态查询</a></li>
+<li><a href="#7_2">7.2待确认风险点数量</a></li>
+<li><a href="#7_3">7.3风险点列表</a></li>
+<li><a href="#7_4">7.4风险点详情</a></li>
+<li><a href="#7_5">7.5审批风险点</a></li>
+<li><a href="#7_6">7.6风险点审批记录</a></li>
+<li><a href="#7_7">7.7风险点计算记录</a></li>
+</ul>
+</li>
+<li>
+<a href="#8">图表数据接口</a>
+<ul>
+<li><a href="#8_1">8.1全局得分情况</a></li>
+<li><a href="#8_2">8.2全局平均分历史</a></li>
+<li><a href="#8_3">8.3个人扣分情况</a></li>
+<li><a href="#8_4">8.4个人分数历史</a></li>
 </ul>
 </li>
 </ol>
@@ -548,6 +570,57 @@ img {
 	<td>userType</td>
 	<td>string</td>
 	<td>用户类型</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="2_3">2.3用户列表</h3>
+<h3>request</h3>
+<p><code>GET /Auth/UserList</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>name</td>
+	<td>string</td>
+	<td>模糊搜索的用户名</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>通用表格结构. 固定键:</p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>userName</td>
+	<td>string</td>
+	<td>用户名</td>
+</tr>
+<tr>
+	<td>chineseName</td>
+	<td>string</td>
+	<td>中文名</td>
 </tr>
 </tbody>
 </table>
@@ -1097,6 +1170,506 @@ img {
 	<td>fileName</td>
 	<td>string</td>
 	<td>文件名</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="7">7.风险点管理</h2>
+<h3 id="7_1">7.1计算状态查询</h3>
+<h3>request</h3>
+<p><code>GET /RiskPoint/CalculationStatus</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;calculationStatus&quot;: &quot;IDLE&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>calculationStatus</td>
+	<td>enum</td>
+	<td>计算状态</td>
+</tr>
+</tbody>
+</table>
+<p><code>计算状态: IDLE, CALCULATING. 计算完成, 计算中</code></p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="7_2">7.2待确认风险点数量</h3>
+<h3>request</h3>
+<p><code>GET /RiskPoint/TBDRiskPointCount</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;tbdRiskPointCount&quot;: 15
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>tbdRiskPointCount</td>
+	<td>int</td>
+	<td>待确定状态的风险点数量</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="7_3">7.3风险点列表</h3>
+<h3>request</h3>
+<p><code>GET /RiskPoint/RiskPointList?recordId=e8fd4295-c82e-46b3-b0f9-092350aafcfd&amp;riskPointStatus=TBD</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>recordId</td>
+	<td>string</td>
+	<td>数据编号</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>riskPointStatus</td>
+	<td>enum</td>
+	<td>风险点状态</td>
+	<td>否, 可多传</td>
+</tr>
+<tr>
+	<td>importId</td>
+	<td>string</td>
+	<td>导入编号</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>riskPointType</td>
+	<td>enum</td>
+	<td>风险点类型</td>
+	<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>通用表格结构</p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>riskPointId</td>
+	<td>string</td>
+	<td>风险点编号</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="7_4">7.4风险点详情</h3>
+<h3>request</h3>
+<p><code>GET /RiskPoint/RiskPointDetail?riskPointId=e8fd4295-c82e-46b3-b0f9-092350aafcfd</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>riskPointId</td>
+	<td>string</td>
+	<td>风险点编号</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>特殊通用表格结构. 只有一行.
+通过表头部分返回当前查询的风险点应该在详情中展示哪些字段.</p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>riskPointId</td>
+	<td>string</td>
+	<td>风险点编号</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="7_5">7.5审批风险点</h3>
+<h3>request</h3>
+<p><code>POST /RiskPoint/ValidateRiskPoint</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>riskPointId</td>
+	<td>string</td>
+	<td>风险点编号</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>targetStatus</td>
+	<td>enum</td>
+	<td>审批结果</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td>string</td>
+	<td>附注</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="7_6">7.6风险点审批记录</h3>
+<h3>request</h3>
+<p><code>GET /RiskPoint/ValidateLog</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>riskPointId</td>
+	<td>string</td>
+	<td>风险点编号</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>userName</td>
+	<td>string</td>
+	<td>审批用户名</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>通用表格结构. </p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="7_7">7.7风险点计算记录</h3>
+<h3>request</h3>
+<p><code>GET /RiskPoint/CalculateLog</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>startDate</td>
+	<td>dateTime</td>
+	<td>起始日期</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>endDate</td>
+	<td>dateTime</td>
+	<td>结束日期</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<p><code>dateTime格式为 yyyy-MM-dd</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<p>通用表格结构. </p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="8">8.图表数据接口</h2>
+<h3 id="8_1">8.1全局得分情况</h3>
+<h3>request</h3>
+<p><code>GET /Statistics/GlobalCurrentScore</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>[
+  {
+    &quot;groupMax&quot;: 100,
+    &quot;groupMin&quot;: 90,
+    &quot;groupRecordCount&quot;: 25
+  }
+  ...
+]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>groupMax</td>
+	<td>int</td>
+	<td>本组分数上限</td>
+</tr>
+<tr>
+	<td>groupMin</td>
+	<td>int</td>
+	<td>本组分数下限</td>
+</tr>
+<tr>
+	<td>groupRecordCount</td>
+	<td>int</td>
+	<td>本组人数</td>
+</tr>
+</tbody>
+</table>
+<p><code>后端接口的分组情况不适用饼图的分块. 饼图分块由前端控制与数据列表页的颜色分组保持一致.</code></p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="8_2">8.2全局平均分历史</h3>
+<h3>request</h3>
+<p><code>GET /Statistics/GlobalAverageScoreLog</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>startDate</td>
+	<td>dateTime</td>
+	<td>起始日期</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>endDate</td>
+	<td>dateTime</td>
+	<td>结束日期</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<p><code>日期格式为 yyyy-MM-dd</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>[
+  {
+    &quot;score&quot;: 85.5,
+    &quot;tbdRiskPointCount&quot;: 40,
+    &quot;statisticsDate&quot;: &quot;2018-05-05&quot;
+  }
+  ...
+]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>score</td>
+	<td>double</td>
+	<td>平均分数</td>
+</tr>
+<tr>
+	<td>tbdRiskPointCount</td>
+	<td>int</td>
+	<td>未确定风险点数量</td>
+</tr>
+<tr>
+	<td>statisticsDate</td>
+	<td>string</td>
+	<td>记录日期(yyyy-MM-dd)</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="8_3">8.3个人扣分情况</h3>
+<h3>request</h3>
+<p><code>GET /Statistics/RecordPenaltyRatio</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>[
+  {
+    &quot;dataType&quot;: &quot;POWER&quot;,
+    &quot;penalty&quot;: 12.5
+  }
+  ...
+]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>dataType</td>
+	<td>enum</td>
+	<td>数据类型</td>
+</tr>
+<tr>
+	<td>penalty</td>
+	<td>double</td>
+	<td>所扣分数</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="8_4">8.4个人分数历史</h3>
+<h3>request</h3>
+<p><code>GET /Statistics/RecordScoreLog</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>[
+  {
+    &quot;score&quot;: 85.5,
+    &quot;tbdRiskPointCount&quot;: 40,
+    &quot;statisticsDate&quot;: &quot;2018-05-05&quot;
+  }
+  ...
+]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>score</td>
+	<td>double</td>
+	<td>平均分数</td>
+</tr>
+<tr>
+	<td>tbdRiskPointCount</td>
+	<td>int</td>
+	<td>未确定风险点数量</td>
+</tr>
+<tr>
+	<td>statisticsDate</td>
+	<td>string</td>
+	<td>记录日期(yyyy-MM-dd)</td>
 </tr>
 </tbody>
 </table>
