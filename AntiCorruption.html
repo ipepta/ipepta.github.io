@@ -1280,7 +1280,7 @@ img {
 	<td>riskPointType</td>
 	<td>enum</td>
 	<td>风险点类型</td>
-	<td>&nbsp;</td>
+	<td>否</td>
 </tr>
 </tbody>
 </table>
@@ -1300,6 +1300,21 @@ img {
 	<td>riskPointId</td>
 	<td>string</td>
 	<td>风险点编号</td>
+</tr>
+<tr>
+	<td>name</td>
+	<td>string</td>
+	<td>姓名</td>
+</tr>
+<tr>
+	<td>idNumber</td>
+	<td>string</td>
+	<td>证件号</td>
+</tr>
+<tr>
+	<td>description</td>
+	<td>string</td>
+	<td>风险点内容</td>
 </tr>
 </tbody>
 </table>
@@ -1458,6 +1473,12 @@ img {
 	<td>结束日期</td>
 	<td>否</td>
 </tr>
+<tr>
+	<td>missionStatus</td>
+	<td>List<enum></td>
+	<td>任务状态</td>
+	<td>否, 可多传</td>
+</tr>
 </tbody>
 </table>
 <p><code>dateTime格式为 yyyy-MM-dd</code></p>
@@ -1600,12 +1621,31 @@ img {
 <h3 id="8_3">8.3个人扣分情况</h3>
 <h3>request</h3>
 <p><code>GET /Statistics/RecordPenaltyRatio</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>recordId</td>
+	<td>string</td>
+	<td>数据编号</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
 <h3>response</h3>
 <p>成功 200</p>
 <pre><code>[
   {
     &quot;dataType&quot;: &quot;POWER&quot;,
-    &quot;penalty&quot;: 12.5
+    &quot;penalty&quot;: 12.5,
+    &quot;penaltyRatio&quot;: 23.2
   }
   ...
 ]
@@ -1630,6 +1670,11 @@ img {
 	<td>double</td>
 	<td>所扣分数</td>
 </tr>
+<tr>
+	<td>penaltyRatio</td>
+	<td>double</td>
+	<td>扣分占比</td>
+</tr>
 </tbody>
 </table>
 <p>失败 400/500</p>
@@ -1641,6 +1686,36 @@ img {
 <h3 id="8_4">8.4个人分数历史</h3>
 <h3>request</h3>
 <p><code>GET /Statistics/RecordScoreLog</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>recordId</td>
+	<td>string</td>
+	<td>数据编号</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>startDate</td>
+	<td>dateTime</td>
+	<td>起始日期</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>endDate</td>
+	<td>dateTime</td>
+	<td>结束日期</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
 <h3>response</h3>
 <p>成功 200</p>
 <pre><code>[
