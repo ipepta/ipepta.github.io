@@ -365,6 +365,7 @@ img {
 <li><a href="#8_2">8.2全局平均分历史</a></li>
 <li><a href="#8_3">8.3个人扣分情况</a></li>
 <li><a href="#8_4">8.4个人分数历史</a></li>
+<li><a href="#8_5">8.5统计计算记录</a></li>
 </ul>
 </li>
 </ol>
@@ -1807,6 +1808,49 @@ img {
 </tr>
 </tbody>
 </table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="8_5">8.5统计计算记录</h3>
+<h3>request</h3>
+<p><code>GET /Statistics/CalculateLog</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>startDate</td>
+	<td>dateTime</td>
+	<td>起始日期</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>endDate</td>
+	<td>dateTime</td>
+	<td>结束日期</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>missionStatus</td>
+	<td>List<enum></td>
+	<td>任务状态</td>
+	<td>否, 可多传</td>
+</tr>
+</tbody>
+</table>
+<p><code>dateTime格式为 yyyy-MM-dd</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<p>通用表格结构. </p>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
