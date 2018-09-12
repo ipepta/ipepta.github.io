@@ -337,6 +337,7 @@ img {
 <ul>
 <li><a href="#5_1">5.1数据key列表及分组情况</a></li>
 <li><a href="#5_2">5.2枚举翻译</a></li>
+<li><a href="#5_3">5.3廉政预警分数区间情况</a></li>
 </ul>
 </li>
 <li>
@@ -1145,6 +1146,53 @@ img {
 }
 </code></pre>
 
+<h3 id="5_3">5.3廉政预警分数区间情况</h3>
+<h3>request</h3>
+<p><code>GET /Meta/WarningLevel</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>[
+  {
+    &quot;scoreMax&quot;: 100,
+    &quot;scoreMin&quot;: 90,
+    &quot;warningLevel&quot;: &quot;RED&quot;
+  }
+  ...
+]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>scoreMax</td>
+	<td>int</td>
+	<td>本组分数上限</td>
+</tr>
+<tr>
+	<td>scoreMin</td>
+	<td>int</td>
+	<td>本组分数下限</td>
+</tr>
+<tr>
+	<td>warningLevel</td>
+	<td>enum</td>
+	<td>警报等级</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
 <h2 id="6">6.文件上传接口</h2>
 <h3 id="6_1">6.1导入数据上传</h3>
 <h3>request</h3>
@@ -1499,9 +1547,10 @@ img {
 <p>成功 200</p>
 <pre><code>[
   {
-    &quot;groupMax&quot;: 100,
-    &quot;groupMin&quot;: 90,
-    &quot;groupRecordCount&quot;: 25
+    &quot;scoreMax&quot;: 100,
+    &quot;scoreMin&quot;: 90,
+    &quot;groupRecordCount&quot;: 25,
+    &quot;warningLevel&quot;: &quot;YELLOW&quot;
   }
   ...
 ]
@@ -1517,12 +1566,12 @@ img {
 </thead>
 <tbody>
 <tr>
-	<td>groupMax</td>
+	<td>scoreMax</td>
 	<td>int</td>
 	<td>本组分数上限</td>
 </tr>
 <tr>
-	<td>groupMin</td>
+	<td>scoreMin</td>
 	<td>int</td>
 	<td>本组分数下限</td>
 </tr>
@@ -1531,9 +1580,13 @@ img {
 	<td>int</td>
 	<td>本组人数</td>
 </tr>
+<tr>
+	<td>warningLevel</td>
+	<td>enum</td>
+	<td>警告等级</td>
+</tr>
 </tbody>
 </table>
-<p><code>后端接口的分组情况不适用饼图的分块. 饼图分块由前端控制与数据列表页的颜色分组保持一致.</code></p>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
