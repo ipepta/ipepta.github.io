@@ -330,6 +330,7 @@ img {
 <li><a href="#4_1">4.1数据列表</a></li>
 <li><a href="#4_2">4.2数据详情</a></li>
 <li><a href="#4_3">4.3变更记录</a></li>
+<li><a href="#4_4">4.4工作记录数据比对</a></li>
 </ul>
 </li>
 <li>
@@ -1048,6 +1049,95 @@ img {
 	<td>dataType</td>
 	<td>enum</td>
 	<td>报告类型</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="4_4">4.4工作记录数据比对</h3>
+<h3>request</h3>
+<p><code>GET /Data/WorkHistoryForCompare?recordId=0262b6e9-8b4e-47ca-8f9c-fc5a1b465d7c</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>recordId</td>
+	<td>string</td>
+	<td>数据编号</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;recordId&quot;: &quot;0262b6e9-8b4e-47ca-8f9c-fc5a1b465d7c&quot;,
+  &quot;name&quot;: &quot;王大锤&quot;,
+  &quot;idNumber&quot;: &quot;1001100101220&quot;,
+  &quot;localItemList&quot;: [
+                     {
+                       &quot;description&quot;: &quot;16年3月至17年5月 地税局, 科员&quot;
+                     }
+                     ...
+                   ],
+  &quot;authorityItemList&quot;: [
+                         {
+                           &quot;description&quot;: &quot;16年1月至17年5月 地税局, 科员&quot;
+                         }
+                         ...
+                       ]
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>recordId</td>
+	<td>string</td>
+	<td>报告编号</td>
+</tr>
+<tr>
+	<td>name</td>
+	<td>string</td>
+	<td>数据姓名</td>
+</tr>
+<tr>
+	<td>idNumber</td>
+	<td>string</td>
+	<td>数据证件号</td>
+</tr>
+<tr>
+	<td>localItemList</td>
+	<td>List</td>
+	<td>本地工作记录列表</td>
+</tr>
+<tr>
+	<td>authorityItemList</td>
+	<td>List</td>
+	<td>核查部门工作记录列表</td>
+</tr>
+<tr>
+	<td>description</td>
+	<td>string</td>
+	<td>工作记录</td>
 </tr>
 </tbody>
 </table>
