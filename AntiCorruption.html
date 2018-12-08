@@ -345,6 +345,7 @@ img {
 <a href="#6">文件上传接口</a>
 <ul>
 <li><a href="#6_1">6.1导入数据上传</a></li>
+<li><a href="#6_2">6.2风险点材料上传</a></li>
 </ul>
 </li>
 <li>
@@ -368,6 +369,16 @@ img {
 <li><a href="#8_4">8.4个人分数历史</a></li>
 <li><a href="#8_5">8.5统计计算记录</a></li>
 <li><a href="#8_6">8.6全局数据量历史</a></li>
+</ul>
+</li>
+<li>
+<a href="#9">风险点材料接口</a>
+<ul>
+<li><a href="#9_1">9.1新增风险点材料</a></li>
+<li><a href="#9_2">9.2风险点材料列表</a></li>
+<li><a href="#9_3">9.3删除风险点材料</a></li>
+<li><a href="#9_4">9.4查看风险点材料</a></li>
+<li><a href="#9_5">9.5下载风险点材料</a></li>
 </ul>
 </li>
 </ol>
@@ -931,6 +942,11 @@ img {
 	<td>double</td>
 	<td>廉政分数</td>
 </tr>
+<tr>
+	<td>warningLevel</td>
+	<td>enum</td>
+	<td>警报级别</td>
+</tr>
 </tbody>
 </table>
 <p>失败 400/500</p>
@@ -1320,6 +1336,45 @@ img {
 	<td>fileName</td>
 	<td>string</td>
 	<td>文件名</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="6_2">6.2风险点材料上传</h3>
+<h3>request</h3>
+<p><code>POST /File/UploadImportExcel</code></p>
+<p><code>Content-Type : multipart/form-data</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;fileName&quot;: &quot;4605e2e8-a666-4dc4-8b5f-5711e16010a4.xlsx&quot;,
+  &quot;originalFileName&quot;: &quot;风险点材料1&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>fileName</td>
+	<td>string</td>
+	<td>文件名</td>
+</tr>
+<tr>
+	<td>originalFileName</td>
+	<td>string</td>
+	<td>默认风险点材料名称</td>
 </tr>
 </tbody>
 </table>
@@ -1993,6 +2048,223 @@ img {
 </tr>
 </tbody>
 </table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="9">9.风险点材料接口</h2>
+<h3 id="9_1">9.1新增风险点材料</h3>
+<h3>request</h3>
+<p><code>POST /RiskPointProof/InsertProof</code></p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+  &quot;riskPointProofId&quot;: &quot;548e10a2-78b9-49e8-b7dc-482cda2f7120&quot;,
+  &quot;proofName&quot;: &quot;风险点材料1&quot;,
+  &quot;fileName&quot;: a973fbab-e985-4363-9bc7-e29623230cfc.xlsx
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>riskPointId</td>
+	<td>string</td>
+	<td>风险点id</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>proofName</td>
+	<td>string</td>
+	<td>材料名</td>
+	<td>是, 默认值由6.2接口返回</td>
+</tr>
+<tr>
+	<td>fileName</td>
+	<td>string</td>
+	<td>文件名</td>
+	<td>是, 6.2接口返回</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;proofId&quot;: &quot;fe6b0d72-d9dd-4fbd-8237-f0245513607c&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>proofId</td>
+	<td>string</td>
+	<td>风险点材料编号</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="9_2">9.2风险点材料列表</h3>
+<h3>request</h3>
+<p><code>GET /RiskPointProof/ProofList?riskPointId=fe6b0d72-d9dd-4fbd-8237-f0245513607c&amp;start=0&amp;limit=20</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>riskPointId</td>
+	<td>string</td>
+	<td>风险点编号</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>通用表格结构. 固定键:</p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>riskPointId</td>
+	<td>string</td>
+	<td>风险点编号</td>
+</tr>
+<tr>
+	<td>riskPointProofId</td>
+	<td>string</td>
+	<td>风险点材料编号</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="9_3">9.3删除风险点材料</h3>
+<h3>request</h3>
+<p><code>POST /RiskPointProof/DeleteProof</code></p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+  &quot;riskPointProofId&quot;: &quot;548e10a2-78b9-49e8-b7dc-482cda2f7120&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>riskPointProofId</td>
+	<td>string</td>
+	<td>风险点材料编号</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="9_4">9.4查看风险点材料</h3>
+<h3>request</h3>
+<p><code>GET /RiskPointProof/ViewProof?riskPointProofId=548e10a2-78b9-49e8-b7dc-482cda2f7120</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>riskPointProofId</td>
+	<td>string</td>
+	<td>风险点材料编号</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>文件流</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="9_5">9.5下载风险点材料</h3>
+<h3>request</h3>
+<p><code>GET /RiskPointProof/DownloadProof?riskPointProofId=548e10a2-78b9-49e8-b7dc-482cda2f7120</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>riskPointProofId</td>
+	<td>string</td>
+	<td>风险点材料编号</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>文件流</p>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
