@@ -358,6 +358,7 @@ img {
 <li><a href="#7_5">7.5审批风险点</a></li>
 <li><a href="#7_6">7.6风险点审批记录</a></li>
 <li><a href="#7_7">7.7风险点计算记录</a></li>
+<li><a href="#7_8">7.8批量审核风险点</a></li>
 </ul>
 </li>
 <li>
@@ -1690,6 +1691,41 @@ img {
 <h3>response</h3>
 <p>成功 200</p>
 <p>通用表格结构. </p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="7_8">7.8批量审核风险点</h3>
+<h3>request</h3>
+<p><code>POST /RiskPoint/GroupConfirm</code></p>
+<p><code>content-type: text/plain</code></p>
+<pre><code>{
+  &quot;riskPointId&quot;: [&quot;be438e36-2ac1-4165-91af-d9fe6c4319ac&quot;, &quot;a67fc393-4d12-4a41-bba2-73f78f1a3424&quot;, &quot;0c987509-aa58-4a1f-9059-816112bb8487&quot;]
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>riskPointId</td>
+	<td>List<string></td>
+	<td>审核风险点编号列表</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
