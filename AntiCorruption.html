@@ -1740,7 +1740,7 @@ img {
 <p>成功 200</p>
 <pre><code>[
   {
-    &quot;scoreMax&quot;: 100,
+    &quot;penaltyPax&quot;: 5,
     &quot;scoreMin&quot;: 90,
     &quot;groupRecordCount&quot;: 25,
     &quot;warningLevel&quot;: &quot;YELLOW&quot;
@@ -1759,9 +1759,9 @@ img {
 </thead>
 <tbody>
 <tr>
-	<td>scoreMax</td>
+	<td>penaltyPax</td>
 	<td>int</td>
-	<td>本组分数上限</td>
+	<td>本组单次扣分上限</td>
 </tr>
 <tr>
 	<td>scoreMin</td>
@@ -1811,9 +1811,21 @@ img {
 	<td>结束日期</td>
 	<td>否</td>
 </tr>
+<tr>
+	<td>statisticsInterval</td>
+	<td>enum</td>
+	<td>时间间隔</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>limit</td>
+	<td>int</td>
+	<td>数据数量</td>
+	<td>否</td>
+</tr>
 </tbody>
 </table>
-<p><code>日期格式为 yyyy-MM-dd</code></p>
+<p><code>日期格式根据时间间隔有所变化</code></p>
 <h3>response</h3>
 <p>成功 200</p>
 <pre><code>[
@@ -1854,7 +1866,7 @@ img {
 <tr>
 	<td>statisticsDate</td>
 	<td>string</td>
-	<td>记录日期(yyyy-MM-dd)</td>
+	<td>记录日期</td>
 </tr>
 </tbody>
 </table>
@@ -1960,14 +1972,28 @@ img {
 	<td>结束日期</td>
 	<td>否</td>
 </tr>
+<tr>
+	<td>statisticsInterval</td>
+	<td>enum</td>
+	<td>时间间隔</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>limit</td>
+	<td>int</td>
+	<td>数据数量</td>
+	<td>否</td>
+</tr>
 </tbody>
 </table>
+<p><code>日期格式根据时间间隔有所变化</code></p>
 <h3>response</h3>
 <p>成功 200</p>
 <pre><code>[
   {
     &quot;score&quot;: 85.5,
     &quot;tbdRiskPointCount&quot;: 40,
+    &quot;penaltyMax&quot;: 5,
     &quot;statisticsDate&quot;: &quot;2018-05-05&quot;
   }
   ...
@@ -1994,9 +2020,14 @@ img {
 	<td>未确定风险点数量</td>
 </tr>
 <tr>
+	<td>penaltyMax</td>
+	<td>double</td>
+	<td>最高单项扣分</td>
+</tr>
+<tr>
 	<td>statisticsDate</td>
 	<td>string</td>
-	<td>记录日期(yyyy-MM-dd)</td>
+	<td>记录日期</td>
 </tr>
 </tbody>
 </table>
@@ -2052,6 +2083,43 @@ img {
 <h3 id="8_6">8.6全局数据量历史</h3>
 <h3>request</h3>
 <p><code>GET /Statistics/GlobalRecordCountLog</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>startDate</td>
+	<td>dateTime</td>
+	<td>起始日期</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>endDate</td>
+	<td>dateTime</td>
+	<td>结束日期</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>statisticsInterval</td>
+	<td>enum</td>
+	<td>时间间隔</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>limit</td>
+	<td>int</td>
+	<td>数据数量</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<p><code>日期格式根据时间间隔有所变化</code></p>
 <h3>response</h3>
 <p>成功 200</p>
 <pre><code>[
@@ -2080,7 +2148,7 @@ img {
 <tr>
 	<td>statisticsDate</td>
 	<td>string</td>
-	<td>记录日期(yyyy-MM-dd)</td>
+	<td>记录日期</td>
 </tr>
 </tbody>
 </table>
