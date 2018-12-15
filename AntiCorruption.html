@@ -382,6 +382,15 @@ img {
 <li><a href="#9_5">9.5下载风险点材料</a></li>
 </ul>
 </li>
+<li>
+<a href="#10">单位管理</a>
+<ul>
+<li><a href="#10_1">10.1新增单位</a></li>
+<li><a href="#10_2">10.2单位列表</a></li>
+<li><a href="#10_3">10.3编辑单位</a></li>
+<li><a href="#10_4">10.4删除单位</a></li>
+</ul>
+</li>
 </ol>
 <h2 id="1">1.通用结构</h2>
 <h3 id="1_1">1.1通用数据表结构</h3>
@@ -1745,9 +1754,8 @@ img {
 <p>成功 200</p>
 <pre><code>[
   {
-    &quot;penaltyPax&quot;: 5,
-    &quot;scoreMin&quot;: 90,
-    &quot;groupRecordCount&quot;: 25,
+    &quot;recordCount&quot;: 15,
+    &quot;recordRatio&quot;: 31.5,
     &quot;warningLevel&quot;: &quot;YELLOW&quot;
   }
   ...
@@ -1764,19 +1772,14 @@ img {
 </thead>
 <tbody>
 <tr>
-	<td>penaltyPax</td>
+	<td>recordCount</td>
 	<td>int</td>
-	<td>本组单次扣分上限</td>
+	<td>本组包含人数</td>
 </tr>
 <tr>
-	<td>scoreMin</td>
-	<td>int</td>
-	<td>本组分数下限</td>
-</tr>
-<tr>
-	<td>groupRecordCount</td>
-	<td>int</td>
-	<td>本组人数</td>
+	<td>recordRatio</td>
+	<td>double</td>
+	<td>本组人数占比</td>
 </tr>
 <tr>
 	<td>warningLevel</td>
@@ -2367,6 +2370,178 @@ img {
 	<td>riskPointProofId</td>
 	<td>string</td>
 	<td>风险点材料编号</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>文件流</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="10">10.单位管理</h2>
+<h3 id="10_1">10.1新增单位</h3>
+<h3>request</h3>
+<p><code>POST /Sector/InsertSector</code></p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+  &quot;sectorName&quot;: &quot;林大&quot;,
+  &quot;fullName&quot;: &quot;北京林业大学&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>sectorName</td>
+	<td>string</td>
+	<td>单位名(导入使用)</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>fullName</td>
+	<td>string</td>
+	<td>单位全名</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="10_2">10.2单位列表</h3>
+<h3>request</h3>
+<p><code>GET /Sector/SectorList?start=0&amp;limit=20</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>name</td>
+	<td>string</td>
+	<td>模糊查询</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>通用表格结构. 固定键:</p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>sectorName</td>
+	<td>string</td>
+	<td>单位名</td>
+</tr>
+<tr>
+	<td>fullName</td>
+	<td>string</td>
+	<td>单位全名</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="10_3">10.3编辑单位</h3>
+<h3>request</h3>
+<p><code>POST /Sector/UpdateSector?targetSectorName=林大</code></p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+  &quot;sectorName&quot;: &quot;矿大&quot;,
+  &quot;sectorFullName&quot;: &quot;北京矿业大学&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>targetSectorName</td>
+	<td>string</td>
+	<td>目标单位名</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>sectorName</td>
+	<td>string</td>
+	<td>变更后单位名</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>fullName</td>
+	<td>string</td>
+	<td>变更后单位全名</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="10_4">10.4删除单位</h3>
+<h3>request</h3>
+<p><code>POST /Sector/DeleteSector?sectorName=林大</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>sectorName</td>
+	<td>string</td>
+	<td>单位名</td>
 	<td>是</td>
 </tr>
 </tbody>
