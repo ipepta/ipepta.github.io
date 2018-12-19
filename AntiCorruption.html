@@ -331,6 +331,10 @@ img {
 <li><a href="#4_2">4.2数据详情</a></li>
 <li><a href="#4_3">4.3变更记录</a></li>
 <li><a href="#4_4">4.4工作记录数据比对</a></li>
+<li><a href="#4_5">4.5在线核查数据查询</a></li>
+<li><a href="#4_6">4.6在线核查字段查询</a></li>
+<li><a href="#4_7">4.7在线核查数据提交</a></li>
+<li><a href="#4_8">4.8下载数据报告</a></li>
 </ul>
 </li>
 <li>
@@ -370,6 +374,8 @@ img {
 <li><a href="#8_4">8.4个人分数历史</a></li>
 <li><a href="#8_5">8.5统计计算记录</a></li>
 <li><a href="#8_6">8.6全局数据量历史</a></li>
+<li><a href="#8_7">8.7单位得分TOP10</a></li>
+<li><a href="#8_8">8.8单位数据得分TOP10</a></li>
 </ul>
 </li>
 <li>
@@ -923,6 +929,12 @@ img {
 	<td>姓名模糊查询</td>
 	<td>否</td>
 </tr>
+<tr>
+	<td>sector</td>
+	<td>string</td>
+	<td>单位查询</td>
+	<td>否</td>
+</tr>
 </tbody>
 </table>
 <h3>response</h3>
@@ -1092,6 +1104,7 @@ img {
 <h3 id="4_4">4.4工作记录数据比对</h3>
 <h3>request</h3>
 <p><code>GET /Data/WorkHistoryForCompare?recordId=0262b6e9-8b4e-47ca-8f9c-fc5a1b465d7c</code></p>
+<p><code>因业务变化本接口暂时停用</code></p>
 <table>
 <thead>
 <tr>
@@ -1172,6 +1185,335 @@ img {
 </tr>
 </tbody>
 </table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="4_5">4.5在线核查数据查询</h3>
+<h3>request</h3>
+<p><code>GET /Data/DataListForOnlineAuth?dataType=BASIC</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>dataType</td>
+	<td>enum</td>
+	<td>数据类型</td>
+	<td>是, 见下表</td>
+</tr>
+<tr>
+	<td>partFieldOnly</td>
+	<td>bool</td>
+	<td>数据类型辅助字段</td>
+	<td>否, 见下表, 默认值false</td>
+</tr>
+<tr>
+	<td>name</td>
+	<td>string</td>
+	<td>姓名模糊查询</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+	<th>数据类型</th>
+	<th>dataType</th>
+	<th>partFieldOnly</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>基本信息</td>
+	<td>BASIC</td>
+	<td>false</td>
+</tr>
+<tr>
+	<td>三龄两历</td>
+	<td>BASIC</td>
+	<td>true</td>
+</tr>
+<tr>
+	<td>权力信息</td>
+	<td>POWER</td>
+	<td>false</td>
+</tr>
+<tr>
+	<td>个人行为</td>
+	<td>BEHAVIOR</td>
+	<td>false</td>
+</tr>
+<tr>
+	<td>家庭财产</td>
+	<td>FAMILY</td>
+	<td>false</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>通用表格结构</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="4_6">4.6在线核查字段查询</h3>
+<h3>request</h3>
+<p><code>GET /Data/DataMetaForOnlineAuth?dataType=BASIC</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>dataType</td>
+	<td>enum</td>
+	<td>数据类型</td>
+	<td>是, 见4.5接口表格</td>
+</tr>
+<tr>
+	<td>partFieldOnly</td>
+	<td>bool</td>
+	<td>数据类型辅助字段</td>
+	<td>否, 见4.5接口表格, 默认值false</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+    &quot;fieldMetaList&quot;:[
+                        {
+                            &quot;fieldName&quot;: &quot;personalIncome&quot;,
+                            &quot;webpageName&quot;: &quot;本人工资/奖金/津补贴及劳务所得信息&quot;,
+                            &quot;fieldType&quot;: &quot;STRING&quot;,
+                            &quot;isExtendedEnum&quot;: true,
+                            &quot;extendedEnumType&quot;: &quot;PERSONAL_INCOME&quot;
+                        },
+                        ...
+                    ],
+    &quot;extendedEnumDict&quot;:{
+                            &quot;PERSONAL_INCOME&quot;: [
+                                                    {
+                                                        &quot;dbName&quot;: &quot;UNKNOWN_INCOME_INCREASE_MORE_THAN_50K&quot;,      
+                                                        &quot;importName&quot;: &quot;个人申报的工资/劳务所得等收入较往年增幅超过五万元且无法说明原因&quot;
+                                                    },
+                                                    ...
+                                                ],
+                            ...
+                        }
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>fieldMetaList</td>
+	<td>List</td>
+	<td>字段列表</td>
+</tr>
+<tr>
+	<td>fieldName</td>
+	<td>string</td>
+	<td>字段名(4.7接口field)</td>
+</tr>
+<tr>
+	<td>webpageName</td>
+	<td>string</td>
+	<td>在页面上显示的名称</td>
+</tr>
+<tr>
+	<td>fieldType</td>
+	<td>enum</td>
+	<td>字段类型, 见下表</td>
+</tr>
+<tr>
+	<td>isExtendedEnum</td>
+	<td>bool</td>
+	<td>字段类型辅助字段, 见下表</td>
+</tr>
+<tr>
+	<td>extendedEnumType</td>
+	<td>string</td>
+	<td>枚举类型名, 用于查询枚举类型取值</td>
+</tr>
+<tr>
+	<td>extendedEnumDict</td>
+	<td>object</td>
+	<td>枚举类型取值表</td>
+</tr>
+<tr>
+	<td>PERSONAL_INCOME</td>
+	<td>string</td>
+	<td>枚举类型名</td>
+</tr>
+<tr>
+	<td>dbName</td>
+	<td>string</td>
+	<td>枚举值(4.7接口传的VALUE)</td>
+</tr>
+<tr>
+	<td>importName</td>
+	<td>string</td>
+	<td>页面显示名</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+	<th>字段类型</th>
+	<th>fieldType</th>
+	<th>isExtendedEnum</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>文字</td>
+	<td>STRING</td>
+	<td>false</td>
+	<td>随意输入的文字</td>
+</tr>
+<tr>
+	<td>枚举</td>
+	<td>STRING</td>
+	<td>true</td>
+	<td>以下拉框的形式提供选择, 下拉框允许值从extendedEnumDict中查询</td>
+</tr>
+<tr>
+	<td>整数</td>
+	<td>INT</td>
+	<td>false</td>
+	<td>随意输入的整数</td>
+</tr>
+<tr>
+	<td>日期</td>
+	<td>DATETIME</td>
+	<td>false</td>
+	<td>选择的日期, 精确到月, 传当月1日</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="4_7">4.7在线核查数据提交</h3>
+<h3>request</h3>
+<p><code>POST /Data/SubmitOnlineAuth?dataType=FAMILY</code></p>
+<pre><code>{
+  &quot;authData&quot;:{
+                &quot;name&quot;: &quot;张三&quot;,
+                &quot;idNumber&quot;: &quot;Test00003&quot;,
+                &quot;houseAndStore&quot;: &quot;TRADE_MORE_THAN_TWO_TIMES&quot;,
+                ....
+            }
+}
+
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>dataType</td>
+	<td>enum</td>
+	<td>数据类型</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>authData</td>
+	<td>object</td>
+	<td>用户输入的核查数据</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>name</td>
+	<td>string</td>
+	<td>数据姓名</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>idNumber</td>
+	<td>string</td>
+	<td>证件号</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>houseAndStore</td>
+	<td>由4.6接口返回</td>
+	<td>所有4.6接口返回的核查字段</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>通用表格结构</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="4_8">4.8下载数据报告</h3>
+<h3>request</h3>
+<p><code>GET /Data/DownloadRecordReport?recordId=d1a00d9f-252b-41dd-b39c-d6c585e1a15f</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>recordId</td>
+	<td>string</td>
+	<td>数据编号</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>文件流</p>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
@@ -2157,6 +2499,132 @@ img {
 	<td>statisticsDate</td>
 	<td>string</td>
 	<td>记录日期</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="8_7">8.7单位得分TOP10</h3>
+<h3>request</h3>
+<p><code>GET /Statistics/Top10Sector</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>sortType</td>
+	<td>enum</td>
+	<td>排序方式</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<p><code>排序方式支持升序ASC(最低10名)和DESC(最高10名)</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>[
+  {
+    &quot;sectorName&quot;: &quot;林大&quot;,
+    &quot;averageScore&quot;: 98.5
+  }
+  ...
+]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>sectorName</td>
+	<td>string</td>
+	<td>单位名称</td>
+</tr>
+<tr>
+	<td>averageScore</td>
+	<td>double</td>
+	<td>平均分数</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="8_8">8.8单位数据的分TOP10</h3>
+<h3>request</h3>
+<p><code>GET /Statistics/Top10RecordForSector</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>sectorName</td>
+	<td>string</td>
+	<td>单位名</td>
+	<td>&nbsp;</td>
+</tr>
+<tr>
+	<td>sortType</td>
+	<td>enum</td>
+	<td>排序方式</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<p><code>排序方式支持升序ASC(最低10名)和DESC(最高10名)</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>[
+  {
+    &quot;name&quot;: &quot;张三&quot;,
+    &quot;cleanScore&quot;: 98.5
+  }
+  ...
+]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>name</td>
+	<td>string</td>
+	<td>数据姓名</td>
+</tr>
+<tr>
+	<td>cleanScore</td>
+	<td>double</td>
+	<td>廉政分数</td>
 </tr>
 </tbody>
 </table>
