@@ -335,6 +335,7 @@ img {
 <li><a href="#4_6">4.6在线核查字段查询</a></li>
 <li><a href="#4_7">4.7在线核查数据提交</a></li>
 <li><a href="#4_8">4.8下载数据报告</a></li>
+<li><a href="#4_9">4.9数据编号翻译</a></li>
 </ul>
 </li>
 <li>
@@ -1514,6 +1515,75 @@ img {
 <h3>response</h3>
 <p>成功 200</p>
 <p>文件流</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="4_9">4.9数据编号翻译</h3>
+<h3>request</h3>
+<p><code>GET /Data/RecordId?name=张宝剑&amp;idNumber=TEST100005</code></p>
+<p><code>本接口仅适用于在线核查页面. 其他页面的证件号被部分遮挡导致无法使用本接口.</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>name</td>
+	<td>string</td>
+	<td>姓名</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>idNumber</td>
+	<td>string</td>
+	<td>证件号</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;name&quot;: &quot;张宝剑&quot;,
+  &quot;idNumber&quot;: &quot;TEST100005&quot;,
+  &quot;recordId&quot;: &quot;bb6f56f6-6ce2-4a0d-a7ab-e7478a5fa7e5&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>name</td>
+	<td>string</td>
+	<td>姓名</td>
+</tr>
+<tr>
+	<td>idNumber</td>
+	<td>string</td>
+	<td>证件号</td>
+</tr>
+<tr>
+	<td>recordId</td>
+	<td>string</td>
+	<td>数据编号</td>
+</tr>
+</tbody>
+</table>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
