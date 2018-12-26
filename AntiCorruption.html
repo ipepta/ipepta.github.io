@@ -1014,6 +1014,12 @@ img {
 	<td>数据类型</td>
 	<td>是</td>
 </tr>
+<tr>
+	<td>translateEnumValue</td>
+	<td>bool</td>
+	<td>将枚举数据翻译为中文</td>
+	<td>否, 默认为true, 接口返回中文</td>
+</tr>
 </tbody>
 </table>
 <h3>response</h3>
@@ -1263,7 +1269,23 @@ img {
 </table>
 <h3>response</h3>
 <p>成功 200</p>
-<p>通用表格结构</p>
+<p>通用表格结构. 固定键</p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>onlineAuthMismatchFieldNameList</td>
+	<td>List</td>
+	<td>不匹配字段列表, 如果列表中包含的字段名在表头中也有包含, 就把这一格的文字置红</td>
+</tr>
+</tbody>
+</table>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
@@ -1479,6 +1501,12 @@ img {
 	<td>由4.6接口返回</td>
 	<td>所有4.6接口返回的核查字段</td>
 	<td>是</td>
+</tr>
+<tr>
+	<td>translateEnumValue</td>
+	<td>bool</td>
+	<td>接口收到数据后先将枚举值翻译为英文值</td>
+	<td>否, 默认为false, 传英文到接口</td>
 </tr>
 </tbody>
 </table>
