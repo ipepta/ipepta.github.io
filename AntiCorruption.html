@@ -313,6 +313,9 @@ img {
 <li><a href="#2_1">2.1用户登录</a></li>
 <li><a href="#2_2">2.2检查登录</a></li>
 <li><a href="#2_3">2.3用户列表</a></li>
+<li><a href="#2_4">2.4新建用户</a></li>
+<li><a href="#2_5">2.5更换密码</a></li>
+<li><a href="#2_6">2.6删除用户</a></li>
 </ul>
 </li>
 <li>
@@ -396,6 +399,12 @@ img {
 <li><a href="#10_2">10.2单位列表</a></li>
 <li><a href="#10_3">10.3编辑单位</a></li>
 <li><a href="#10_4">10.4删除单位</a></li>
+</ul>
+</li>
+<li>
+<a href="#11">响应机制管理</a>
+<ul>
+<li><a href="#11_1">11.1响应机制查询</a></li>
 </ul>
 </li>
 </ol>
@@ -666,6 +675,111 @@ img {
 </tr>
 </tbody>
 </table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="2_4">2.4新建用户</h3>
+<h3>request</h3>
+<p><code>POST /Auth/CreateUser</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>userName</td>
+	<td>string</td>
+	<td>用户名</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>chineseName</td>
+	<td>string</td>
+	<td>中文名</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>password</td>
+	<td>string</td>
+	<td>密码</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="2_5">2.5更换密码</h3>
+<h3>request</h3>
+<p><code>POST /Auth/UpdatePassword</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>userName</td>
+	<td>string</td>
+	<td>用户名</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>password</td>
+	<td>string</td>
+	<td>新密码</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="2_5">2.6删除用户</h3>
+<h3>request</h3>
+<p><code>POST /Auth/RemoveUser</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>userName</td>
+	<td>string</td>
+	<td>用户名</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
@@ -3121,6 +3235,41 @@ img {
 <h3>response</h3>
 <p>成功 200</p>
 <p>文件流</p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="11">11.响应机制管理</h2>
+<h3 id="11_1">11.1响应机制查询</h3>
+<h3>request</h3>
+<p><code>GET /AntiCorruptionResponse/AntiCorruptionResponse</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>warningLevel</td>
+	<td>enum</td>
+	<td>预警级别</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;response&quot;: &quot;(1)与本人谈话核实情况&quot;
+}
+</code></pre>
+
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
