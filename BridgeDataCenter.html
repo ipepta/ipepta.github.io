@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>api</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<div style="
+    position: fixed;
+    right: 50px;
+    bottom: 30px;
+    cursor: pointer;
+"><a href="#table">返回顶部</a></div>
+<h1>廉政系统接口</h1>
+<h2 id="table">目录</h2>
+<ol>
+<li>
+<a href="#1">桥梁结构接口</a>
+<ul>
+<li><a href="#1.1">1.1桥梁结构查询</a></li>
+<li><a href="#1.2">1.2制备站结构查询</a></li>
+</ul>
+</li>
+<li>
+<a href="#2">数据查询接口</a>
+<ul>
+<li><a href="#2_1">2.1制备站数据查询</a></li>
+<li><a href="#2_2">2.2数据历史查询</a></li>
+</ul>
+</li>
+<li>
+<a href="#3">数据上传接口</a>
+<ul>
+<li><a href="#3_1">3.1Socket数据上传</a></li>
+</ul>
+</li>
+<li>
+<a href="#4">用户接口</a>
+<ul>
+<li><a href="#4_1">4.1用户登录</a></li>
+<li><a href="#4_2">4.2检查登录</a></li>
+</ul>
+</li>
+<li>
+<a href="#5">警报接口</a>
+<ul>
+<li><a href="#5">5.1全局警报</a></li>
+</ul>
+</li>
+</ol>
+<h2 id="1">1.桥梁结构</h2>
+<h3 id="1_1">1.1桥梁结构查询</h3>
+<h3>request</h3>
+<p><code>GET /Bridge/BridgeInfo?bridgeId=5ef490d2-1e64-4122-a44f-d02eb7d3941c</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>bridgeId</td>
+	<td>string</td>
+	<td>桥梁ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+  &quot;bridgeId&quot;: &quot;5ef490d2-1e64-4122-a44f-d02eb7d3941c&quot;,
+  &quot;bridgeName&quot;: &quot;南京夹江大桥&quot;,
+  &quot;stationList&quot;: [
+                   {
+                     &quot;stationId&quot;: &quot;21d05c86-89ca-44d6-8102-70051d735f3e&quot;,
+                     &quot;stationName&quot;: &quot;1#空气制备站&quot;
+                   }
+                   ...
+                 ] 
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>bridgeId</td>
+	<td>string</td>
+	<td>桥梁ID</td>
+</tr>
+<tr>
+	<td>bridgeName</td>
+	<td>string</td>
+	<td>桥梁名称</td>
+</tr>
+<tr>
+	<td>stationList</td>
+	<td>List</td>
+	<td>制备站列表</td>
+</tr>
+<tr>
+	<td>stationId</td>
+	<td>string</td>
+	<td>制备站ID</td>
+</tr>
+<tr>
+	<td>stationName</td>
+	<td>string</td>
+	<td>制备站名称</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="1_2">1.2制备站结构查询</h3>
+<h3>request</h3>
+<p><code>GET /Bridge/StationInfo?stationId=21d05c86-89ca-44d6-8102-70051d735f3e</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>stationId</td>
+	<td>string</td>
+	<td>制备站ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+  &quot;stationId&quot;: &quot;21d05c86-89ca-44d6-8102-70051d735f3e&quot;,
+  &quot;stationName&quot;: &quot;1#制备站&quot;,
+  &quot;deviceList&quot;: [
+                   {
+                     &quot;deviceId&quot;: &quot;1f842cd1-63d9-4ac6-af79-516bd8f1a3cd&quot;,
+                     &quot;deviceName&quot;: &quot;1#空气制备站&quot;,
+                     &quot;dataType&quot;: &quot;VALUE&quot;,
+                   }
+                   ...
+                 ] 
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>stationId</td>
+	<td>string</td>
+	<td>制备站ID</td>
+</tr>
+<tr>
+	<td>stationName</td>
+	<td>string</td>
+	<td>制备站名称</td>
+</tr>
+<tr>
+	<td>deviceList</td>
+	<td>List</td>
+	<td>设备列表</td>
+</tr>
+<tr>
+	<td>deviceId</td>
+	<td>string</td>
+	<td>制备站ID</td>
+</tr>
+<tr>
+	<td>deviceName</td>
+	<td>string</td>
+	<td>制备站名称</td>
+</tr>
+<tr>
+	<td>dataType</td>
+	<td>enum</td>
+	<td>数据类型</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="2">2.数据查询</h2>
+<h3 id="2_1">2.1制备站数据查询</h3>
+<h3>request</h3>
+<p><code>GET /DeviceData/Station?stationId=21d05c86-89ca-44d6-8102-70051d735f3e</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>stationId</td>
+	<td>string</td>
+	<td>制备站ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200
+<code>Content-Type : text/plain</code></p>
+<pre><code>{
+  &quot;1f842cd1-63d9-4ac6-af79-516bd8f1a3cd&quot;: {
+                                            &quot;dataId&quot;: &quot;d88d429a-a358-4565-bb12-22dbee32f8f0&quot;.
+                                            &quot;deviceId&quot;: &quot;1f842cd1-63d9-4ac6-af79-516bd8f1a3cd&quot;,
+                                            &quot;value&quot;: 15.0,
+                                            &quot;dataType&quot;: &quot;VALUE&quot;,
+                                            &quot;errorLevel&quot;: &quot;NORMAL&quot;
+                                          }
+  ...
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>字典key</td>
+	<td>string</td>
+	<td>设备ID</td>
+</tr>
+<tr>
+	<td>字典value</td>
+	<td>object</td>
+	<td>设备数据</td>
+</tr>
+<tr>
+	<td>dataId</td>
+	<td>string</td>
+	<td>数据ID</td>
+</tr>
+<tr>
+	<td>deviceId</td>
+	<td>string</td>
+	<td>设备ID</td>
+</tr>
+<tr>
+	<td>value</td>
+	<td>double</td>
+	<td>数据值(可能为空)</td>
+</tr>
+<tr>
+	<td>dataType</td>
+	<td>enum</td>
+	<td>数据类型</td>
+</tr>
+<tr>
+	<td>errorLevel</td>
+	<td>enum</td>
+	<td>报警级别</td>
+</tr>
+</tbody>
+</table>
+<p><code>数据类型: VALUE, PERCENTAGE, FLAG. 值, 百分比, 开关</code></p>
+<p><code>报警级别: NORMAL, WARNING, ERROR. 正常, 警告(数据为空), 错误(数据超限)</code></p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="2_2">2.2数据历史查询</h3>
+<h3>request</h3>
+<p><code>GET /Statistics/DeviceData?deviceId=21d05c86-89ca-44d6-8102-70051d735f3e&amp;interval=BY_HOUR</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>deviceId</td>
+	<td>string</td>
+	<td>设备ID</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>interval</td>
+	<td>enum</td>
+	<td>间隔类型</td>
+	<td>否, 默认NA</td>
+</tr>
+</tbody>
+</table>
+<p><code>间隔类型: NA, BY_DAY, BY_HOUR. 不使用, 每日, 每小时</code></p>
+<h3>response</h3>
+<p>成功 200
+<code>Content-Type : text/plain</code></p>
+<pre><code>[
+  {
+    &quot;dataId&quot;: &quot;d88d429a-a358-4565-bb12-22dbee32f8f0&quot;.
+    &quot;deviceId&quot;: &quot;1f842cd1-63d9-4ac6-af79-516bd8f1a3cd&quot;,
+    &quot;value&quot;: 15.0,
+    &quot;dataType&quot;: &quot;VALUE&quot;,
+    &quot;errorLevel&quot;: &quot;NORMAL&quot;,
+    &quot;statisticsInterval&quot;: &quot;BY_HOUR&quot;,
+    &quot;statisticsDate&quot;: &quot;19年3月7日 20时&quot;
+  },
+  ...
+]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>字典key</td>
+	<td>string</td>
+	<td>设备ID</td>
+</tr>
+<tr>
+	<td>字典value</td>
+	<td>object</td>
+	<td>设备数据</td>
+</tr>
+<tr>
+	<td>dataId</td>
+	<td>string</td>
+	<td>数据ID</td>
+</tr>
+<tr>
+	<td>deviceId</td>
+	<td>string</td>
+	<td>设备ID</td>
+</tr>
+<tr>
+	<td>value</td>
+	<td>double</td>
+	<td>数据值(可能为空)</td>
+</tr>
+<tr>
+	<td>dataType</td>
+	<td>enum</td>
+	<td>数据类型</td>
+</tr>
+<tr>
+	<td>errorLevel</td>
+	<td>enum</td>
+	<td>报警级别</td>
+</tr>
+<tr>
+	<td>statisticsInterval</td>
+	<td>enum</td>
+	<td>间隔类型</td>
+</tr>
+<tr>
+	<td>statisticsDate</td>
+	<td>string</td>
+	<td>统计时间(页面展示用)</td>
+</tr>
+</tbody>
+</table>
+<p><code>数据类型: VALUE, PERCENTAGE, FLAG. 值, 百分比, 开关</code></p>
+<p><code>报警级别: NORMAL, WARNING, ERROR. 正常, 警告(数据为空), 错误(数据超限)</code></p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="3">3.数据上传</h2>
+<h3 id="3_1">3.1Socket数据上传</h3>
+<h3>request</h3>
+<p><code>POST /SubmitData/FromSocket</code></p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+  &quot;socketJson&quot;: &quot;{
+                  &quot;socketId&quot;: &quot;0b89aff1-68ed-4b5e-82e1-e9a5aea1aa97&quot;,
+                  &quot;messageId&quot;: &quot;2f4983f6-4c7c-4238-864f-3f613b448134&quot;,
+                  &quot;version&quot;: 3389,
+                  &quot;command&quot;: 0,
+                  &quot;dataCount&quot;: 3,
+                  &quot;dataList&quot;:[
+                               {
+                                  &quot;dataItemIndex&quot;: 0,
+                                  &quot;id&quot;: 7500,
+                                  &quot;value&quot;: 15.50,
+                                  &quot;timeStamp&quot;: &quot;2019/02/20 22:03:59&quot;,
+                                  &quot;exception&quot;: null
+                               },
+                               ...
+                             ],
+                  &quot;dataHex&quot;: &quot;33464339344530312D4334363.....&quot;,
+                  &quot;exception&quot;: null.
+                  &quot;createdDate&quot;: &quot;2019-03-03T22:50:10.4906372+08:00&quot;,
+                  &quot;listenerSignature&quot;: &quot;75bd62014d393719b29fca6c22b15dad&quot;   
+                }&quot;
+}
+</code></pre>
+
+<p><code>出于socket数据特殊性, 本接口所有字段全部必填, exception字段除外. exception仅当数据产生错误时传值.</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>socketJson</td>
+	<td>string</td>
+	<td>socket数据json串</td>
+</tr>
+<tr>
+	<td>socketId</td>
+	<td>string</td>
+	<td>socket请求ID(服务端)</td>
+</tr>
+<tr>
+	<td>messageId</td>
+	<td>string</td>
+	<td>消息ID(客户端)</td>
+</tr>
+<tr>
+	<td>version</td>
+	<td>int</td>
+	<td>消息版本</td>
+</tr>
+<tr>
+	<td>command</td>
+	<td>int</td>
+	<td>命令码</td>
+</tr>
+<tr>
+	<td>dataCount</td>
+	<td>int</td>
+	<td>数据数量</td>
+</tr>
+<tr>
+	<td>dataList</td>
+	<td>List</td>
+	<td>数据列表</td>
+</tr>
+<tr>
+	<td>dataItemIndex</td>
+	<td>int</td>
+	<td>数据序号</td>
+</tr>
+<tr>
+	<td>id</td>
+	<td>int</td>
+	<td>数据字段ID</td>
+</tr>
+<tr>
+	<td>value</td>
+	<td>double</td>
+	<td>数据字段值</td>
+</tr>
+<tr>
+	<td>timeStamp</td>
+	<td>string</td>
+	<td>数据时间</td>
+</tr>
+<tr>
+	<td>exception</td>
+	<td>object</td>
+	<td>socket消息或数据项错误</td>
+</tr>
+<tr>
+	<td>dataHex</td>
+	<td>string</td>
+	<td>原始数据</td>
+</tr>
+<tr>
+	<td>createdDate</td>
+	<td>datetime</td>
+	<td>socket消息时间</td>
+</tr>
+<tr>
+	<td>listenerSignature</td>
+	<td>string</td>
+	<td>socket监听器签名</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="4">4.用户</h2>
+<h3 id="4_1">4.1用户登录</h3>
+<h3>request</h3>
+<p><code>POST /Auth/Login</code></p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+  &quot;userId&quot;: &quot;admin&quot;,
+  &quot;password&quot;: &quot;admin&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>userId</td>
+	<td>string</td>
+	<td>用户名</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>password</td>
+	<td>string</td>
+	<td>密码</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="4_2">4.2检查登录</h3>
+<h3>request</h3>
+<p><code>GET /Auth/LoginInfo</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+  &quot;userId&quot;: &quot;admin&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>userId</td>
+	<td>string</td>
+	<td>用户名</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="5">5.警报</h2>
+<h3 id="5_2">5.2全局警报</h3>
+<h3>request</h3>
+<p><code>GET /DataError/GlobalError?bridgeId=3fe28c5e-62ca-482c-9534-e15d9f36a440</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>bridgeId</td>
+	<td>string</td>
+	<td>桥梁ID是</td>
+	<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+  &quot;errorLevel&quot;: &quot;WARNING&quot;,
+  &quot;errorDataList&quot;: [
+                     {
+                         &quot;dataId&quot;: &quot;d88d429a-a358-4565-bb12-22dbee32f8f0&quot;.
+                         &quot;deviceId&quot;: &quot;1f842cd1-63d9-4ac6-af79-516bd8f1a3cd&quot;,
+                         &quot;value&quot;: null,
+                         &quot;dataType&quot;: &quot;VALUE&quot;,
+                         &quot;errorLevel&quot;: &quot;WARNING&quot;
+                     },
+                     ...
+                   ]
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>errorLevel</td>
+	<td>enum</td>
+	<td>全局警报级别</td>
+</tr>
+<tr>
+	<td>errorDataList</td>
+	<td>List</td>
+	<td>全局报警数据列表</td>
+</tr>
+<tr>
+	<td>dataId</td>
+	<td>string</td>
+	<td>数据ID</td>
+</tr>
+<tr>
+	<td>deviceId</td>
+	<td>string</td>
+	<td>设备ID</td>
+</tr>
+<tr>
+	<td>value</td>
+	<td>double</td>
+	<td>数据值(可能为空)</td>
+</tr>
+<tr>
+	<td>dataType</td>
+	<td>enum</td>
+	<td>数据类型</td>
+</tr>
+<tr>
+	<td>errorLevel</td>
+	<td>enum</td>
+	<td>报警级别</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
