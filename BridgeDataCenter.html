@@ -303,8 +303,8 @@ img {
 <li>
 <a href="#1">桥梁结构接口</a>
 <ul>
-<li><a href="#1.1">1.1桥梁结构查询</a></li>
-<li><a href="#1.2">1.2制备站结构查询</a></li>
+<li><a href="#1_1">1.1桥梁结构查询</a></li>
+<li><a href="#1_2">1.2制备站结构查询</a></li>
 </ul>
 </li>
 <li>
@@ -330,7 +330,13 @@ img {
 <li>
 <a href="#5">警报接口</a>
 <ul>
-<li><a href="#5">5.1全局警报</a></li>
+<li><a href="#5_1">5.1全局警报</a></li>
+</ul>
+</li>
+<li>
+<a href="#6">表格接口</a>
+<ul>
+<li><a href="#6_1">6.1通用表格结构</a></li>
 </ul>
 </li>
 </ol>
@@ -797,7 +803,7 @@ img {
 <tr>
 	<td>exception</td>
 	<td>object</td>
-	<td>socket消息或数据项错误</td>
+	<td>socket消息错误或数据项错误</td>
 </tr>
 <tr>
 	<td>dataHex</td>
@@ -874,7 +880,8 @@ img {
 <p>成功 200</p>
 <p><code>Content-Type : text/plain</code></p>
 <pre><code>{
-  &quot;userId&quot;: &quot;admin&quot;
+  &quot;userId&quot;: &quot;admin&quot;,
+  &quot;userName&quot;: &quot;管理员&quot;
 }
 </code></pre>
 
@@ -890,6 +897,11 @@ img {
 <tr>
 	<td>userId</td>
 	<td>string</td>
+	<td>用户ID</td>
+</tr>
+<tr>
+	<td>userName</td>
+	<td>string</td>
 	<td>用户名</td>
 </tr>
 </tbody>
@@ -901,7 +913,7 @@ img {
 </code></pre>
 
 <h2 id="5">5.警报</h2>
-<h3 id="5_2">5.2全局警报</h3>
+<h3 id="5_1">5.1全局警报</h3>
 <h3>request</h3>
 <p><code>GET /DataError/GlobalError?bridgeId=3fe28c5e-62ca-482c-9534-e15d9f36a440</code></p>
 <table>
@@ -983,6 +995,91 @@ img {
 	<td>errorLevel</td>
 	<td>enum</td>
 	<td>报警级别</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="6">6.表格</h2>
+<h3 id="6_1">6.1通用表格结构</h3>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+  &quot;tableSchema&quot;:[
+                  {
+                    &quot;name&quot;: &quot;importName&quot;,
+                    &quot;chineseName&quot;: &quot;导入名称&quot;,
+                    &quot;enumName&quot;: &quot;&quot;,
+                    &quot;isDate&quot;: false,
+                    &quot;mergeAdjacentSameValueRows&quot;: true,
+                  },
+                  ...
+                ],
+  &quot;tableData&quot;:[
+           {
+             &quot;importName&quot;: &quot;18年9月3日 10点5分 管理员 本地上传导入&quot;,
+             &quot;createdDate&quot;: &quot;2018年09月03日 10点05分&quot;,
+             ....
+           },
+           ...       
+         ],
+  &quot;totalCount&quot;: 200
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>tableSchema</td>
+	<td>list</td>
+	<td>表头列表</td>
+</tr>
+<tr>
+	<td>name</td>
+	<td>string</td>
+	<td>字段名</td>
+</tr>
+<tr>
+	<td>chineseName</td>
+	<td>string</td>
+	<td>显示名</td>
+</tr>
+<tr>
+	<td>enumName</td>
+	<td>string</td>
+	<td>枚举名. 配合5.2接口翻译枚举. 为空时不适用</td>
+</tr>
+<tr>
+	<td>isDate</td>
+	<td>bool</td>
+	<td>是否为日期字段</td>
+</tr>
+<tr>
+	<td>mergeAdjacentSameValueRows</td>
+	<td>bool</td>
+	<td>当紧邻的数据行本字段相等时,是否将这些行的本列合并在一格显示</td>
+</tr>
+<tr>
+	<td>tableData</td>
+	<td>list</td>
+	<td>数据列表, 其中每个对象为一行数据</td>
+</tr>
+<tr>
+	<td>totalCount</td>
+	<td>int</td>
+	<td>查询总数(分页用)</td>
 </tr>
 </tbody>
 </table>
