@@ -325,6 +325,9 @@ img {
 <ul>
 <li><a href="#4_1">4.1用户登录</a></li>
 <li><a href="#4_2">4.2检查登录</a></li>
+<li><a href="#4_3">4.3用户列表</a></li>
+<li><a href="#4_4">4.4新建用户</a></li>
+<li><a href="#4_5">4.5修改密码</a></li>
 </ul>
 </li>
 <li>
@@ -337,6 +340,14 @@ img {
 <a href="#6">表格接口</a>
 <ul>
 <li><a href="#6_1">6.1通用表格结构</a></li>
+</ul>
+</li>
+<li>
+<a href="#7">数据下载接口</a>
+<ul>
+<li><a href="#7_1">7.1设备数据下载</a></li>
+<li><a href="#7_2">7.2制备站数据下载</a></li>
+<li><a href="#7_3">7.3桥梁数据下载</a></li>
 </ul>
 </li>
 </ol>
@@ -912,6 +923,128 @@ img {
 }
 </code></pre>
 
+<h3 id="4_3">4.3用户列表</h3>
+<h3>request</h3>
+<p><code>GET /User/UserList?start=0&amp;limit=20</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>start</td>
+	<td>int</td>
+	<td>起始下标</td>
+	<td>否, 默认0</td>
+</tr>
+<tr>
+	<td>limit</td>
+	<td>int</td>
+	<td>返回数量</td>
+	<td>否, 默认20</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>默认表格结构</code></p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="4_4">4.4新建用户</h3>
+<h3>request</h3>
+<p><code>POST /User/InsertUser</code></p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+  &quot;userId&quot;: &quot;admin2&quot;,
+  &quot;userName&quot;: &quot;管理员2&quot;,
+  &quot;password&quot;: &quot;Admin2&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>userId</td>
+	<td>string</td>
+	<td>用户ID</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>userName</td>
+	<td>string</td>
+	<td>用户名</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>password</td>
+	<td>string</td>
+	<td>密码</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="4_5">4.5修改密码</h3>
+<h3>request</h3>
+<p><code>POST /User/UpdatePassword</code></p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+  &quot;userId&quot;: &quot;admin2&quot;,
+  &quot;password&quot;: &quot;Admin23456&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>userId</td>
+	<td>string</td>
+	<td>用户ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<p>password|string|密码|是</p>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
 <h2 id="5">5.警报</h2>
 <h3 id="5_1">5.1全局警报</h3>
 <h3>request</h3>
@@ -929,8 +1062,8 @@ img {
 <tr>
 	<td>bridgeId</td>
 	<td>string</td>
-	<td>桥梁ID是</td>
-	<td>&nbsp;</td>
+	<td>桥梁ID</td>
+	<td>是</td>
 </tr>
 </tbody>
 </table>
@@ -1083,6 +1216,97 @@ img {
 </tr>
 </tbody>
 </table>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="7">7.数据下载</h2>
+<h3 id="7_1">7.1设备数据下载</h3>
+<h3>request</h3>
+<p><code>GET /Excel/Device?deviceId=3fe28c5e-62ca-482c-9534-e15d9f36a440</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>deviceId</td>
+	<td>string</td>
+	<td>设备ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>FileStream</code></p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="7_2">7.2制备站数据下载</h3>
+<h3>request</h3>
+<p><code>GET /Excel/Station?stationId=3fe28c5e-62ca-482c-9534-e15d9f36a440</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>stationid</td>
+	<td>string</td>
+	<td>制备站ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>FileStream</code></p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="7_3">7.3桥梁数据下载</h3>
+<h3>request</h3>
+<p><code>GET /Excel/Bridge?bridgeId=3fe28c5e-62ca-482c-9534-e15d9f36a440</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>bridgeId</td>
+	<td>string</td>
+	<td>桥梁ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>FileStream</code></p>
 <p>失败 400/401/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
