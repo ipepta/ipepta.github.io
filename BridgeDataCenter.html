@@ -328,6 +328,7 @@ img {
 <li><a href="#4_3">4.3用户列表</a></li>
 <li><a href="#4_4">4.4新建用户</a></li>
 <li><a href="#4_5">4.5修改密码</a></li>
+<li><a href="#4_6">4.6配置权限桥</a></li>
 </ul>
 </li>
 <li>
@@ -644,18 +645,22 @@ img {
 <h3>response</h3>
 <p>成功 200
 <code>Content-Type : text/plain</code></p>
-<pre><code>[
-  {
-    &quot;dataId&quot;: &quot;d88d429a-a358-4565-bb12-22dbee32f8f0&quot;.
-    &quot;deviceId&quot;: &quot;1f842cd1-63d9-4ac6-af79-516bd8f1a3cd&quot;,
-    &quot;value&quot;: 15.0,
-    &quot;dataType&quot;: &quot;VALUE&quot;,
-    &quot;errorLevel&quot;: &quot;NORMAL&quot;,
-    &quot;statisticsInterval&quot;: &quot;BY_HOUR&quot;,
-    &quot;statisticsDate&quot;: &quot;19年3月7日 20时&quot;
-  },
-  ...
-]
+<pre><code>{
+  &quot;errorLevel&quot;: &quot;NORMAL&quot;,
+  &quot;useHumiditySectionLine&quot;: true,
+  &quot;dataList&quot;:  [
+                  {
+                    &quot;dataId&quot;: &quot;d88d429a-a358-4565-bb12-22dbee32f8f0&quot;.
+                    &quot;deviceId&quot;: &quot;1f842cd1-63d9-4ac6-af79-516bd8f1a3cd&quot;,
+                    &quot;value&quot;: 15.0,
+                    &quot;dataType&quot;: &quot;VALUE&quot;,
+                    &quot;errorLevel&quot;: &quot;NORMAL&quot;,
+                    &quot;statisticsInterval&quot;: &quot;BY_HOUR&quot;,
+                    &quot;statisticsDate&quot;: &quot;19年3月7日 20时&quot;
+                  },
+                  ...
+               ]
+}
 </code></pre>
 
 <table>
@@ -668,14 +673,19 @@ img {
 </thead>
 <tbody>
 <tr>
-	<td>字典key</td>
-	<td>string</td>
-	<td>设备ID</td>
+	<td>errorLevel</td>
+	<td>enum</td>
+	<td>警报级别</td>
 </tr>
 <tr>
-	<td>字典value</td>
-	<td>object</td>
-	<td>设备数据</td>
+	<td>useHumiditySectionLine</td>
+	<td>bool</td>
+	<td>是否适用湿度区间红线(40,60)</td>
+</tr>
+<tr>
+	<td>dataList</td>
+	<td>List</td>
+	<td>数据列表</td>
 </tr>
 <tr>
 	<td>dataId</td>
@@ -898,7 +908,13 @@ img {
 <p><code>Content-Type : text/plain</code></p>
 <pre><code>{
   &quot;userId&quot;: &quot;admin&quot;,
-  &quot;userName&quot;: &quot;管理员&quot;
+  &quot;userName&quot;: &quot;管理员&quot;,
+  &quot;userType&quot;: &quot;ADMIN&quot;,
+  &quot;authorisedBridgeList&quot;: [
+                            &quot;355f166d-3828-4e6c-96f6-ce2f8a8b2bc1&quot;,
+                            &quot;96af31c8-3ff2-44d1-bad9-b8ab6c8102c8&quot;,
+                            &quot;27a143bc-9817-44dd-a599-7beb0dcb0763&quot;
+                          ]
 }
 </code></pre>
 
@@ -921,8 +937,19 @@ img {
 	<td>string</td>
 	<td>用户名</td>
 </tr>
+<tr>
+	<td>userType</td>
+	<td>enum</td>
+	<td>用户类型</td>
+</tr>
+<tr>
+	<td>authorisedBridgeList</td>
+	<td>List</td>
+	<td>权限桥梁列表</td>
+</tr>
 </tbody>
 </table>
+<p><code>用户类型: ADMIN, USER. 管理员, 一般用户</code></p>
 <p>失败 400/401/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
@@ -1040,9 +1067,60 @@ img {
 	<td>用户ID</td>
 	<td>是</td>
 </tr>
+<tr>
+	<td>password</td>
+	<td>string</td>
+	<td>密码</td>
+	<td>是</td>
+</tr>
 </tbody>
 </table>
-<p>password|string|密码|是</p>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="4_6">4.6配置权限桥</h3>
+<h3>request</h3>
+<p><code>POST /User/UpdateAuthorisedBridge</code></p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+  &quot;userId&quot;: &quot;admin2&quot;,
+  &quot;authorisedBridgeList&quot;: [
+                            &quot;355f166d-3828-4e6c-96f6-ce2f8a8b2bc1&quot;,
+                            &quot;96af31c8-3ff2-44d1-bad9-b8ab6c8102c8&quot;,
+                            &quot;27a143bc-9817-44dd-a599-7beb0dcb0763&quot;
+                          ]
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>userId</td>
+	<td>string</td>
+	<td>用户ID</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>authorisedBridgeList</td>
+	<td>List</td>
+	<td>权限桥列表(覆盖更新)</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
 <h3>response</h3>
 <p>成功 200</p>
 <p>失败 400/401/500</p>
