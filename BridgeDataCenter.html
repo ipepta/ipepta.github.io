@@ -313,6 +313,7 @@ img {
 <ul>
 <li><a href="#2_1">2.1制备站数据查询</a></li>
 <li><a href="#2_2">2.2数据历史查询</a></li>
+<li><a href="#2_3">2.3历史图表湿度标准线查询</a></li>
 </ul>
 </li>
 <li>
@@ -731,7 +732,6 @@ img {
 <code>Content-Type : text/plain</code></p>
 <pre><code>{
   &quot;errorLevel&quot;: &quot;NORMAL&quot;,
-  &quot;useHumiditySectionLine&quot;: true,
   &quot;dataList&quot;:  [
                   {
                     &quot;dataId&quot;: &quot;d88d429a-a358-4565-bb12-22dbee32f8f0&quot;.
@@ -760,11 +760,6 @@ img {
 	<td>errorLevel</td>
 	<td>enum</td>
 	<td>警报级别</td>
-</tr>
-<tr>
-	<td>useHumiditySectionLine</td>
-	<td>bool</td>
-	<td>是否适用湿度区间红线(40,60)</td>
 </tr>
 <tr>
 	<td>dataList</td>
@@ -810,6 +805,69 @@ img {
 </table>
 <p><code>数据类型: VALUE, PERCENTAGE, FLAG. 值, 百分比, 开关</code></p>
 <p><code>报警级别: NORMAL, WARNING, ERROR. 正常, 警告(数据为空), 错误(数据超限)</code></p>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="2_3">2.3历史图表湿度标准线查询</h3>
+<h3>request</h3>
+<p><code>GET /Statistics/ChartHumidityLine?deviceId=21d05c86-89ca-44d6-8102-70051d735f3e&amp;deviceId=39a86410-38d0-4df3-95a4-23abca11abe6</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>deviceId</td>
+	<td>List<string></td>
+	<td>设备ID列表</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200
+<code>Content-Type : text/plain</code></p>
+<pre><code>{
+  &quot;useHumiditySectionLine&quot;: true,
+  &quot;humidityLineMin&quot;: 40.0,
+  &quot;humidityLineMax&quot;: 60.0
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>useHumiditySectionLine</td>
+	<td>bool</td>
+	<td>适用湿度标准线</td>
+</tr>
+<tr>
+	<td>humidityLineMin</td>
+	<td>double</td>
+	<td>标准线低值</td>
+</tr>
+<tr>
+	<td>humidityLineMax</td>
+	<td>double</td>
+	<td>标准线高值</td>
+</tr>
+</tbody>
+</table>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
