@@ -305,6 +305,8 @@ img {
 <ul>
 <li><a href="#1_1">1.1创建应收账款</a></li>
 <li><a href="#1_2">1.2创建核销账款</a></li>
+<li><a href="#1_3">1.3查询batch</a></li>
+<li><a href="#1_4">1.4查询应收账款/核销账款</a></li>
 </ul>
 </li>
 </ol>
@@ -642,6 +644,240 @@ img {
 </tr>
 </tbody>
 </table>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="1_3">1.3查询batch</h3>
+<h3>request</h3>
+<p><code>GET /AccountReceivable/Batch?batchNumber=95</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>batchNumber</td>
+	<td>string</td>
+	<td>batch编号</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+    &quot;batchNumber&quot;: &quot;95&quot;,
+    &quot;batchDate&quot;: &quot;5/11/2019 12:00:00 AM&quot;,
+    &quot;batchDescription&quot;: &quot;sage api test batch 11&quot;,
+    &quot;entryCount&quot;: &quot;0&quot;,
+    &quot;batchTotal&quot;: &quot;0.000&quot;,
+    &quot;batchStatus&quot;: &quot;DELETED&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>batchNumber</td>
+	<td>string</td>
+	<td>batch编号</td>
+</tr>
+<tr>
+	<td>batchDate</td>
+	<td>string</td>
+	<td>batch时间</td>
+</tr>
+<tr>
+	<td>batchDescription</td>
+	<td>string</td>
+	<td>batch名称</td>
+</tr>
+<tr>
+	<td>entryCount</td>
+	<td>string</td>
+	<td>entry数量</td>
+</tr>
+<tr>
+	<td>batchTotal</td>
+	<td>string</td>
+	<td>batch总额</td>
+</tr>
+<tr>
+	<td>batchStatus</td>
+	<td>string</td>
+	<td>batch状态</td>
+</tr>
+</tbody>
+</table>
+<p><code>batch状态: OPEN, POSTED, DELETED, POST_IN_PROGRESS, READY_TO_POST</code></p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="1_4">1.4查询应收账款/核销账款</h3>
+<h3>request</h3>
+<p><code>GET /AccountReceivable/Invoice?batchNumber=95&amp;documentNumber=API_DOCUMENT_FA535DF4-</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>batchNumber</td>
+	<td>string</td>
+	<td>batch编号</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>documentNumber</td>
+	<td>string</td>
+	<td>文档编号</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+    &quot;documentNumber&quot;: &quot;API_DOCUMENT_FA535DF4-&quot;,
+    &quot;batchNumber&quot;: &quot;97&quot;,
+    &quot;customerNumber&quot;: &quot;1100&quot;,
+    &quot;invoiceDescription&quot;: &quot;sage api test invoice 11&quot;,
+    &quot;documentDate&quot;: &quot;5/19/2019 12:00:00 AM&quot;,
+    &quot;postingDate&quot;: &quot;6/18/2019 12:00:00 AM&quot;,
+    &quot;documentType&quot;: &quot;CREDIT_NOTE&quot;,
+    &quot;applyToDocumentNumber&quot;: &quot;DOC_00153347280&quot;,
+    &quot;optional_courseName&quot;: &quot;sage api test course 11&quot;,
+    &quot;optional_startDate&quot;: &quot;5/19/2019 12:00:00 AM&quot;,
+    &quot;optional_studentId&quot;: &quot;sage api test student 11&quot;,
+    &quot;optional_studentName&quot;: &quot;sage api test student aaa&quot;,
+    &quot;entryIndex&quot;: &quot;9&quot;,
+    &quot;revenueAndAmountList&quot;: [{
+        &quot;revenueAccount&quot;: &quot;1000&quot;,
+        &quot;extendedAmount&quot;: &quot;200&quot;
+    }, {
+        &quot;revenueAccount&quot;: &quot;1000&quot;,
+        &quot;extendedAmount&quot;: &quot;100&quot;
+    }]
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>documentNumber</td>
+	<td>string</td>
+	<td>文档编号</td>
+</tr>
+<tr>
+	<td>batchNumber</td>
+	<td>string</td>
+	<td>batch编号</td>
+</tr>
+<tr>
+	<td>customerNumber</td>
+	<td>string</td>
+	<td>客户编号</td>
+</tr>
+<tr>
+	<td>invoiceDescription</td>
+	<td>string</td>
+	<td>应收账款/核销账款名称</td>
+</tr>
+<tr>
+	<td>documentDate</td>
+	<td>string</td>
+	<td>文档日期</td>
+</tr>
+<tr>
+	<td>postingDate</td>
+	<td>string</td>
+	<td>posting日期</td>
+</tr>
+<tr>
+	<td>documentType</td>
+	<td>string</td>
+	<td>文档类型</td>
+</tr>
+<tr>
+	<td>applyToDocumentNumber</td>
+	<td>string</td>
+	<td>核销目标文档编号(仅当查询目标为核销账款时)</td>
+</tr>
+<tr>
+	<td>optional_courseName</td>
+	<td>string</td>
+	<td>可选字段 课程名称</td>
+</tr>
+<tr>
+	<td>optional_startDate</td>
+	<td>datetime</td>
+	<td>可选字段 起始时间</td>
+</tr>
+<tr>
+	<td>optional_studentId</td>
+	<td>string</td>
+	<td>可选字段 学生id</td>
+</tr>
+<tr>
+	<td>optional_studentName</td>
+	<td>string</td>
+	<td>可选字段 学生姓名</td>
+</tr>
+<tr>
+	<td>entryIndex</td>
+	<td>string</td>
+	<td>文档所在entry编号</td>
+</tr>
+<tr>
+	<td>revenueAndAmountList</td>
+	<td>list</td>
+	<td>付款金额与账户列表</td>
+</tr>
+<tr>
+	<td>revenueAccount</td>
+	<td>string</td>
+	<td>付款账户</td>
+</tr>
+<tr>
+	<td>extendedAmount</td>
+	<td>string</td>
+	<td>付款金额</td>
+</tr>
+</tbody>
+</table>
+<p><code>文档状态: INVOICE, DEBIT_NOTE, CREDIT_NOTE</code></p>
 <p>失败 400/401/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
