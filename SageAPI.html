@@ -734,7 +734,7 @@ img {
 
 <h3 id="1_4">1.4查询应收账款/核销账款</h3>
 <h3>request</h3>
-<p><code>GET /AccountReceivable/Invoice?batchNumber=95&amp;documentNumber=API_DOCUMENT_FA535DF4-</code></p>
+<p><code>GET /AccountReceivable/Document?documentNumber=API_DOCUMENT_FA535DF4-&amp;customerNumber=1100</code></p>
 <table>
 <thead>
 <tr>
@@ -746,19 +746,20 @@ img {
 </thead>
 <tbody>
 <tr>
-	<td>batchNumber</td>
-	<td>string</td>
-	<td>batch编号</td>
-	<td>是</td>
-</tr>
-<tr>
 	<td>documentNumber</td>
 	<td>string</td>
 	<td>文档编号</td>
 	<td>是</td>
 </tr>
+<tr>
+	<td>customerNumber</td>
+	<td>string</td>
+	<td>客户编号</td>
+	<td>否</td>
+</tr>
 </tbody>
 </table>
+<p><code>当客户编号在sage中作为联合主键使用时, 必填客户编号, 否则可能会导致错误查询</code></p>
 <h3>response</h3>
 <p>成功 200</p>
 <p><code>Content-Type : text/plain</code></p>
@@ -782,7 +783,8 @@ img {
     }, {
         &quot;revenueAccount&quot;: &quot;1000&quot;,
         &quot;extendedAmount&quot;: &quot;100&quot;
-    }]
+    }],
+    &quot;batchStatus&quot;: &quot;POSTED&quot;
 }
 </code></pre>
 
@@ -875,8 +877,14 @@ img {
 	<td>string</td>
 	<td>付款金额</td>
 </tr>
+<tr>
+	<td>batchStatus</td>
+	<td>string</td>
+	<td>batch状态</td>
+</tr>
 </tbody>
 </table>
+<p><code>batch状态: OPEN, POSTED, READY_TO_POST</code></p>
 <p><code>文档状态: INVOICE, DEBIT_NOTE, CREDIT_NOTE</code></p>
 <p>失败 400/401/500</p>
 <pre><code>{
