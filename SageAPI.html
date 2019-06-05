@@ -301,12 +301,20 @@ img {
 <h2 id="table">目录</h2>
 <ol>
 <li>
-<a href="#1">应收账款(AR)接口</a>
+<a href="#1">1.应收账款(AR)接口</a>
 <ul>
 <li><a href="#1_1">1.1创建应收账款</a></li>
 <li><a href="#1_2">1.2创建核销账款</a></li>
 <li><a href="#1_3">1.3查询batch</a></li>
 <li><a href="#1_4">1.4查询应收账款/核销账款</a></li>
+<li><a href="#1_5">1.5查询收据金额</a></li>
+</ul>
+</li>
+<li>
+<a href="#2">2.SAGE凭据接口</a>
+<ul>
+<li><a href="#2_1">2.1查询凭据</a></li>
+<li><a href="#2_2">2.2配置凭据</a></li>
 </ul>
 </li>
 </ol>
@@ -355,12 +363,6 @@ img {
 	<td>是</td>
 </tr>
 <tr>
-	<td>batchDate</td>
-	<td>datetime</td>
-	<td>batch时间</td>
-	<td>是</td>
-</tr>
-<tr>
 	<td>customerNumber</td>
 	<td>string</td>
 	<td>客户编号</td>
@@ -370,18 +372,6 @@ img {
 	<td>invoiceDescription</td>
 	<td>string</td>
 	<td>invoice名称</td>
-	<td>是</td>
-</tr>
-<tr>
-	<td>documentDate</td>
-	<td>datetime</td>
-	<td>document时间</td>
-	<td>是</td>
-</tr>
-<tr>
-	<td>postingDate</td>
-	<td>datetime</td>
-	<td>post时间</td>
 	<td>是</td>
 </tr>
 <tr>
@@ -412,12 +402,6 @@ img {
 	<td>optional_studentName</td>
 	<td>string</td>
 	<td>可选字段 学生姓名</td>
-	<td>是</td>
-</tr>
-<tr>
-	<td>overrideBatchInfoWhenExists</td>
-	<td>bool</td>
-	<td>当使用已有batch时, 是否覆盖batch名称 batch时间</td>
 	<td>是</td>
 </tr>
 <tr>
@@ -522,12 +506,6 @@ img {
 	<td>是</td>
 </tr>
 <tr>
-	<td>batchDate</td>
-	<td>datetime</td>
-	<td>batch时间</td>
-	<td>是</td>
-</tr>
-<tr>
 	<td>customerNumber</td>
 	<td>string</td>
 	<td>客户编号</td>
@@ -537,18 +515,6 @@ img {
 	<td>invoiceDescription</td>
 	<td>string</td>
 	<td>invoice名称</td>
-	<td>是</td>
-</tr>
-<tr>
-	<td>documentDate</td>
-	<td>datetime</td>
-	<td>document时间</td>
-	<td>是</td>
-</tr>
-<tr>
-	<td>postingDate</td>
-	<td>datetime</td>
-	<td>post时间</td>
 	<td>是</td>
 </tr>
 <tr>
@@ -585,12 +551,6 @@ img {
 	<td>optional_studentName</td>
 	<td>string</td>
 	<td>可选字段 学生姓名</td>
-	<td>是</td>
-</tr>
-<tr>
-	<td>overrideBatchInfoWhenExists</td>
-	<td>bool</td>
-	<td>当使用已有batch时, 是否覆盖batch名称 batch时间</td>
 	<td>是</td>
 </tr>
 <tr>
@@ -886,6 +846,159 @@ img {
 </table>
 <p><code>batch状态: OPEN, POSTED, READY_TO_POST</code></p>
 <p><code>文档状态: INVOICE, DEBIT_NOTE, CREDIT_NOTE</code></p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="1_5">1.5查询收据金额</h3>
+<h3>request</h3>
+<p><code>GET /AccountReceivable/ReceiptAmount?documentNumber=API_DOCUMENT_FA535DF4-&amp;customerNumber=1100</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>documentNumber</td>
+	<td>string</td>
+	<td>文档编号</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>customerNumber</td>
+	<td>string</td>
+	<td>客户编号</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<p><code>当客户编号在sage中作为联合主键使用时, 必填客户编号, 否则可能会导致错误查询</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+    &quot;receiptAmount&quot;: 975.03
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>receiptAmount</td>
+	<td>double</td>
+	<td>收据金额</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<p><h2 id="2">2.SAGE凭据接口/h2&gt;</p>
+<h3 id="2_1">2.1查询凭据</h3>
+<h3>request</h3>
+<p><code>GET /Credential/SageCredential</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>content-type: text/plain</code></p>
+<pre><code>{
+    &quot;userId&quot;: &quot;ADMIN&quot;,
+    &quot;password&quot;: &quot;ADMIN&quot;,
+    &quot;companyId&quot;: &quot;65AINC&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>userId</td>
+	<td>string</td>
+	<td>用户名</td>
+</tr>
+<tr>
+	<td>password</td>
+	<td>string</td>
+	<td>密码</td>
+</tr>
+<tr>
+	<td>companyId</td>
+	<td>string</td>
+	<td>公司账号</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="2_2">2.2配置凭据</h3>
+<h3>request</h3>
+<p><code>POST /Credential/SageCredential</code></p>
+<p><code>content-type: application/json</code></p>
+<pre><code>{
+    &quot;userId&quot;: &quot;ADMIN&quot;,
+    &quot;password&quot;: &quot;ADMIN&quot;,
+    &quot;companyId&quot;: &quot;65AINC&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>userId</td>
+	<td>string</td>
+	<td>用户名</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>password</td>
+	<td>string</td>
+	<td>密码</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>companyId</td>
+	<td>string</td>
+	<td>公司账号</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
 <p>失败 400/401/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
