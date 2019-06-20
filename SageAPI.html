@@ -339,7 +339,8 @@ img {
   &quot;revenueAndAmountList&quot;: [
                             {
                               &quot;revenueAccount&quot;: &quot;1000&quot;,
-                              &quot;extendedAmount&quot;: &quot;500.00&quot;
+                              &quot;extendedAmount&quot;: &quot;500.00&quot;,
+                              &quot;includeTax&quot;: true,
                             }
                           ]
 
@@ -422,6 +423,12 @@ img {
 	<td>付款金额</td>
 	<td>是</td>
 </tr>
+<tr>
+	<td>includeTax</td>
+	<td>bool</td>
+	<td>是否含税</td>
+	<td>否, 默认为false</td>
+</tr>
 </tbody>
 </table>
 <p><code>时间类型格式: yyyy-MM-dd HH:mm:ss</code></p>
@@ -483,6 +490,7 @@ img {
                             {
                               &quot;revenueAccount&quot;: &quot;1000&quot;,
                               &quot;extendedAmount&quot;: &quot;500.00&quot;
+                              &quot;includeTax&quot;: true,
                             }
                           ]
 
@@ -570,6 +578,12 @@ img {
 	<td>string</td>
 	<td>付款金额</td>
 	<td>是</td>
+</tr>
+<tr>
+	<td>includeTax</td>
+	<td>bool</td>
+	<td>是否含税</td>
+	<td>否, 默认为false</td>
 </tr>
 </tbody>
 </table>
