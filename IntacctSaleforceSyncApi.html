@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>api</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<div style="
+    position: fixed;
+    right: 50px;
+    bottom: 30px;
+    cursor: pointer;
+"><a href="#table">back to top</a></div>
+<h1>intacct saleforce sync api</h1>
+<h2 id="table">contents</h2>
+<ol>
+<li>
+<a href="#1">intacct saleforce sync interface</a>
+<ul>
+<li><a href="#1_1">1.1.run sync</a></li>
+</ul>
+</li>
+</ol>
+<h2 id="1">1.intacct saleforce sync</h2>
+<h3 id="1_1">1.1.run sync</h3>
+<h3>request</h3>
+<p><code>POST /IntacctSaleforceSync/RunSync</code></p>
+<p><code>CONTENT-TYPE: application/json</code></p>
+<pre><code>{
+  &quot;saleforceUserId&quot;: &quot;sheila@kerrconsulting.com&quot;,
+  &quot;saleforcePassword&quot;: &quot;password12345&quot;,
+  &quot;intacctUserId&quot;: &quot;jackyxu&quot;,
+  &quot;intacctPassword&quot;: &quot;password54321&quot;,
+  &quot;intacctCompanyId&quot;: &quot;KerrConsulting-szhang&quot;,
+  &quot;startLastModifyDate&quot;: &quot;2019-03-01 00:00:00&quot;,
+  &quot;endLastModifyDate&quot;: &quot;2019-03-31 23:59:59&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>name</th>
+	<th>type</th>
+	<th>desc.</th>
+	<th>mandatory</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>saleforceUserId</td>
+	<td>string</td>
+	<td>saleforce user id</td>
+	<td>yes</td>
+</tr>
+<tr>
+	<td>saleforcePassword</td>
+	<td>string</td>
+	<td>saleforce password</td>
+	<td>yes</td>
+</tr>
+<tr>
+	<td>intacctUserId</td>
+	<td>string</td>
+	<td>intacct user id</td>
+	<td>yes</td>
+</tr>
+<tr>
+	<td>intacctPassword</td>
+	<td>string</td>
+	<td>intacct password</td>
+	<td>yes</td>
+</tr>
+<tr>
+	<td>intacctCompanyId</td>
+	<td>string</td>
+	<td>intacct company id</td>
+	<td>yes</td>
+</tr>
+<tr>
+	<td>startLastModifyDate</td>
+	<td>datetime</td>
+	<td>start of last-modify-date query period in saleforce</td>
+	<td>yes</td>
+</tr>
+<tr>
+	<td>endLastModifyDate</td>
+	<td>datetime</td>
+	<td>end of last-modify-date query period in saleforce</td>
+	<td>no, current time by default</td>
+</tr>
+</tbody>
+</table>
+<p><code>date time format: yyyy-MM-dd HH:mm:ss</code></p>
+<p><code>date time example: 2019-07-15 22:30:15</code></p>
+<h3>response</h3>
+<p>success: response-code 200</p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+    &quot;syncId&quot;: &quot;61881dc6-f0c8-497e-bea1-22154218a84e&quot;,
+    &quot;syncTime&quot;: &quot;2019-07-17T04:49:55.2816087+08:00&quot;,
+    &quot;startLastModifyDate&quot;: &quot;2019-03-01T00:00:00&quot;,
+    &quot;endLastModifyDate&quot;: &quot;2019-03-31T23:59:59&quot;,
+    &quot;customerContactReport&quot;: {
+        &quot;syncTarget&quot;: &quot;customer contact&quot;,
+        &quot;insertList&quot;: [],
+        &quot;updateList&quot;: [&quot;P-4781&quot;],
+        &quot;failedList&quot;: [],
+        &quot;insertCount&quot;: 0,
+        &quot;updateCount&quot;: 1,
+        &quot;failedCount&quot;: 0,
+        &quot;totalCount&quot;: 1
+    },
+    &quot;customerReport&quot;: {
+        &quot;syncTarget&quot;: &quot;customer&quot;,
+        &quot;insertList&quot;: [],
+        &quot;updateList&quot;: [],
+        &quot;failedList&quot;: [{
+            &quot;id&quot;: &quot;P-4781&quot;,
+            &quot;errorMessage&quot;: &quot;insert intacct result failed. Error No: BL34000061 Desc:  Another Contact with the given value(s)   already exists\r\nError No: BL01001973 Desc:  Could not create Contact record!\r\nError No: BL01001973 Desc:  Error While Saving the Display Contact\r\nError No: BL01001973 Desc:  Could not create Customer record!\r\nError No: XL03000009 Desc:  The entire transaction in this operation has been rolled back due to an error.\r\n&quot;
+        }],
+        &quot;insertCount&quot;: 0,
+        &quot;updateCount&quot;: 0,
+        &quot;failedCount&quot;: 1,
+        &quot;totalCount&quot;: 1
+    },
+    &quot;vendorContactReport&quot;: {
+        &quot;syncTarget&quot;: &quot;vendor contact&quot;,
+        &quot;insertList&quot;: [],
+        &quot;updateList&quot;: [&quot;P-4781&quot;],
+        &quot;failedList&quot;: [],
+        &quot;insertCount&quot;: 0,
+        &quot;updateCount&quot;: 1,
+        &quot;failedCount&quot;: 0,
+        &quot;totalCount&quot;: 1
+    },
+    &quot;vendorReport&quot;: {
+        &quot;syncTarget&quot;: &quot;vendor&quot;,
+        &quot;insertList&quot;: [],
+        &quot;updateList&quot;: [],
+        &quot;failedList&quot;: [{
+            &quot;id&quot;: &quot;P-4781&quot;,
+            &quot;errorMessage&quot;: &quot;insert intacct result failed. Error No: BL34000061 Desc:  Another Contact with the given value(s)   already exists\r\nError No: BL01001973 Desc:  Could not create Contact record!\r\nError No: BL01001973 Desc:  Error While Saving the Display Contact\r\nError No: XL03000009 Desc:  The entire transaction in this operation has been rolled back due to an error.\r\n&quot;
+        }],
+        &quot;insertCount&quot;: 0,
+        &quot;updateCount&quot;: 0,
+        &quot;failedCount&quot;: 1,
+        &quot;totalCount&quot;: 1
+    }
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>syncId</td>
+	<td>string</td>
+	<td>id of this sync</td>
+</tr>
+<tr>
+	<td>syncTime</td>
+	<td>string</td>
+	<td>time when this sync is executed</td>
+</tr>
+<tr>
+	<td>startLastModifyDate</td>
+	<td>string</td>
+	<td>sync param. start of last-modify-date query period in saleforce</td>
+</tr>
+<tr>
+	<td>endLastModifyDate</td>
+	<td>string</td>
+	<td>sync param. end of last-modify-date query period in saleforce</td>
+</tr>
+<tr>
+	<td>customerContactReport</td>
+	<td>sync report object</td>
+	<td>customer contact sync result</td>
+</tr>
+<tr>
+	<td>customerReport</td>
+	<td>sync report object</td>
+	<td>customer sync result</td>
+</tr>
+<tr>
+	<td>vendorContactReport</td>
+	<td>sync report object</td>
+	<td>vendor contact sync result</td>
+</tr>
+<tr>
+	<td>vendorReport</td>
+	<td>sync report object</td>
+	<td>vendor sync result</td>
+</tr>
+<tr>
+	<td>syncTarget</td>
+	<td>string</td>
+	<td>sync target for this report</td>
+</tr>
+<tr>
+	<td>insertList</td>
+	<td>List</td>
+	<td>id list of insert successed data</td>
+</tr>
+<tr>
+	<td>updateList</td>
+	<td>List</td>
+	<td>id list of update successed data</td>
+</tr>
+<tr>
+	<td>failedList</td>
+	<td>List</td>
+	<td>failed description list for both insert and update data</td>
+</tr>
+<tr>
+	<td>id</td>
+	<td>string</td>
+	<td>id of failed data</td>
+</tr>
+<tr>
+	<td>errorMessage</td>
+	<td>string</td>
+	<td>exception message for failed data</td>
+</tr>
+<tr>
+	<td>insertCount</td>
+	<td>int</td>
+	<td>insert successed count</td>
+</tr>
+<tr>
+	<td>updateCount</td>
+	<td>int</td>
+	<td>update successed count</td>
+</tr>
+<tr>
+	<td>failedCount</td>
+	<td>int</td>
+	<td>insert and update failed count</td>
+</tr>
+<tr>
+	<td>totalCount</td>
+	<td>int</td>
+	<td>total sync data count</td>
+</tr>
+</tbody>
+</table>
+<p>failed: response-code 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;failed description&quot;
+}
+</code></pre>
+
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
