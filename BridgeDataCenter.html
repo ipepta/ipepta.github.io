@@ -355,6 +355,13 @@ img {
 <li><a href="#7_3">7.3桥梁数据下载</a></li>
 </ul>
 </li>
+<li>
+<a href="#8">蓝图接口</a>
+<ul>
+<li><a href="#8_1">8.1蓝图查询</a></li>
+<li><a href="#8_2">8.2蓝图文件</a></li>
+</ul>
+</li>
 </ol>
 <h2 id="1">1.桥梁结构</h2>
 <h3 id="1_1">1.1桥梁结构查询</h3>
@@ -416,7 +423,11 @@ img {
                      &quot;stationName&quot;: &quot;1#空气制备站&quot;
                    }
                    ...
-                 ] 
+                 ],
+  &quot;blueprintList&quot;: [
+                      &quot;lantu1&quot;,
+                      &quot;lantu2&quot;
+                   ]
 }
 </code></pre>
 
@@ -453,6 +464,11 @@ img {
 	<td>stationName</td>
 	<td>string</td>
 	<td>制备站名称</td>
+</tr>
+<tr>
+	<td>blueprintList</td>
+	<td>List</td>
+	<td>蓝图名列表</td>
 </tr>
 </tbody>
 </table>
@@ -1697,6 +1713,90 @@ img {
 <h3>response</h3>
 <p>成功 200</p>
 <p><code>FileStream</code></p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="8">8.蓝图</h2>
+<h3 id="8_1">8.1蓝图查询</h3>
+<h3>request</h3>
+<p><code>GET /Blueprint/BlueprintList?bridgeId=27e7e01d-e54a-4d23-be79-ee96f8a83823</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>bridgeId</td>
+	<td>string</td>
+	<td>桥梁ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>[
+    &quot;lantu1&quot;,
+    &quot;lantu2&quot;
+]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>NA</td>
+	<td>List</td>
+	<td>蓝图名称列表</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="8_2">8.2蓝图文件</h3>
+<h3>request</h3>
+<p><code>GET /Blueprint/BlueprintFile?blueprint=lantu1</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>blueprint</td>
+	<td>string</td>
+	<td>蓝图名称</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>stream</code></p>
+<p><code>Content-Type : img/jpeg</code></p>
 <p>失败 400/401/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
