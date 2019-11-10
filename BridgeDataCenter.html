@@ -362,6 +362,12 @@ img {
 <li><a href="#8_2">8.2蓝图文件</a></li>
 </ul>
 </li>
+<li>
+<a href="#9">Echart报告接口</a>
+<ul>
+<li><a href="#9_1">9.1上传Echart图片</a></li>
+</ul>
+</li>
 </ol>
 <h2 id="1">1.桥梁结构</h2>
 <h3 id="1_1">1.1桥梁结构查询</h3>
@@ -1818,6 +1824,41 @@ img {
 <p>成功 200</p>
 <p><code>stream</code></p>
 <p><code>Content-Type : img/jpeg</code></p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="9">9.Echart报告</h2>
+<h3 id="9_1">9.1上传Echart图片</h3>
+<h3>request</h3>
+<p><code>POST /EchartReport/UploadEchartReportImage</code></p>
+<p><code>File Stream</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+  &quot;imageFileId&quot;: &quot;5f524415-1311-453b-a2fc-2f5ae038e6f3&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>imageFileId</td>
+	<td>string</td>
+	<td>Echart报告图片ID</td>
+</tr>
+</tbody>
+</table>
 <p>失败 400/401/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
