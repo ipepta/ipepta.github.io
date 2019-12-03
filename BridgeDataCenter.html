@@ -297,7 +297,7 @@ img {
     bottom: 30px;
     cursor: pointer;
 "><a href="#table">返回顶部</a></div>
-<h1>廉政系统接口</h1>
+<h1>桥梁数据系统接口</h1>
 <h2 id="table">目录</h2>
 <ol>
 <li>
@@ -366,6 +366,10 @@ img {
 <a href="#9">Echart报告接口</a>
 <ul>
 <li><a href="#9_1">9.1上传Echart图片</a></li>
+<li><a href="#9_2">9.2生成Echart报告</a></li>
+<li><a href="#9_3">9.3下载Echart报告</a></li>
+<li><a href="#9_4">9.4生成月度报告</a></li>
+<li><a href="#9_5">9.5下载月度报告</a></li>
 </ul>
 </li>
 </ol>
@@ -1859,6 +1863,246 @@ img {
 </tr>
 </tbody>
 </table>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="9_2">9.2数据历史查询</h3>
+<h3>request</h3>
+<p><code>POST /EchartReport/GenerateEchartReport</code></p>
+<pre><code>{
+  &quot;deviceIdList&quot;:[
+                   &quot;4a2c45df-be3c-4845-a0ea-ae5792d41c78&quot;,
+                   &quot;c8d0f85b-e304-43a0-9e0b-2adb11ccb35b&quot;
+                 ],
+  &quot;echartReportImageId&quot;: &quot;3e01bd58-b76a-4e0e-9636-319ab4e75cde&quot;,
+  &quot;interval&quot;: &quot;BY_HOUR&quot;,
+  &quot;count&quot;: 20,
+  &quot;insertBlankData&quot;: true,
+  &quot;dataDate&quot;: &quot;2019-07-20 15:30&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>deviceIdList</td>
+	<td>List</td>
+	<td>设备ID列表</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>echartReportImageId</td>
+	<td>string</td>
+	<td>echart图片ID</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>interval</td>
+	<td>enum</td>
+	<td>间隔类型</td>
+	<td>否, 默认NA</td>
+</tr>
+<tr>
+	<td>count</td>
+	<td>int</td>
+	<td>数据数量</td>
+	<td>否, 默认20</td>
+</tr>
+<tr>
+	<td>dataDate</td>
+	<td>datetime</td>
+	<td>截止日期</td>
+	<td>否, 默认为当前服务器时间</td>
+</tr>
+<tr>
+	<td>insertBlankData</td>
+	<td>bool</td>
+	<td>在数据缺失时填充数据</td>
+	<td>否, 默认为否</td>
+</tr>
+</tbody>
+</table>
+<p><code>间隔类型: NA, BY_DAY, BY_HOUR, BY_WEEK, BY_MONTH. 不使用, 每日, 每小时, 每周, 每月</code></p>
+<p><code>时间格式为 yyyy-MM-dd HH:mm</code></p>
+<h3>response</h3>
+<p>成功 200
+<code>Content-Type : text/plain</code></p>
+<pre><code>{
+  &quot;reportId&quot;: &quot;a2336f7d-1922-4617-a136-057d29cccf09&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>reportFileId</td>
+	<td>string</td>
+	<td>报告ID</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="9.3">9.3下载Echart报告</h3>
+<h3>request</h3>
+<p><code>GET /EchartReport/DownloadEchartReport?reportId=48ea4d04-89fa-4cb5-9350-a6ad1a971c2e</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>reportId</td>
+	<td>string</td>
+	<td>报告ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>FileStream</code></p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="9_4">9.4生成月度报告</h3>
+<h3>request</h3>
+<p><code>POST /EchartReport/GenerateMonthlyReport</code></p>
+<pre><code>{
+  &quot;deviceParameterList&quot;:[
+                          {
+                            &quot;deviceId&quot;: &quot;aa8dbd44-e95a-4c00-8223-b3219334165b&quot;,
+                            &quot;echartReportImageId&quot;: &quot;57b68fb2-5fe2-4d42-af5c-05301a990cee&quot;
+                          },
+                          {
+                            &quot;deviceId&quot;: &quot;b1c5063c-384a-4423-a6c5-bad43db245ea&quot;,
+                            &quot;echartReportImageId&quot;: &quot;aabec12a-ad20-408e-8f8d-c9722ee89ad9&quot;
+                          },
+                        ],
+  &quot;bridgeId&quot;: &quot;0b3fc11f-09e5-4da0-ad79-3a44a3b65575&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>deviceParameterList</td>
+	<td>List</td>
+	<td>设备参数列表</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>deviceId</td>
+	<td>string</td>
+	<td>设备ID</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>echartReportImageId</td>
+	<td>string</td>
+	<td>echart图片ID</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>bridgeId</td>
+	<td>string</td>
+	<td>桥梁ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200
+<code>Content-Type : text/plain</code></p>
+<pre><code>{
+  &quot;reportId&quot;: &quot;15c140e1-f49c-40e5-8b78-5388fad3fb36&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>reportFileId</td>
+	<td>string</td>
+	<td>报告ID</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="9.5">9.5下载月度报告</h3>
+<h3>request</h3>
+<p><code>GET /EchartReport/DownloadMonthlyReport?reportId=48ea4d04-89fa-4cb5-9350-a6ad1a971c2e</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>reportId</td>
+	<td>string</td>
+	<td>报告ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>FileStream</code></p>
 <p>失败 400/401/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
