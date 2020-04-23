@@ -372,6 +372,16 @@ img {
 <li><a href="#9_5">9.5下载月度报告</a></li>
 </ul>
 </li>
+<li>
+<a href="#10">远程遥控接口</a>
+<ul>
+<li><a href="#10_1">10.1长轮询查询新任务</a></li>
+<li><a href="#10_1">10.2全部活跃任务</a></li>
+<li><a href="#10_1">10.3更新任务状态</a></li>
+<li><a href="#10_1">10.4创建遥控任务</a></li>
+<li><a href="#10_1">10.5查询遥控任务</a></li>
+</ul>
+</li>
 </ol>
 <h2 id="1">1.桥梁结构</h2>
 <h3 id="1_1">1.1桥梁结构查询</h3>
@@ -963,7 +973,7 @@ img {
 <h3 id="2_5">2.5设备数据查询</h3>
 <h3>request</h3>
 <p><code>GET /DeviceData/Device?deviceId=21d05c86-89ca-44d6-8102-70051d735f3e&amp;startDate=2019-07-01_07:00:00&amp;endDate=2019-07-01_09:00:00</code></p>
-<p><code>注意: 本接口不供页面使用.</code></p>
+<p><code>后端接口. 前端无权限.</code></p>
 <table>
 <thead>
 <tr>
@@ -2103,6 +2113,399 @@ img {
 <h3>response</h3>
 <p>成功 200</p>
 <p><code>FileStream</code></p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="10">10.远程遥控接口</h2>
+<h3 id="10_1">10.1长轮询查询新任务</h3>
+<h3>request</h3>
+<p><code>GET /RemoteControl/NewMissionLongPoll</code></p>
+<p><code>后端接口. 前端无权限.</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+  &quot;serverMissionId&quot;: &quot;c869fcae-02b9-493e-9fff-c006dbb20d3e&quot;,
+  &quot;clientMissionId&quot;: 103327098,
+  &quot;deviceIdRemoteCommandDict&quot;: {
+                                  &quot;9fc4157d-eef0-47d4-b77e-250915a92f96&quot;: true,
+                                  &quot;1250382e-e714-4fb3-bf9e-4cbc200abb05&quot;: false,
+                               }
+  &quot;dispatchStatus&quot;: &quot;COMPLETE&quot;,
+  &quot;replyStatus&quot;: &quot;PENDING&quot;,
+  &quot;failedMessage&quot;: &quot;&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>serverMissionId</td>
+	<td>string</td>
+	<td>任务id</td>
+</tr>
+<tr>
+	<td>clientMissionId</td>
+	<td>int</td>
+	<td>通信端任务id</td>
+</tr>
+<tr>
+	<td>deviceIdremoteCommandDict</td>
+	<td>object</td>
+	<td>任务命令清单</td>
+</tr>
+<tr>
+	<td>字典key</td>
+	<td>string</td>
+	<td>命令设备id</td>
+</tr>
+<tr>
+	<td>字典value</td>
+	<td>bool</td>
+	<td>命令设备值. true为开启, false为关闭</td>
+</tr>
+<tr>
+	<td>dispatchStatus</td>
+	<td>enum</td>
+	<td>任务下发状态</td>
+</tr>
+<tr>
+	<td>replyStatus</td>
+	<td>enum</td>
+	<td>任务回报状态</td>
+</tr>
+<tr>
+	<td>failedMessage</td>
+	<td>string</td>
+	<td>任务失败详情</td>
+</tr>
+</tbody>
+</table>
+<p><code>任务状态: PENDING, COMPLETE, FAILED, NA. 进行中, 已完成, 失败, 无效.</code></p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="10_2">10.2查询全部活跃任务</h3>
+<h3>request</h3>
+<p><code>GET /RemoteControl/AllActiveMission</code></p>
+<p><code>后端接口. 前端无权限.</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>[
+    {
+      &quot;serverMissionId&quot;: &quot;c869fcae-02b9-493e-9fff-c006dbb20d3e&quot;,
+      &quot;clientMissionId&quot;: 103327098,
+      &quot;deviceIdRemoteCommandDict&quot;: {
+                                      &quot;9fc4157d-eef0-47d4-b77e-250915a92f96&quot;: true,
+                                      &quot;1250382e-e714-4fb3-bf9e-4cbc200abb05&quot;: false,
+                                   }
+      &quot;dispatchStatus&quot;: &quot;COMPLETE&quot;,
+      &quot;replyStatus&quot;: &quot;PENDING&quot;,
+      &quot;failedMessage&quot;: &quot;&quot;
+    },
+    ...
+]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>serverMissionId</td>
+	<td>string</td>
+	<td>任务id</td>
+</tr>
+<tr>
+	<td>clientMissionId</td>
+	<td>int</td>
+	<td>通信端任务id</td>
+</tr>
+<tr>
+	<td>deviceIdremoteCommandDict</td>
+	<td>object</td>
+	<td>任务命令清单</td>
+</tr>
+<tr>
+	<td>字典key</td>
+	<td>string</td>
+	<td>命令设备id</td>
+</tr>
+<tr>
+	<td>字典value</td>
+	<td>bool</td>
+	<td>命令设备值. true为开启, false为关闭</td>
+</tr>
+<tr>
+	<td>dispatchStatus</td>
+	<td>enum</td>
+	<td>任务下发状态</td>
+</tr>
+<tr>
+	<td>replyStatus</td>
+	<td>enum</td>
+	<td>任务回报状态</td>
+</tr>
+<tr>
+	<td>failedMessage</td>
+	<td>string</td>
+	<td>任务失败详情</td>
+</tr>
+</tbody>
+</table>
+<p><code>任务状态: PENDING, COMPLETE, FAILED, NA. 进行中, 已完成, 失败, 无效.</code></p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="10_3">10.3更新任务状态</h3>
+<h3>request</h3>
+<p><code>POST /RemoteControl/UpdateMissionStatus</code></p>
+<p><code>后端接口. 前端无权限.</code></p>
+<pre><code>{
+  &quot;missionJson&quot;: &quot;{
+                      &quot;serverMissionId&quot;: &quot;c869fcae-02b9-493e-9fff-c006dbb20d3e&quot;,
+                      &quot;clientMissionId&quot;: 103327098,
+                      &quot;deviceIdRemoteCommandDict&quot;: {
+                                                      &quot;9fc4157d-eef0-47d4-b77e-250915a92f96&quot;: true,
+                                                      &quot;1250382e-e714-4fb3-bf9e-4cbc200abb05&quot;: false,
+                                                   }
+                      &quot;dispatchStatus&quot;: &quot;COMPLETE&quot;,
+                      &quot;replyStatus&quot;: &quot;PENDING&quot;,
+                      &quot;failedMessage&quot;: &quot;&quot;
+                    }&quot;,
+  &quot;replyDeviceValueDictJson&quot;: &quot;{
+                                 &quot;c6b106a3-628e-4ae9-9368-a31ac45a3045&quot;: 1.00,
+                                 &quot;730d1858-36b2-4d27-be45-4627ab639a7f&quot;: 0.00
+                               }&quot;,
+  &quot;replyDeviceValueDateString&quot;: &quot;2020-04-20 10:30:00&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>missionJson</td>
+	<td>string</td>
+	<td>任务对象JSON</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>replyDeviceValueDictJson</td>
+	<td>string</td>
+	<td>任务回报设备状态字典</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>字典key</td>
+	<td>string</td>
+	<td>设备id</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>字典value</td>
+	<td>double</td>
+	<td>设备状态值, 同数据上传接口设备字段值</td>
+	<td>否</td>
+</tr>
+<tr>
+	<td>replyDeviceValueDateString</td>
+	<td>string</td>
+	<td>任务回报设备状态时间</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="10_4">10.4创建遥控任务</h3>
+<h3>request</h3>
+<p><code>GET /RemoteControl/SubmitNewMission</code></p>
+<pre><code>{
+  &quot;deviceCommandDict&quot;: {
+                         &quot;f4281015-0635-45a1-9bf5-def0db111e7f&quot;: true,
+                         &quot;d3d68e62-1406-48a8-a563-28a7fddd02ae&quot;: false,
+                       }
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>deviceCommandDict</td>
+	<td>dict</td>
+	<td>遥控命令表</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>字典key</td>
+	<td>string</td>
+	<td>命令设备ID</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>字典value</td>
+	<td>string</td>
+	<td>命令值, true为开启, false为关闭</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="10_5">10.5查询遥控任务</h3>
+<h3>request</h3>
+<p><code>GET /RemoteControl/RemoteMissionByBridge?bridgeId=74cfb7af-8b17-4162-b9fe-df029f03deac</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>bridgeId</td>
+	<td>string</td>
+	<td>桥梁ID</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>start</td>
+	<td>int</td>
+	<td>分页起始下标</td>
+	<td>否, 默认0</td>
+</tr>
+<tr>
+	<td>page</td>
+	<td>int</td>
+	<td>分页长度</td>
+	<td>否, 默认20</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>[
+    {
+      &quot;serverMissionId&quot;: &quot;c869fcae-02b9-493e-9fff-c006dbb20d3e&quot;,
+      &quot;clientMissionId&quot;: 103327098,
+      &quot;deviceIdRemoteCommandDict&quot;: {
+                                      &quot;9fc4157d-eef0-47d4-b77e-250915a92f96&quot;: true,
+                                      &quot;1250382e-e714-4fb3-bf9e-4cbc200abb05&quot;: false,
+                                   }
+      &quot;dispatchStatus&quot;: &quot;COMPLETE&quot;,
+      &quot;replyStatus&quot;: &quot;PENDING&quot;,
+      &quot;failedMessage&quot;: &quot;&quot;
+    },
+    ...
+]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>serverMissionId</td>
+	<td>string</td>
+	<td>任务id</td>
+</tr>
+<tr>
+	<td>clientMissionId</td>
+	<td>int</td>
+	<td>通信端任务id</td>
+</tr>
+<tr>
+	<td>deviceIdremoteCommandDict</td>
+	<td>object</td>
+	<td>任务命令清单</td>
+</tr>
+<tr>
+	<td>字典key</td>
+	<td>string</td>
+	<td>命令设备id</td>
+</tr>
+<tr>
+	<td>字典value</td>
+	<td>bool</td>
+	<td>命令设备值. true为开启, false为关闭</td>
+</tr>
+<tr>
+	<td>dispatchStatus</td>
+	<td>enum</td>
+	<td>任务下发状态</td>
+</tr>
+<tr>
+	<td>replyStatus</td>
+	<td>enum</td>
+	<td>任务回报状态</td>
+</tr>
+<tr>
+	<td>failedMessage</td>
+	<td>string</td>
+	<td>任务失败详情</td>
+</tr>
+</tbody>
+</table>
+<p><code>任务状态: PENDING, COMPLETE, FAILED, NA. 进行中, 已完成, 失败, 无效.</code></p>
 <p>失败 400/401/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
