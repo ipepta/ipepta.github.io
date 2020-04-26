@@ -376,10 +376,16 @@ img {
 <a href="#10">远程遥控接口</a>
 <ul>
 <li><a href="#10_1">10.1长轮询查询新任务</a></li>
-<li><a href="#10_1">10.2全部活跃任务</a></li>
-<li><a href="#10_1">10.3更新任务状态</a></li>
-<li><a href="#10_1">10.4创建遥控任务</a></li>
-<li><a href="#10_1">10.5查询遥控任务</a></li>
+<li><a href="#10_2">10.2全部活跃任务</a></li>
+<li><a href="#10_3">10.3更新任务状态</a></li>
+<li><a href="#10_4">10.4创建遥控任务</a></li>
+<li><a href="#10_5">10.5查询遥控任务</a></li>
+</ul>
+</li>
+<li>
+<a href="#11">数据日报接口</a>
+<ul>
+<li><a href="#11_1">11.1查询数据日报</a></li>
 </ul>
 </li>
 </ol>
@@ -428,6 +434,10 @@ img {
 <tr>
 	<td>贵州清水河大桥</td>
 	<td>7553a665-0928-4416-9389-98e7cda26f0c</td>
+</tr>
+<tr>
+	<td>苏通大桥</td>
+	<td>ca6d55dc-e059-4d72-b494-e3140e31b2fe</td>
 </tr>
 </tbody>
 </table>
@@ -2506,6 +2516,92 @@ img {
 </tbody>
 </table>
 <p><code>任务状态: PENDING, COMPLETE, FAILED, NA. 进行中, 已完成, 失败, 无效.</code></p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="11">11.数据日报接口</h2>
+<h3 id="11_1">11.1查询数据日报</h3>
+<h3>request</h3>
+<p><code>GET /DailyDataReport/GetReport?dateString=2020-04-20</code></p>
+<p><code>后端接口. 前端无权限.</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>dateString</td>
+	<td>string</td>
+	<td>查询日期</td>
+	<td>否, 默认今日</td>
+</tr>
+<tr>
+	<td>bridgeId</td>
+	<td>string</td>
+	<td>桥梁id</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<p><code>查询日期格式: yyyy-MM-dd</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>[
+  {
+    &quot;reportId&quot;: &quot;70152211-e1d4-43e8-8fa9-d49169474132&quot;,
+    &quot;bridgeId&quot;: &quot;5cc6bb73-9124-415a-9153-c7e2ee8b3c0c&quot;,
+    &quot;bridgeName&quot;: &quot;测试大桥&quot;,
+    &quot;reportDateString&quot;: &quot;2020-04-20&quot;,
+    &quot;dataCount&quot;: 50,
+  }
+]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>reportId</td>
+	<td>string</td>
+	<td>报告ID</td>
+</tr>
+<tr>
+	<td>bridgeId</td>
+	<td>string</td>
+	<td>桥梁ID</td>
+</tr>
+<tr>
+	<td>bridgeName</td>
+	<td>string</td>
+	<td>桥梁名称</td>
+</tr>
+<tr>
+	<td>reportDateString</td>
+	<td>string</td>
+	<td>日期字符串</td>
+</tr>
+<tr>
+	<td>dataCount</td>
+	<td>int</td>
+	<td>数据量</td>
+</tr>
+</tbody>
+</table>
 <p>失败 400/401/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
