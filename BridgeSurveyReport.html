@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>api</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<div style="
+    position: fixed;
+    right: 50px;
+    bottom: 30px;
+    cursor: pointer;
+"><a href="#table">返回顶部</a></div>
+<h1>桥梁检测报告系统接口</h1>
+<h2 id="table">目录</h2>
+<ol>
+<li>
+<a href="#1">权限接口</a>
+<ul>
+<li><a href="#1_1">1.1登录系统</a></li>
+<li><a href="#1_2">1.2登录信息</a></li>
+</ul>
+</li>
+<li>
+<a href="#2">数据接口</a>
+<ul>
+<li><a href="#2_1">2.1数据过期</a></li>
+<li><a href="#2_2">2.2查询数据</a></li>
+<li><a href="#2_3">2.3数据列表</a></li>
+<li><a href="#2_4">2.4数据数量</a></li>
+<li><a href="#2_5">2.5提交数据</a></li>
+<li><a href="#2_6">2.6上传Excel文件</a></li>
+<li><a href="#2_7">2.7修改数据名称</a></li>
+<li><a href="#2_8">2.8下载原始文件</a></li>
+<li><a href="#2_9">2.9下载数据模板</a></li>
+</ul>
+</li>
+<li>
+<a href="#3">数据分组接口</a>
+<ul>
+<li><a href="#3_1">3.1获取数据分组</a></li>
+<li><a href="#3_2">3.2获取设备分组</a></li>
+</ul>
+</li>
+<li>
+<a href="#4">报告接口</a>
+<ul>
+<li><a href="#4_1">4.1上传报告图片</a></li>
+<li><a href="#4_2">4.2生成报告</a></li>
+<li><a href="#4_3">4.3下载报告</a></li>
+</ul>
+</li>
+<li>
+<a href="#5">统计数据接口</a>
+<ul>
+<li><a href="#5_1">5.1设备统计数据</a></li>
+<li><a href="#5_2">5.2设备湿度标准线</a></li>
+</ul>
+</li>
+</ol>
+<h2 id="1">1.权限接口</h2>
+<h3 id="1_1">1.1登录系统</h3>
+<h3>request</h3>
+<p><code>POST /Auth/Login?userId=admin&amp;password=123456</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>userId</td>
+	<td>string</td>
+	<td>用户名</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>password</td>
+	<td>string</td>
+	<td>密码</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="1_2">1.2登录信息</h3>
+<h3>request</h3>
+<p><code>GET /Auth/LoginInfo</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>userId</td>
+	<td>string</td>
+	<td>用户ID</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>password</td>
+	<td>string</td>
+	<td>密码</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;userId&quot;: &quot;admin&quot;,
+  &quot;userName&quot;: &quot;管理员&quot;,
+  &quot;userType&quot;: &quot;ADMIN&quot;,
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>userId</td>
+	<td>string</td>
+	<td>用户ID</td>
+</tr>
+<tr>
+	<td>userName</td>
+	<td>string</td>
+	<td>用户名</td>
+</tr>
+<tr>
+	<td>userType</td>
+	<td>enum</td>
+	<td>用户类型</td>
+</tr>
+</tbody>
+</table>
+<p><code>用户类型: NORMAL, ADMIN: 一般用户, 管理员</code></p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="2">2.数据接口</h2>
+<h3 id="2_1">2.1数据过期</h3>
+<h3>request</h3>
+<p><code>POST /Report/ExpireReport?reportId=b3f909bb-a351-48bb-8632-7f166c7f174c</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>reportId</td>
+	<td>string</td>
+	<td>报告ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="2_2">2.2查询数据</h3>
+<h3>request</h3>
+<p><code>POST /Report/Report?reportId=b3f909bb-a351-48bb-8632-7f166c7f174c</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>reportId</td>
+	<td>string</td>
+	<td>报告ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;reportId&quot;: &quot;5493df2d-3d4b-46c7-b06c-638d87b9c29f&quot;,
+  &quot;reportName&quot;: &quot;测试报告0714A&quot;,
+  &quot;userId&quot;: &quot;所属用户ID&quot;,
+  &quot;excelFileName&quot;: &quot;2a28e2ce-4c20-4c53-850c-5d95b8887f75&quot;,
+  &quot;createdDate&quot;: &quot;2020-07-14T09:30:15&quot;,
+  &quot;reportStatus&quot;: &quot;NORMAL&quot;
+  &quot;reportGroupIdGroupNameDict&quot;: {
+                                   &quot;21a024fb-035b-4b81-901f-bf779b2e31d4&quot;: &quot;xx大桥检测点01&quot;,
+                                   ...
+                                },
+  &quot;deviceGroupIdGroupNameDict&quot;: {
+                                   &quot;aa728c3e-4d5a-4fe0-81f3-c296a72a6641&quot;: &quot;xx大桥检测点01除湿机&quot;,
+                                   ...
+                                },
+
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>reportId</td>
+	<td>string</td>
+	<td>数据ID</td>
+</tr>
+<tr>
+	<td>reportName</td>
+	<td>string</td>
+	<td>数据名称</td>
+</tr>
+<tr>
+	<td>userId</td>
+	<td>string</td>
+	<td>所属用户ID</td>
+</tr>
+<tr>
+	<td>excelFileName</td>
+	<td>string</td>
+	<td>原始文件ID</td>
+</tr>
+<tr>
+	<td>createdDate</td>
+	<td>datetime</td>
+	<td>创建日期</td>
+</tr>
+<tr>
+	<td>reportStatus</td>
+	<td>enum</td>
+	<td>报告状态</td>
+</tr>
+<tr>
+	<td>reportGroupIdGroupNameDict</td>
+	<td>object</td>
+	<td>报告分组-名称字典(用于制作报告)</td>
+</tr>
+<tr>
+	<td>deviceGroupIdGroupNameDict</td>
+	<td>object</td>
+	<td>设备分组-名称字典(用于查看数据)</td>
+</tr>
+</tbody>
+</table>
+<p><code>报告状态: NORMAL, EXPIRED: 正常, 已过期</code></p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="2_3">2.3数据列表</h3>
+<h3>request</h3>
+<p><code>GET /Report/ReportList?showAllUser=true&amp;reportStatus=NORMAL&amp;start=0&amp;page=20</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>showAllUser</td>
+	<td>bool</td>
+	<td>显示全部用户报告(需要管理员权限)</td>
+	<td>否, 默认false</td>
+</tr>
+<tr>
+	<td>reportStatus</td>
+	<td>enum</td>
+	<td>报告状态筛选</td>
+	<td>否, 默认不筛选</td>
+</tr>
+<tr>
+	<td>start</td>
+	<td>int</td>
+	<td>起始index</td>
+	<td>否, 默认0</td>
+</tr>
+<tr>
+	<td>page</td>
+	<td>int</td>
+	<td>分页长度</td>
+	<td>否, 默认20</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>[
+    {
+      &quot;reportId&quot;: &quot;5493df2d-3d4b-46c7-b06c-638d87b9c29f&quot;,
+      &quot;reportName&quot;: &quot;测试报告0714A&quot;,
+      &quot;userId&quot;: &quot;所属用户ID&quot;,
+      &quot;excelFileName&quot;: &quot;2a28e2ce-4c20-4c53-850c-5d95b8887f75&quot;,
+      &quot;createdDate&quot;: &quot;2020-07-14T09:30:15&quot;,
+      &quot;reportStatus&quot;: &quot;NORMAL&quot;
+      &quot;reportGroupIdGroupNameDict&quot;: {
+                                       &quot;21a024fb-035b-4b81-901f-bf779b2e31d4&quot;: &quot;xx大桥检测点01&quot;,
+                                       ...
+                                    },
+      &quot;deviceGroupIdGroupNameDict&quot;: {
+                                       &quot;aa728c3e-4d5a-4fe0-81f3-c296a72a6641&quot;: &quot;xx大桥检测点01除湿机&quot;,
+                                       ...
+                                    },
+    
+    }
+]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>reportId</td>
+	<td>string</td>
+	<td>数据ID</td>
+</tr>
+<tr>
+	<td>reportName</td>
+	<td>string</td>
+	<td>数据名称</td>
+</tr>
+<tr>
+	<td>userId</td>
+	<td>string</td>
+	<td>所属用户ID</td>
+</tr>
+<tr>
+	<td>excelFileName</td>
+	<td>string</td>
+	<td>原始文件ID</td>
+</tr>
+<tr>
+	<td>createdDate</td>
+	<td>datetime</td>
+	<td>创建日期</td>
+</tr>
+<tr>
+	<td>reportStatus</td>
+	<td>enum</td>
+	<td>报告状态</td>
+</tr>
+<tr>
+	<td>reportGroupIdGroupNameDict</td>
+	<td>object</td>
+	<td>报告分组-名称字典(用于制作报告)</td>
+</tr>
+<tr>
+	<td>deviceGroupIdGroupNameDict</td>
+	<td>object</td>
+	<td>设备分组-名称字典(用于查看数据)</td>
+</tr>
+</tbody>
+</table>
+<p><code>报告状态: NORMAL, EXPIRED: 正常, 已过期</code></p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="2_4">2.4数据数量</h3>
+<h3>request</h3>
+<p><code>GET /Report/ReportCount?showAllUser=true&amp;reportStatus=NORMAL</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>showAllUser</td>
+	<td>bool</td>
+	<td>显示全部用户报告(需要管理员权限)</td>
+	<td>否, 默认false</td>
+</tr>
+<tr>
+	<td>reportStatus</td>
+	<td>enum</td>
+	<td>报告状态筛选</td>
+	<td>否, 默认不筛选</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;count&quot;: 15
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>count</td>
+	<td>int</td>
+	<td>数量</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="2_5">2.5提交数据</h3>
+<h3>request</h3>
+<p><code>POST /Report/SubmitReport?excelFileName=52e50c4d-731c-4f0a-b0b5-3e43acdb0d7a&amp;reportName=测试报告0710B?removeZero=true</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>excelFileName</td>
+	<td>string</td>
+	<td>excel文件名</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>reportName</td>
+	<td>string</td>
+	<td>报告名</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>removeZero</td>
+	<td>bool</td>
+	<td>自动移除0值</td>
+	<td>否, 默认false</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<p><h3 id="2_6">2.6上传Excel文件/h3&gt;</p>
+<h3>request</h3>
+<p><code>POST /Report/UploadImportExcel</code></p>
+<p><code>文件流</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>fileName</td>
+	<td>string</td>
+	<td>服务端excel文件名</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<p><h3 id="2_7">2.7修改数据名称/h3&gt;</p>
+<h3>request</h3>
+<p><code>POST /Report/UpdateReportName?reportId=fb564007-de34-4fd3-9ce0-e53d94f08d7c&amp;reportName=测试714A_改</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>reportId</td>
+	<td>string</td>
+	<td>目标报告ID</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>reportName</td>
+	<td>string</td>
+	<td>变更后报告名</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="2_8">2.8下载原始文件</h3>
+<h3>request</h3>
+<p><code>POST /Report/DownloadOriginalExcel?reportId=fb564007-de34-4fd3-9ce0-e53d94f08d7c</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>reportId</td>
+	<td>string</td>
+	<td>目标报告ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>文件流</code></p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="2_9">2.9下载数据模板</h3>
+<h3>request</h3>
+<p><code>POST /Report/DownloadImportTemplate</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>文件流</code></p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="3">3.数据分组接口</h2>
+<h3 id="3_1">3.1获取数据分组</h3>
+<p><code>本接口获取分组用于制作报告</code></p>
+<h3>request</h3>
+<p><code>GET /ReportGroup/ReportGroup?reportId=ea093179-9a05-4ab7-8b86-19a4651c441c</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>reportId</td>
+	<td>string</td>
+	<td>报告ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>[
+  {
+    &quot;groupId&quot;: &quot;7cb35110-4e4d-4199-b173-49ec113d6455&quot;,
+    &quot;reportId&quot;: &quot;dd5484df-1266-4d9b-a5e8-c734201b8e93&quot;, 
+    &quot;groupName&quot;: &quot;xx桥检测点003&quot;,
+    &quot;deviceIdDeviceNameDict&quot;: {
+                                  &quot;a56086ef-8846-4cb1-ab31-455e440ea0c3&quot;: &quot;排风1温度&quot;
+                                  &quot;97b32883-b04f-433f-a91a-12c255af3b5e&quot;: &quot;排风1湿度&quot;
+                                  ...
+                              },
+  }
+]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>groupId</td>
+	<td>string</td>
+	<td>分组ID</td>
+</tr>
+<tr>
+	<td>reportId</td>
+	<td>string</td>
+	<td>所属数据ID</td>
+</tr>
+<tr>
+	<td>groupName</td>
+	<td>string</td>
+	<td>分组名称</td>
+</tr>
+<tr>
+	<td>deviceIdDeviceNameDict</td>
+	<td>object</td>
+	<td>设备ID-名称字典</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="3_2">3.2获取设备分组</h3>
+<p><code>本接口获取分组用于展示数据</code></p>
+<h3>request</h3>
+<p><code>GET /ReportGroup/DeviceGroup?reportId=ea093179-9a05-4ab7-8b86-19a4651c441c</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>reportId</td>
+	<td>string</td>
+	<td>报告ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>[
+  {
+    &quot;groupId&quot;: &quot;7cb35110-4e4d-4199-b173-49ec113d6455&quot;,
+    &quot;reportId&quot;: &quot;dd5484df-1266-4d9b-a5e8-c734201b8e93&quot;, 
+    &quot;groupName&quot;: &quot;xx桥检测点003&quot;,
+    &quot;deviceIdDeviceNameDict&quot;: {
+                                  &quot;a56086ef-8846-4cb1-ab31-455e440ea0c3&quot;: &quot;排风1温度&quot;
+                                  &quot;97b32883-b04f-433f-a91a-12c255af3b5e&quot;: &quot;排风1湿度&quot;
+                                  ...
+                              },
+  }
+]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>groupId</td>
+	<td>string</td>
+	<td>分组ID</td>
+</tr>
+<tr>
+	<td>reportId</td>
+	<td>string</td>
+	<td>所属数据ID</td>
+</tr>
+<tr>
+	<td>groupName</td>
+	<td>string</td>
+	<td>分组名称</td>
+</tr>
+<tr>
+	<td>deviceIdDeviceNameDict</td>
+	<td>object</td>
+	<td>设备ID-名称字典</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="4">4.报告接口</h2>
+<h3 id="4_1">4.1上传报告图片</h3>
+<h3>request</h3>
+<p><code>POST /EchartReport/UploadEchartReportImage</code></p>
+<p><code>文件流</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;imageFileId&quot;: &quot;2421fe01-cdca-4fb9-a79c-2058933f13a1&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>imageFileId</td>
+	<td>string</td>
+	<td>图片ID</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="4_2">4.2生成报告</h3>
+<h3>request</h3>
+<p><code>POST /EchartReport/GenerateMonthlyReport</code></p>
+<pre><code>[
+  {
+    &quot;groupId&quot;: &quot;05aac80f-6c52-40b9-9c36-2608c7749eda&quot;,
+    &quot;echartReportImageId&quot;: &quot;1e71e316-f561-43a7-ae35-ba7f2633495e&quot;
+  },
+  ...
+]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>groupId</td>
+	<td>string</td>
+	<td>分组ID</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>echartReportImageId</td>
+	<td>string</td>
+	<td>图片ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;documentId&quot;: &quot;2421fe01-cdca-4fb9-a79c-2058933f13a1&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>documentId</td>
+	<td>string</td>
+	<td>报告文件ID</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="4_3">4.3下载报告</h3>
+<h3>request</h3>
+<p><code>POST /EchartReport/DownloadMonthlyReport?documentId=f87c06c8-b128-46b0-af90-dbc38fa76b0a</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>documentId</td>
+	<td>string</td>
+	<td>报告文件ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>文件流</code></p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="5">5.统计数据接口</h2>
+<h3 id="5_1">5.1设备统计数据</h3>
+<h3>request</h3>
+<p><code>GET /Statistics/DeviceData?deviceId=4dca0d7e-1971-440d-8294-59bce6565920&amp;reportId=205091c7-5eea-4c1f-abde-4b52be96e0a5&amp;groupId=ec2fd243-fbf7-4ef8-98ef-46cfb47a008b</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>deviceId</td>
+	<td>string</td>
+	<td>设备ID</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>reportId</td>
+	<td>string</td>
+	<td>所属报告ID</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>groupId</td>
+	<td>string</td>
+	<td>目标分组ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;errorLevel&quot;: &quot;NORMAL&quot;,
+  &quot;dataList&quot;: [
+                {
+                  &quot;dataId&quot;: &quot;581da869-6154-4466-b430-4f992306653f&quot;,
+                  &quot;deviceId&quot;: &quot;5859ca0e-abac-4eec-a5f6-1074ca252b06&quot;,
+                  &quot;reportId&quot;: &quot;a02185bc-95fa-4ad3-9fdf-a7db55951752&quot;
+                  &quot;value&quot;: 20.01,
+                  &quot;statisticsDate&quot;: &quot;2020年5月20日 04时15分&quot;
+                }
+              ]
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>errorLevel</td>
+	<td>enum</td>
+	<td>报错等级</td>
+</tr>
+<tr>
+	<td>dataList</td>
+	<td>list</td>
+	<td>数据列表</td>
+</tr>
+<tr>
+	<td>dataId</td>
+	<td>string</td>
+	<td>数据ID</td>
+</tr>
+<tr>
+	<td>deviceId</td>
+	<td>string</td>
+	<td>设备ID</td>
+</tr>
+<tr>
+	<td>reportId</td>
+	<td>string</td>
+	<td>所属报告ID</td>
+</tr>
+<tr>
+	<td>value</td>
+	<td>double</td>
+	<td>检测值</td>
+</tr>
+<tr>
+	<td>statisticsDate</td>
+	<td>string</td>
+	<td>统计数据日期</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="5_2">5.2设备湿度标准线</h3>
+<h3>request</h3>
+<p><code>GET /Statistics/ChartHumidityLine</code></p>
+<pre><code>[
+  &quot;cdd4b6a5-df6b-4a53-8ccc-f30922d23a0f&quot;,
+  &quot;8f791642-cb82-49c1-acdb-6ad429cbcd32&quot;,
+  ...
+]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>列表项</td>
+	<td>string</td>
+	<td>设备ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;useHumiditySectionLine&quot;: true,
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>useHumiditySectionLine</td>
+	<td>bool</td>
+	<td>使用湿度标准线</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

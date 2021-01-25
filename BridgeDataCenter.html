@@ -306,6 +306,7 @@ img {
 <li><a href="#1_1">1.1桥梁结构查询</a></li>
 <li><a href="#1_2">1.2制备站结构查询</a></li>
 <li><a href="#1_3">1.3全部桥梁列表</a></li>
+<li><a href="#1_4">1.4设备查询</a></li>
 </ul>
 </li>
 <li>
@@ -316,6 +317,7 @@ img {
 <li><a href="#2_3">2.3历史图表湿度标准线查询</a></li>
 <li><a href="#2_4">2.4Socket记录查询</a></li>
 <li><a href="#2_5">2.5设备数据查询</a></li>
+<li><a href="#2_6">2.6湿度比例查询</a></li>
 </ul>
 </li>
 <li>
@@ -333,18 +335,19 @@ img {
 <li><a href="#4_4">4.4新建用户</a></li>
 <li><a href="#4_5">4.5修改密码</a></li>
 <li><a href="#4_6">4.6配置权限桥</a></li>
+<li><a href="#4_7">4.7用户数量</a></li>
 </ul>
 </li>
 <li>
 <a href="#5">警报接口</a>
 <ul>
-<li><a href="#5_1">5.1全局警报</a></li>
+<li><a href="#5_1">5.1查询全局警报</a></li>
 </ul>
 </li>
 <li>
 <a href="#6">表格接口</a>
 <ul>
-<li><a href="#6_1">6.1通用表格结构</a></li>
+<li><a href="#6_1">6.1通用表格结构(作废)</a></li>
 </ul>
 </li>
 <li>
@@ -370,6 +373,7 @@ img {
 <li><a href="#9_3">9.3下载Echart报告</a></li>
 <li><a href="#9_4">9.4生成月度报告</a></li>
 <li><a href="#9_5">9.5下载月度报告</a></li>
+<li><a href="#9_6">9.6月度报告设备分组</a></li>
 </ul>
 </li>
 <li>
@@ -380,12 +384,15 @@ img {
 <li><a href="#10_3">10.3更新任务状态</a></li>
 <li><a href="#10_4">10.4创建遥控任务</a></li>
 <li><a href="#10_5">10.5查询遥控任务</a></li>
+<li><a href="#10_6">10.6查询遥控任务数量</a></li>
 </ul>
 </li>
 <li>
 <a href="#11">数据日报接口</a>
 <ul>
 <li><a href="#11_1">11.1查询数据日报</a></li>
+<li><a href="#11_2">11.2查询常规警报日报</a></li>
+<li><a href="#11_3">11.3查询统计警报日报</a></li>
 </ul>
 </li>
 </ol>
@@ -632,6 +639,87 @@ img {
 	<td>bridgeName</td>
 	<td>string</td>
 	<td>桥梁名称</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="1_4">1.4设备查询</h3>
+<h3>request</h3>
+<p><code>GET /Bridge/DeviceInfo?deviceId=21d05c86-89ca-44d6-8102-70051d735f3e</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>deviceId</td>
+	<td>string</td>
+	<td>设备ID</td>
+	<td>与socketId选填一个</td>
+</tr>
+<tr>
+	<td>socketId</td>
+	<td>int</td>
+	<td>设备socketID</td>
+	<td>与deviceId选填一个</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+  &quot;deviceId&quot;: &quot;21d05c86-89ca-44d6-8102-70051d735f3e&quot;,
+  &quot;deviceName&quot;: &quot;常熟侧排风湿度&quot;,
+  &quot;socketId&quot;: 9205,
+  &quot;allowMax&quot;: 60,
+  &quot;allowMin&quot;: 0
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>deviceId</td>
+	<td>string</td>
+	<td>设备ID</td>
+</tr>
+<tr>
+	<td>deviceName</td>
+	<td>string</td>
+	<td>设备名称</td>
+</tr>
+<tr>
+	<td>socketId</td>
+	<td>List</td>
+	<td>SOCKET编号</td>
+</tr>
+<tr>
+	<td>allowMax</td>
+	<td>string</td>
+	<td>报警上限</td>
+</tr>
+<tr>
+	<td>allowMin</td>
+	<td>string</td>
+	<td>报警下限</td>
 </tr>
 </tbody>
 </table>
@@ -969,11 +1057,91 @@ img {
 </tr>
 </tbody>
 </table>
-<p><code>出于原理限制, 本接口无法分页</code></p>
+<p><code>出于性能和原理限制, 本接口后端无法分页</code></p>
 <h3>response</h3>
 <p>成功 200
 <code>Content-Type : text/plain</code></p>
-<p><code>通用表格结构</code></p>
+<pre><code>{
+  &quot;socketId&quot;: &quot;dfbde719-402e-4a86-926f-579a54a41d4e&quot;,
+  &quot;messageId&quot;: &quot;99f80eb2-eaf8-4f41-97ac-2e4377484207&quot;,
+  &quot;version&quot;: &quot;3400&quot;,
+  &quot;createdDate&quot;: &quot;20年6月15日 3时1分&quot;,
+  &quot;dataDate&quot;: &quot;20年6月15日 2时55分&quot;,
+  &quot;id&quot;: &quot;7008&quot;,
+  &quot;value&quot;: &quot;35.03&quot;,
+  &quot;deviceName&quot;: &quot;xxx排风湿度&quot;,
+  &quot;stationName&quot;: &quot;上游锚室&quot;,
+  &quot;bridgeName&quot;: &quot;xxx大桥&quot;,
+  &quot;exceptionMessage&quot;: &quot;&quot;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>socketId</td>
+	<td>string</td>
+	<td>socketID(服务端)</td>
+</tr>
+<tr>
+	<td>messageId</td>
+	<td>string</td>
+	<td>socketID(客户端)</td>
+</tr>
+<tr>
+	<td>version</td>
+	<td>string</td>
+	<td>协议版本</td>
+</tr>
+<tr>
+	<td>createdDate</td>
+	<td>string</td>
+	<td>接收日期</td>
+</tr>
+<tr>
+	<td>dataDate</td>
+	<td>string</td>
+	<td>数据日期</td>
+</tr>
+<tr>
+	<td>id</td>
+	<td>string</td>
+	<td>设备socketID</td>
+</tr>
+<tr>
+	<td>value</td>
+	<td>string</td>
+	<td>数据值</td>
+</tr>
+<tr>
+	<td>deviceName</td>
+	<td>string</td>
+	<td>设备名称</td>
+</tr>
+<tr>
+	<td>stationName</td>
+	<td>string</td>
+	<td>制备站名称</td>
+</tr>
+<tr>
+	<td>bridgeName</td>
+	<td>string</td>
+	<td>桥梁名称</td>
+</tr>
+<tr>
+	<td>exceptionMessage</td>
+	<td>string</td>
+	<td>报错信息</td>
+</tr>
+</tbody>
+</table>
 <p>失败 400/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
@@ -1063,6 +1231,156 @@ img {
 	<td>errorLevel</td>
 	<td>enum</td>
 	<td>报警级别</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="2_6">2.6湿度比例查询</h3>
+<h3>request</h3>
+<p><code>GET /DeviceData/HumidityPercentage?deviceId=21d05c86-89ca-44d6-8102-70051d735f3e&amp;daysCount=90&amp;reportDate=2019-07-01</code></p>
+<p><code>后端接口. 前端无权限.</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>deviceId</td>
+	<td>string</td>
+	<td>设备ID</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>daysCount</td>
+	<td>int</td>
+	<td>覆盖天数</td>
+	<td>是</td>
+</tr>
+<tr>
+	<td>reportDate</td>
+	<td>datetime</td>
+	<td>报告日期</td>
+	<td>否, 默认今日</td>
+</tr>
+<tr>
+	<td>customHumidityLine</td>
+	<td>double</td>
+	<td>自定义湿度占比</td>
+	<td>否, 默认不使用</td>
+</tr>
+</tbody>
+</table>
+<p><code>日期格式: yyyy-MM-dd</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+    &quot;deviceId&quot;: &quot;1f842cd1-63d9-4ac6-af79-516bd8f1a3cd&quot;,
+    &quot;deviceName&quot;: &quot;锚室湿度1&quot;,
+    &quot;reportDate&quot;: &quot;2020-10-25&quot;,
+    &quot;daysCount&quot;: 90,
+    &quot;customHumidityLine&quot;: 0,
+    &quot;dataCount_total&quot;: 100,
+    &quot;dataCount_humidityover40&quot;: 80,
+    &quot;dataCount_humidityover50&quot;: 42,
+    &quot;dataCount_humidityover60&quot;: 11,
+    &quot;dataCount_humidityoverCustom&quot;: 0,
+    &quot;percentage_humidityover40&quot;: 80,
+    &quot;percentage_humidityover50&quot;: 42,
+    &quot;percentage_humidityover60&quot;: 11,
+    &quot;percentage_humidityoverCustom&quot;: 0,
+}
+    
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>deviceId</td>
+	<td>string</td>
+	<td>设备ID</td>
+</tr>
+<tr>
+	<td>deviceName</td>
+	<td>string</td>
+	<td>设备名称</td>
+</tr>
+<tr>
+	<td>reportDate</td>
+	<td>datetime</td>
+	<td>报告日期</td>
+</tr>
+<tr>
+	<td>daysCount</td>
+	<td>int</td>
+	<td>覆盖天数</td>
+</tr>
+<tr>
+	<td>customHumidityLine</td>
+	<td>double</td>
+	<td>自定义湿度线</td>
+</tr>
+<tr>
+	<td>dataCount_total</td>
+	<td>int</td>
+	<td>数据总量</td>
+</tr>
+<tr>
+	<td>dataCount_humidityOver40</td>
+	<td>int</td>
+	<td>湿度超过40数量</td>
+</tr>
+<tr>
+	<td>dataCount_humidityOver50</td>
+	<td>int</td>
+	<td>湿度超过50数量</td>
+</tr>
+<tr>
+	<td>dataCount_humidityOver60</td>
+	<td>int</td>
+	<td>湿度超过60数量</td>
+</tr>
+<tr>
+	<td>dataCount_humidityOverCustom</td>
+	<td>int</td>
+	<td>湿度超过自定义线数量</td>
+</tr>
+<tr>
+	<td>percentage_humidityOver40</td>
+	<td>int</td>
+	<td>湿度超过40比例</td>
+</tr>
+<tr>
+	<td>percentage_humidityOver50</td>
+	<td>int</td>
+	<td>湿度超过50比例</td>
+</tr>
+<tr>
+	<td>percentage_humidityOver60</td>
+	<td>int</td>
+	<td>湿度超过60比例</td>
+</tr>
+<tr>
+	<td>percentage_humidityOverCustom</td>
+	<td>int</td>
+	<td>湿度超过自定义线比例</td>
 </tr>
 </tbody>
 </table>
@@ -1298,7 +1616,7 @@ img {
 
 <h3 id="4_3">4.3用户列表</h3>
 <h3>request</h3>
-<p><code>GET /User/UserList?start=0&amp;limit=20</code></p>
+<p><code>GET /User/UserList?start=0&amp;limit=20&amp;userId=admin</code></p>
 <table>
 <thead>
 <tr>
@@ -1321,11 +1639,68 @@ img {
 	<td>返回数量</td>
 	<td>否, 默认20</td>
 </tr>
+<tr>
+	<td>userId</td>
+	<td>string</td>
+	<td>用户ID</td>
+	<td>否, 一般用户强制返回自己, 管理员默认为空返回全部</td>
+</tr>
 </tbody>
 </table>
 <h3>response</h3>
 <p>成功 200</p>
-<p><code>默认表格结构</code></p>
+<pre><code>[
+  {
+    &quot;userId&quot;: &quot;admin&quot;,
+    &quot;userName&quot;: &quot;超级管理员&quot;,
+    &quot;userType&quot;: &quot;ADMIN&quot;,
+    &quot;lastLoginDate&quot;: &quot;2020-05-15T12:03:20&quot;,
+    &quot;authorisedBridgeList&quot;: [
+                              &quot;77a25afd-2071-4911-86f6-5945df6342ce&quot;,
+                              &quot;ea3a4961-79b3-40dd-9919-1a8d3cc6f810&quot;,
+                              ...
+                            ]
+  }
+]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>userId</td>
+	<td>string</td>
+	<td>用户ID</td>
+</tr>
+<tr>
+	<td>userName</td>
+	<td>string</td>
+	<td>用户名</td>
+</tr>
+<tr>
+	<td>userType</td>
+	<td>enum</td>
+	<td>用户类型</td>
+</tr>
+<tr>
+	<td>lastLoginDate</td>
+	<td>datetime</td>
+	<td>上次登录时间</td>
+</tr>
+<tr>
+	<td>authorisedBridgeList</td>
+	<td>list</td>
+	<td>授权桥列表(桥梁ID)</td>
+</tr>
+</tbody>
+</table>
+<p><code>用户类型: ADMIN, USER, SYSTEM: 管理员, 一般用户, 系统用户</code></p>
 <p>失败 400/401/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
@@ -1373,6 +1748,7 @@ img {
 </tr>
 </tbody>
 </table>
+<p><code>新建用户全部为一般用户. 管理员无法通过页面创建.</code></p>
 <h3>response</h3>
 <p>成功 200</p>
 <p>失败 400/401/500</p>
@@ -1469,8 +1845,58 @@ img {
 }
 </code></pre>
 
+<h3 id="4_7">4.7用户数量</h3>
+<h3>request</h3>
+<p><code>GET /User/UserCount?userId=admin</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>userId</td>
+	<td>string</td>
+	<td>用户ID</td>
+	<td>否, 一般用户配置无效强制返回自己, 管理员默认为空返回全部</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>{
+  &quot;count&quot;: 15
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>count</td>
+	<td>int</td>
+	<td>用户数量</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
 <h2 id="5">5.警报</h2>
-<h3 id="5_1">5.1全局警报</h3>
+<h3 id="5_1">5.1查询全局警报</h3>
 <h3>request</h3>
 <p><code>GET /DataError/GlobalError?bridgeId=3fe28c5e-62ca-482c-9534-e15d9f36a440</code></p>
 <table>
@@ -1574,7 +2000,8 @@ img {
 </code></pre>
 
 <h2 id="6">6.表格</h2>
-<h3 id="6_1">6.1通用表格结构</h3>
+<h3 id="6_1">6.1通用表格结构(作废)</h3>
+<p><code>本接口已作废, 通用表格结构在本系统中不再使用</code></p>
 <h3>response</h3>
 <p>成功 200</p>
 <p><code>Content-Type : text/plain</code></p>
@@ -2021,11 +2448,11 @@ img {
 <pre><code>{
   &quot;deviceParameterList&quot;:[
                           {
-                            &quot;deviceId&quot;: &quot;aa8dbd44-e95a-4c00-8223-b3219334165b&quot;,
+                            &quot;groupId&quot;: &quot;aa8dbd44-e95a-4c00-8223-b3219334165b&quot;,
                             &quot;echartReportImageId&quot;: &quot;57b68fb2-5fe2-4d42-af5c-05301a990cee&quot;
                           },
                           {
-                            &quot;deviceId&quot;: &quot;b1c5063c-384a-4423-a6c5-bad43db245ea&quot;,
+                            &quot;groupId&quot;: &quot;b1c5063c-384a-4423-a6c5-bad43db245ea&quot;,
                             &quot;echartReportImageId&quot;: &quot;aabec12a-ad20-408e-8f8d-c9722ee89ad9&quot;
                           },
                         ],
@@ -2050,9 +2477,9 @@ img {
 	<td>是</td>
 </tr>
 <tr>
-	<td>deviceId</td>
+	<td>groupId</td>
 	<td>string</td>
-	<td>设备ID</td>
+	<td>月度报告分组ID</td>
 	<td>是</td>
 </tr>
 <tr>
@@ -2067,8 +2494,15 @@ img {
 	<td>桥梁ID</td>
 	<td>是</td>
 </tr>
+<tr>
+	<td>reportEndDate</td>
+	<td>string</td>
+	<td>报告截至日期</td>
+	<td>否, 默认今日</td>
+</tr>
 </tbody>
 </table>
+<p><code>日期格式: yyyy-MM-dd</code></p>
 <h3>response</h3>
 <p>成功 200
 <code>Content-Type : text/plain</code></p>
@@ -2123,6 +2557,82 @@ img {
 <h3>response</h3>
 <p>成功 200</p>
 <p><code>FileStream</code></p>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="9_6">9.6月度报告设备分组</h3>
+<h3>request</h3>
+<p><code>GET /EchartReport/GetMonthlyReportGroup?bridgeId=48ea4d04-89fa-4cb5-9350-a6ad1a971c2e</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>bridgeId</td>
+	<td>string</td>
+	<td>桥梁ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<pre><code>[
+  {
+    &quot;groupId&quot;: &quot;896781f4-b731-4eb6-980c-970978ccbc29&quot;,
+    &quot;deviceIdList&quot;: [
+                       &quot;9df8db5b-19d9-47cb-91aa-942d75ddcb5c&quot;,
+                       &quot;768ad022-c186-427f-8ad9-c680f6235c47&quot;,
+                    ],
+    &quot;groupName&quot;: &quot;上游气夹排气湿度&quot;,
+    &quot;deviceIdDistinctNameDict&quot;: {
+                                   &quot;9df8db5b-19d9-47cb-91aa-942d75ddcb5c&quot;: &quot;东侧制备站 - 上游排气1&quot;,
+                                   &quot;768ad022-c186-427f-8ad9-c680f6235c47&quot;: &quot;西侧制备站 - 上游排气1&quot;  
+                                }
+  }
+]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>groupId</td>
+	<td>string</td>
+	<td>分组ID</td>
+</tr>
+<tr>
+	<td>deviceIdList</td>
+	<td>List</td>
+	<td>包含设备ID列表</td>
+</tr>
+<tr>
+	<td>groupName</td>
+	<td>string</td>
+	<td>分组名称</td>
+</tr>
+<tr>
+	<td>deviceIdDistinctNameDict</td>
+	<td>Dict</td>
+	<td>设备唯一名称字典</td>
+</tr>
+</tbody>
+</table>
 <p>失败 400/401/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
@@ -2438,7 +2948,7 @@ img {
 	<td>否, 默认0</td>
 </tr>
 <tr>
-	<td>page</td>
+	<td>limit</td>
 	<td>int</td>
 	<td>分页长度</td>
 	<td>否, 默认20</td>
@@ -2522,11 +3032,9 @@ img {
 }
 </code></pre>
 
-<h2 id="11">11.数据日报接口</h2>
-<h3 id="11_1">11.1查询数据日报</h3>
+<h3 id="10_6">10.6查询遥控任务数量</h3>
 <h3>request</h3>
-<p><code>GET /DailyDataReport/GetReport?dateString=2020-04-20</code></p>
-<p><code>后端接口. 前端无权限.</code></p>
+<p><code>GET /RemoteControl/RemoteMissionByBridgeCount?bridgeId=74cfb7af-8b17-4162-b9fe-df029f03deac</code></p>
 <table>
 <thead>
 <tr>
@@ -2538,7 +3046,59 @@ img {
 </thead>
 <tbody>
 <tr>
-	<td>dateString</td>
+	<td>bridgeId</td>
+	<td>string</td>
+	<td>桥梁ID</td>
+	<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>{
+  &quot;count&quot;: 45
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>count</td>
+	<td>int</td>
+	<td>任务总数</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h2 id="11">11.数据日报接口</h2>
+<h3 id="11_1">11.1查询数据日报</h3>
+<h3>request</h3>
+<p><code>GET /DailyReport/GetDataReport?reportDate=2020-04-20</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>reportDate</td>
 	<td>string</td>
 	<td>查询日期</td>
 	<td>否, 默认今日</td>
@@ -2602,6 +3162,194 @@ img {
 </tr>
 </tbody>
 </table>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="11_2">11.2查询常规警报日报</h3>
+<h3>request</h3>
+<p><code>GET /DailyReport/GetErrorReport?reportDate=2020-04-20</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>reportDate</td>
+	<td>string</td>
+	<td>查询日期</td>
+	<td>否, 默认今日</td>
+</tr>
+<tr>
+	<td>bridgeId</td>
+	<td>List</td>
+	<td>桥梁id</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<p><code>查询日期格式: yyyy-MM-dd</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>[
+  {
+    &quot;reportId&quot;: &quot;70152211-e1d4-43e8-8fa9-d49169474132&quot;,
+    &quot;deviceId&quot;: &quot;5cc6bb73-9124-415a-9153-c7e2ee8b3c0c&quot;,
+    &quot;LogDateString&quot;: &quot;2020-04-20&quot;,
+    &quot;errorCount&quot;: 20,
+    &quot;maxValue&quot;: null,
+    &quot;minValue&quot;: 10
+  }
+]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>reportId</td>
+	<td>string</td>
+	<td>报告ID</td>
+</tr>
+<tr>
+	<td>deviceId</td>
+	<td>string</td>
+	<td>设备ID</td>
+</tr>
+<tr>
+	<td>reportDateString</td>
+	<td>string</td>
+	<td>日期字符串</td>
+</tr>
+<tr>
+	<td>errorCount</td>
+	<td>int</td>
+	<td>报错数据量</td>
+</tr>
+<tr>
+	<td>maxValue</td>
+	<td>double</td>
+	<td>报错最大值</td>
+</tr>
+<tr>
+	<td>minValue</td>
+	<td>double</td>
+	<td>报错最小值</td>
+</tr>
+</tbody>
+</table>
+<p>失败 400/401/500</p>
+<pre><code>{
+  &quot;info&quot;: &quot;失败描述&quot;
+}
+</code></pre>
+
+<h3 id="11_3">11.3查询统计警报日报</h3>
+<h3>request</h3>
+<p><code>GET /DailyReport/GetStatisticsErrorReport?reportDate=2020-04-20</code></p>
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+	<th>是否必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>reportDate</td>
+	<td>string</td>
+	<td>查询日期</td>
+	<td>否, 默认今日</td>
+</tr>
+<tr>
+	<td>bridgeId</td>
+	<td>List</td>
+	<td>桥梁id</td>
+	<td>否</td>
+</tr>
+</tbody>
+</table>
+<p><code>查询日期格式: yyyy-MM-dd</code></p>
+<h3>response</h3>
+<p>成功 200</p>
+<p><code>Content-Type : text/plain</code></p>
+<pre><code>[
+  {
+    &quot;reportId&quot;: &quot;70152211-e1d4-43e8-8fa9-d49169474132&quot;,
+    &quot;deviceId&quot;: &quot;5cc6bb73-9124-415a-9153-c7e2ee8b3c0c&quot;,
+    &quot;ErrorDateStatistics&quot;: &quot;2020-04-20&quot;,
+    &quot;valueToday&quot;: 20,
+    &quot;valueMonth&quot;: null,
+    &quot;DeviationRate&quot;: 10,
+    &quot;statisticsErrorType&quot;: &quot;MAX&quot;
+  }
+]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+	<th>名称</th>
+	<th>类型</th>
+	<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>reportId</td>
+	<td>string</td>
+	<td>报告ID</td>
+</tr>
+<tr>
+	<td>deviceId</td>
+	<td>string</td>
+	<td>设备ID</td>
+</tr>
+<tr>
+	<td>ErrorDateStatistics</td>
+	<td>string</td>
+	<td>警报日期</td>
+</tr>
+<tr>
+	<td>DeviationRate</td>
+	<td>double</td>
+	<td>偏差率</td>
+</tr>
+<tr>
+	<td>valueToday</td>
+	<td>double</td>
+	<td>当日值</td>
+</tr>
+<tr>
+	<td>valueMonth</td>
+	<td>double</td>
+	<td>当月平均值</td>
+</tr>
+<tr>
+	<td>statisticsErrorType</td>
+	<td>enum</td>
+	<td>错误类型</td>
+</tr>
+</tbody>
+</table>
+<p><code>错误类型: EMPTY, MAX, MIN, AVERAGE, MEDIAN, VARIANCE, NOT_ENOUGH_DATA_MONTH, NOT_ENOUGH_DATA_TODAY</code></p>
+<p><code>对应含义: 无错误, 最大值, 最小值, 平均值, 中位数, 方差, 当月数据不足, 当日数据不足</code></p>
 <p>失败 400/401/500</p>
 <pre><code>{
   &quot;info&quot;: &quot;失败描述&quot;
